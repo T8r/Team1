@@ -150,28 +150,28 @@ public class ProfilePage {
         
         
         if(AllergyGUI.cbI1.isSelected()){
-            newProfile.allergy.dairyA = AllergyGUI.cbA1.getText();
+            newProfile.allergy.glutenI = AllergyGUI.cbI1.getText();
         }
         if(AllergyGUI.cbI2.isSelected()){
-            newProfile.allergy.soyA = AllergyGUI.cbA2.getText();
+            newProfile.allergy.lactoseI = AllergyGUI.cbI2.getText();
         }
         if(AllergyGUI.cbI3.isSelected()){
-            newProfile.allergy.eggsA = AllergyGUI.cbA3.getText();
+            newProfile.allergy.fructoseI = AllergyGUI.cbI3.getText();
         }
         if(AllergyGUI.cbI4.isSelected()){
-            newProfile.allergy.peanutsA = AllergyGUI.cbA4.getText();
+            newProfile.allergy.sulfitesI = AllergyGUI.cbI4.getText();
         }
         if(AllergyGUI.cbI5.isSelected()){
-            newProfile.allergy.fishA = AllergyGUI.cbA5.getText();
+            newProfile.allergy.histaminesI = AllergyGUI.cbI5.getText();
         }
         if(AllergyGUI.cbI6.isSelected()){
-            newProfile.allergy.wheatA = AllergyGUI.cbA6.getText();
+            newProfile.allergy.nitritesI = AllergyGUI.cbI6.getText();
         }
         if(AllergyGUI.cbI7.isSelected()){
-            newProfile.allergy.sesameA = AllergyGUI.cbA7.getText();
+            newProfile.allergy.nightshadesI = AllergyGUI.cbI7.getText();
         }
         if(AllergyGUI.cbI8.isSelected()){
-            newProfile.allergy.tree_nutsA = AllergyGUI.cbA8.getText();
+            newProfile.allergy.fructansI = AllergyGUI.cbI8.getText();
         }
         
         
