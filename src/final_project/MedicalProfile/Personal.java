@@ -25,4 +25,18 @@ public class Personal {
     public String state;
     public String city;
     public String email;
+    
+    
+    @Override
+    public String toString(){
+        return "\nPersonal Information:"+
+               "\nFirst Name: "+fname+
+                "\nLast Neme: "+lName+
+                "\nSex: "+sex+
+                "\nAddress: "+address+
+                "\nState: "+state+
+                "\nCity: "+city+
+                "\nEmail: "+email;
+    }
+    
 }

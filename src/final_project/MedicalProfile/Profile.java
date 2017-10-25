@@ -14,6 +14,11 @@ public class Profile {
     public Medical medical;
     public Allergy allergy;
     
-    
+    @Override
+    public String toString(){
+        return personal.toString() +"\n"
+                + medical.toString() +"\n"
+                + allergy.toString();
+    }
     
 }

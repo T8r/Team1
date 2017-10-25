@@ -26,6 +26,17 @@ public class Medical {
     public String personalDiabetes;// maybe a switch to also require 
                                     //the severity?
     
+    @Override
+    public String toString(){
+        return "\nMedical Issues: "+
+                "Has Diabetes: "+personalDiabetes+
+                "Family has history with diabetes: "+familyDiabetes+
+                "Has HeartProblems: "+heartProblems+
+                "Is currently on Medication: "+onMedication+
+                "Has a digestive disorder: "+digestiveDisorder+
+                "Is abusing drugs: "+drugAbuse+
+                "Is abusing alcohol: "+alcoholAbuse;
     
+    }
     
 }

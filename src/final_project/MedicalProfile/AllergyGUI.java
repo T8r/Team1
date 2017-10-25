@@ -30,6 +30,9 @@ public class AllergyGUI {
     static public CheckBox cbI8 = new CheckBox("Fructans");
     
     
+    /**
+     * Not working as intended, want to reset when confirmation is pushed
+     */
     public static void resetCheckboxes(){
         cbA1.setSelected(false);
         cbA2.setSelected(false);

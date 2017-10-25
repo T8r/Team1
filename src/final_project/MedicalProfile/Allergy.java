@@ -26,4 +26,26 @@ public class Allergy {
     public String nitritesI;
     public String nightshadesI;
     public String fructansI;
+    
+    @Override
+    public String toString(){
+        return "\nFood allergic to:"+
+                "\nDairy: "+dairyA+
+                "\nSoy: "+soyA+
+                "\nEggs: "+eggsA+
+                "\nPeanuts: "+peanutsA+
+                "\nFish: "+fishA+
+                "\nWheat: "+wheatA+
+                "\nSesame: "+sesameA+
+                "\nTree Nuts: "+tree_nutsA+
+                "\nFood Types Allergic to:"+
+                "\nGluten: "+glutenI+
+                "\nLactose: "+lactoseI+
+                "\nFructose: "+fructoseI+
+                "\nSulfites: "+sulfitesI+
+                "\nHistamines: "+histaminesI+
+                "\nNitrites"+nitritesI+
+                "\nNightshades: "+nightshadesI+
+                "\nFructans: "+fructansI;
+    }
 }

@@ -53,7 +53,9 @@ public class MedicalGUI {
         personalDiabetesRBn.setToggleGroup(personalDiabetesTG);
     }
     
-    
+    /**
+     * Not working as intended, want to reset when confirmation is pushed
+     */
     public static void resetMedical(){
         drugAbuseRBy.setSelected(false);
         drugAbuseRBn.setSelected(false);

@@ -32,7 +32,8 @@ public class ProfilePage {
                         PersonalGUI.sexRB2),
                 new HBox(new Label("Address"), PersonalGUI.addressTF),
                 new HBox(new Label("State"), PersonalGUI.stateTF),
-                new HBox(new Label("City"),PersonalGUI.cityTF)
+                new HBox(new Label("City"),PersonalGUI.cityTF),
+                new HBox(new Label("Email"),PersonalGUI.emailTF)
         );
         PersonalGUI.setToggles();
         tab.setContent(vBoxContent1);
@@ -45,17 +46,27 @@ public class ProfilePage {
        Tab tab = new Tab("Medical History");
        VBox vBoxContent2 = new VBox();
        vBoxContent2.getChildren().addAll(
-               new HBox(new Label("Has your family had a history with diabetes?")),
+               new HBox(new Label("Are you suffering from diabetes currently?"),
+                    new HBox(MedicalGUI.personalDiabetesRBy, MedicalGUI.personalDiabetesRBn)),
+               new HBox(new Label("Has your family had a history with diabetes?"), 
+                    new HBox(MedicalGUI.familyDiabetesRBy, MedicalGUI.familyDiabetesRBn)),
                new HBox(new Label("Other than diabetes has your family had a "
-                       + "medical impairment history?")),//choice
-               new HBox(new Label("Are you abusing drugs or alcohol?")),//y/n
-               new HBox(new Label("Are you experiencing heart complications?")),//y/n
-               new HBox(new Label("Do you have digestive problems?")),//y/n
+                       + "medical impairment history?"), 
+                    new HBox(MedicalGUI.onOtherMedsRBy, MedicalGUI.onOtherMedsRBn)),
+               new HBox(new Label("Are you considered abusing drugs currently?"), 
+                    new HBox(MedicalGUI.drugAbuseRBy, MedicalGUI.drugAbuseRBn)),
+               new HBox(new Label("Are you considered abusing alcohol currently?"),
+                    new HBox(MedicalGUI.alcoholRBy, MedicalGUI.alcoholRBn)),
+               new HBox(new Label("Are you experiencing heart complications?"),
+                    new HBox(MedicalGUI.heartProblemsRBy, MedicalGUI.heartProblemsRBn)),
+               new HBox(new Label("Do you have digestive problems?"),
+                    new HBox(MedicalGUI.digestiveDisorderRBy, MedicalGUI.digestiveDisorderRBn)),
                new HBox(new Label("Do you posses high or low blood pressure?")),
                new HBox(new Label("Are you pregnant?")),//when Female is selected
                new HBox(new Label("Does your work involve strenuous labor or"
                        + " exorcise?"))
        );
+       MedicalGUI.setToggles();
        tab.setContent(vBoxContent2);
        
        return tab;
@@ -64,11 +75,13 @@ public class ProfilePage {
        Tab tab = new Tab("Allergies");
        VBox vBoxContent3 = new VBox(); 
        vBoxContent3.getChildren().addAll(
-               new Label("Select the following Medications you're allergic to:"),
-               
-       
-               new Label("Select the following Food types you're allergic to:")
-       
+               new Label("Select the following Foods are you allergic to:"),
+               new HBox(AllergyGUI.cbA1, AllergyGUI.cbA2, AllergyGUI.cbA3, AllergyGUI.cbA4),
+               new HBox(AllergyGUI.cbA5, AllergyGUI.cbA6, AllergyGUI.cbA7, AllergyGUI.cbA8),
+               new Label("Select the following Food types you're intolerant  to:"),
+               new HBox(AllergyGUI.cbI1, AllergyGUI.cbI2, AllergyGUI.cbI3, AllergyGUI.cbI4),
+               new HBox(AllergyGUI.cbI5, AllergyGUI.cbI6, AllergyGUI.cbI7, AllergyGUI.cbI8),
+               new Label("Select the following Medications you're allergic to:")
        );
        
        tab.setContent(vBoxContent3);
@@ -86,7 +99,12 @@ public class ProfilePage {
        bigbtn.setOnAction(new EventHandler<ActionEvent>() {       
             @Override
             public void handle(ActionEvent event){
-                SaveProfile();
+                Profile current = SaveProfile();
+                PersonalGUI.resetPersonals();
+                MedicalGUI.resetMedical();
+                AllergyGUI.resetCheckboxes();
+                
+                OpenProfileTab(current);
             }
         });
        
@@ -173,6 +191,7 @@ public class ProfilePage {
         if(AllergyGUI.cbI8.isSelected()){
             newProfile.allergy.fructansI = AllergyGUI.cbI8.getText();
         }
+        
         
         
         

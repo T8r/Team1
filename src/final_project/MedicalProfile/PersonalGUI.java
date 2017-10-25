@@ -30,7 +30,9 @@ public class PersonalGUI {
      sexRB2.setToggleGroup(sexTG);
     }
     
-    
+    /**
+     * Not working as intended, want to reset when confirmation is pushed
+     */
     public static void resetPersonals(){
         fNameTF.setText("");
         lNameTF.setText("");
