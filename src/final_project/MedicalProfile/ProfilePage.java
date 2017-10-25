@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.RadioButton;
 
 /**
  *
@@ -47,11 +48,15 @@ public class ProfilePage {
                new HBox(new Label("Has your family had a history with diabetes?")),
                new HBox(new Label("Other than diabetes has your family had a "
                        + "medical impairment history?")),//choice
-               new HBox(new Label("Do you have an allergy to the following?")),
                new HBox(new Label("Are you abusing drugs or alcohol?")),//y/n
                new HBox(new Label("Are you experiencing heart complications?")),//y/n
-               new HBox(new Label("Do you have digestive problems?"))//y/n
+               new HBox(new Label("Do you have digestive problems?")),//y/n
+               new HBox(new Label("Do you posses high or low blood pressure?")),
+               new HBox(new Label("Are you pregnant?")),//when Female is selected
+               new HBox(new Label("Does your work involve strenuous labor or"
+                       + " exorcise?"))
        );
+       tab.setContent(vBoxContent2);
        
        return tab;
    }
@@ -66,6 +71,7 @@ public class ProfilePage {
        
        );
        
+       tab.setContent(vBoxContent3);
        return tab;
    }
    
@@ -80,16 +86,15 @@ public class ProfilePage {
        bigbtn.setOnAction(new EventHandler<ActionEvent>() {                                                    //e -> primaryStage.setScene(scene2)
             @Override
             public void handle(ActionEvent event){
-                
-                
+                SaveProfile();
             }
         });
        
        vBoxContent4.getChildren().addAll(
                bigbtn
-       
        );
        
+       tab.setContent(vBoxContent4);
        return tab;
    }
    
@@ -98,9 +103,26 @@ public class ProfilePage {
         
     }
    
+   /**
+    * Want this to be the work to collect the Profile 
+    * from the collected work
+    * @return 
+    */
     public static Profile SaveProfile(){
         Profile newProfile = new Profile();
         newProfile.personal.fname = PersonalGUI.fNameTF.getText();
+        newProfile.personal.lName = PersonalGUI.lNameTF.getText();
+        RadioButton endSexRB = new RadioButton();
+        if(PersonalGUI.sexTG.getSelectedToggle() == null)
+                    endSexRB.setText("No Sex Selected");
+                else
+                    endSexRB = (RadioButton) PersonalGUI.sexTG.getSelectedToggle();
+        newProfile.personal.sex = endSexRB.getText();
+        newProfile.personal.address = PersonalGUI.addressTF.getText();
+        newProfile.personal.state = PersonalGUI.stateTF.getText();
+        newProfile.personal.email = PersonalGUI.emailTF.getText();
+        
+        
         return newProfile;
     }
     
