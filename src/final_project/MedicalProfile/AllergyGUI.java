@@ -7,16 +7,8 @@ package final_project.MedicalProfile;
 
 /**
  *
- * @author Stephen
+ * @author MaxIII
  */
-public class Medical {
-    /**
-     * Add all values one can make medical inferences from 
-     * that's not allergies
-     */
-    
-    
-    
-    
+public class AllergyGUI {
     
 }

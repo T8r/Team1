@@ -11,4 +11,9 @@ package final_project.MedicalProfile;
  */
 public class Profile {
     public Personal personal;
+    public Medical medical;
+    public Allergy allergy;
+    
+    
+    
 }

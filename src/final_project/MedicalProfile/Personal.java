@@ -19,8 +19,10 @@ public class Personal {
     
     public String fname;
     public String lName;
+    public String sex;
     public Integer age;
     public String address;
     public String state;
-    public String city;    
+    public String city;
+    public String email;
 }

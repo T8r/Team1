@@ -7,6 +7,9 @@ package final_project;
 
 import final_project.MedicalProfile.Personal;
 import final_project.MedicalProfile.ProfilePage;
+import final_project.MedicalProfile.Allergy;
+import final_project.MedicalProfile.Medical;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,25 +32,21 @@ public class Final_Project extends Application {
     public void start(Stage primaryStage) {
         
         TabPane tabPane = new TabPane();
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
         
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(200,50,10,200));
         tabPane.getTabs().add(ProfilePage.CreateProfilePage());
+        tabPane.getTabs().add(ProfilePage.CreateMedicalTab());
+        tabPane.getTabs().add(ProfilePage.CreateAllergyTab());
+        tabPane.getTabs().add(ProfilePage.CreateConfirmationTab());
         root.setCenter(tabPane);
         root.setTop(new Label("PROFILE"));
         
+        
         Scene scene = new Scene(root, 1000, 1000);
         
-        primaryStage.setTitle("Hello World!");
+        
+        primaryStage.setTitle("Medical Form");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
