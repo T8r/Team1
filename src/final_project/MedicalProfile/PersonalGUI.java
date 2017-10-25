@@ -31,4 +31,17 @@ public class PersonalGUI {
     }
     
     
+    public static void resetPersonals(){
+        fNameTF.setText("");
+        lNameTF.setText("");
+        sexRB1.setSelected(false);
+        sexRB2.setSelected(false);
+        ageTF.setText("");
+        addressTF.setText("");
+        cityTF.setText("");
+        emailTF.setText("");
+    
+    }
+    
+    
 }

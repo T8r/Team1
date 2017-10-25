@@ -83,7 +83,7 @@ public class ProfilePage {
        Tab tab = new Tab("Confirmation");
        VBox vBoxContent4 = new VBox();
        Button bigbtn = new Button("Confirmation");
-       bigbtn.setOnAction(new EventHandler<ActionEvent>() {                                                    //e -> primaryStage.setScene(scene2)
+       bigbtn.setOnAction(new EventHandler<ActionEvent>() {       
             @Override
             public void handle(ActionEvent event){
                 SaveProfile();
@@ -121,6 +121,61 @@ public class ProfilePage {
         newProfile.personal.address = PersonalGUI.addressTF.getText();
         newProfile.personal.state = PersonalGUI.stateTF.getText();
         newProfile.personal.email = PersonalGUI.emailTF.getText();
+        
+        if(AllergyGUI.cbA1.isSelected()){
+            newProfile.allergy.dairyA = AllergyGUI.cbA1.getText();
+        }
+        if(AllergyGUI.cbA2.isSelected()){
+            newProfile.allergy.soyA = AllergyGUI.cbA2.getText();
+        }
+        if(AllergyGUI.cbA3.isSelected()){
+            newProfile.allergy.eggsA = AllergyGUI.cbA3.getText();
+        }
+        if(AllergyGUI.cbA4.isSelected()){
+            newProfile.allergy.peanutsA = AllergyGUI.cbA4.getText();
+        }
+        if(AllergyGUI.cbA5.isSelected()){
+            newProfile.allergy.fishA = AllergyGUI.cbA5.getText();
+        }
+        if(AllergyGUI.cbA6.isSelected()){
+            newProfile.allergy.wheatA = AllergyGUI.cbA6.getText();
+        }
+        if(AllergyGUI.cbA7.isSelected()){
+            newProfile.allergy.sesameA = AllergyGUI.cbA7.getText();
+        }
+        if(AllergyGUI.cbA8.isSelected()){
+            newProfile.allergy.tree_nutsA = AllergyGUI.cbA8.getText();
+        }
+        
+        
+        
+        if(AllergyGUI.cbI1.isSelected()){
+            newProfile.allergy.dairyA = AllergyGUI.cbA1.getText();
+        }
+        if(AllergyGUI.cbI2.isSelected()){
+            newProfile.allergy.soyA = AllergyGUI.cbA2.getText();
+        }
+        if(AllergyGUI.cbI3.isSelected()){
+            newProfile.allergy.eggsA = AllergyGUI.cbA3.getText();
+        }
+        if(AllergyGUI.cbI4.isSelected()){
+            newProfile.allergy.peanutsA = AllergyGUI.cbA4.getText();
+        }
+        if(AllergyGUI.cbI5.isSelected()){
+            newProfile.allergy.fishA = AllergyGUI.cbA5.getText();
+        }
+        if(AllergyGUI.cbI6.isSelected()){
+            newProfile.allergy.wheatA = AllergyGUI.cbA6.getText();
+        }
+        if(AllergyGUI.cbI7.isSelected()){
+            newProfile.allergy.sesameA = AllergyGUI.cbA7.getText();
+        }
+        if(AllergyGUI.cbI8.isSelected()){
+            newProfile.allergy.tree_nutsA = AllergyGUI.cbA8.getText();
+        }
+        
+        
+        
         
         
         return newProfile;
