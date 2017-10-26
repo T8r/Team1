@@ -5,10 +5,15 @@
  */
 package final_project;
 
-import final_project.MedicalProfile.Personal;
+import final_project.MedicalProfile.Profile;
 import final_project.MedicalProfile.ProfilePage;
+import final_project.MedicalProfile.Personal;
 import final_project.MedicalProfile.Allergy;
 import final_project.MedicalProfile.Medical;
+import final_project.MedicalProfile.PersonalGUI;
+import final_project.MedicalProfile.MedicalGUI;
+import final_project.MedicalProfile.AllergyGUI;
+
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -35,11 +40,13 @@ public class Final_Project extends Application {
         
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(200,50,10,200));
+        
         tabPane.getTabs().add(ProfilePage.CreateProfilePage());
         tabPane.getTabs().add(ProfilePage.CreateMedicalTab());
         tabPane.getTabs().add(ProfilePage.CreateAllergyTab());
         tabPane.getTabs().add(ProfilePage.CreateConfirmationTab());
         root.setCenter(tabPane);
+        
         root.setTop(new Label("PROFILE"));
         
         

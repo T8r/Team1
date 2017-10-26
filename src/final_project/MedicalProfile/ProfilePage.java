@@ -71,6 +71,10 @@ public class ProfilePage {
        
        return tab;
    }
+   /**
+    * This is the makeup look for Allergy Tab
+    * @return 
+    */
    public static Tab CreateAllergyTab(){
        Tab tab = new Tab("Allergies");
        VBox vBoxContent3 = new VBox(); 
@@ -96,6 +100,8 @@ public class ProfilePage {
        Tab tab = new Tab("Confirmation");
        VBox vBoxContent4 = new VBox();
        Button bigbtn = new Button("Confirmation");
+       
+       
        bigbtn.setOnAction(new EventHandler<ActionEvent>() {       
             @Override
             public void handle(ActionEvent event){
@@ -116,6 +122,10 @@ public class ProfilePage {
        return tab;
    }
    
+   /**
+    * No clear movement to utilize this
+    * @param profile 
+    */
    public static void OpenProfileTab(Profile profile){
         PersonalGUI.fNameTF.setText(profile.personal.fname);
         
@@ -128,6 +138,8 @@ public class ProfilePage {
     */
     public static Profile SaveProfile(){
         Profile newProfile = new Profile();
+        
+        /*Personals collecting*/
         newProfile.personal.fname = PersonalGUI.fNameTF.getText();
         newProfile.personal.lName = PersonalGUI.lNameTF.getText();
         RadioButton endSexRB = new RadioButton();
@@ -140,6 +152,53 @@ public class ProfilePage {
         newProfile.personal.state = PersonalGUI.stateTF.getText();
         newProfile.personal.email = PersonalGUI.emailTF.getText();
         
+        
+        /*Medicals collecting*/
+        RadioButton endaaRB = new RadioButton();
+        if(MedicalGUI.alcoholTG.getSelectedToggle() == null)
+                    endaaRB.setText("Not selected");
+                else
+                    endaaRB = (RadioButton) MedicalGUI.alcoholTG.getSelectedToggle();
+        newProfile.medical.setAlcoholAbuse(endaaRB.getText());
+        RadioButton enddrugRB = new RadioButton();
+        if(MedicalGUI.drugAbuseTG.getSelectedToggle() == null)
+                    enddrugRB.setText("Not selected");
+                else
+                    enddrugRB = (RadioButton) MedicalGUI.drugAbuseTG.getSelectedToggle();
+        newProfile.medical.setDrugAbuse(enddrugRB.getText());
+        RadioButton endheartRB = new RadioButton();
+        if(MedicalGUI.heartProblemsTG.getSelectedToggle() == null)
+                    endheartRB.setText("Not selected");
+                else
+                    endheartRB = (RadioButton) MedicalGUI.heartProblemsTG.getSelectedToggle();
+        newProfile.medical.setHeartProblems(endheartRB.getText());
+        RadioButton enddigestRB = new RadioButton();
+        if(MedicalGUI.digestiveDisorderTG.getSelectedToggle() == null)
+                    enddigestRB.setText("Not selected");
+                else
+                    enddigestRB = (RadioButton) MedicalGUI.digestiveDisorderTG.getSelectedToggle();
+        newProfile.medical.setDigestiveDisorder(enddigestRB.getText());
+        RadioButton endonMedRB = new RadioButton();
+        if(MedicalGUI.onOtherMedsTG.getSelectedToggle() == null)
+                    endonMedRB.setText("Not selected");
+                else
+                    endonMedRB = (RadioButton) MedicalGUI.onOtherMedsTG.getSelectedToggle();
+        newProfile.medical.setOnMedication(endonMedRB.getText());
+        RadioButton endfDiaRB = new RadioButton();
+        if(MedicalGUI.familyDiabetesTG.getSelectedToggle() == null)
+                    endfDiaRB.setText("Not selected");
+                else
+                    endfDiaRB = (RadioButton) MedicalGUI.familyDiabetesTG.getSelectedToggle();
+        newProfile.medical.setFamilyDiabetes(endfDiaRB.getText());
+        RadioButton endpDiaRB = new RadioButton();
+        if(MedicalGUI.personalDiabetesTG.getSelectedToggle() == null)
+                    endpDiaRB.setText("Not selected");
+                else
+                    endpDiaRB = (RadioButton) MedicalGUI.personalDiabetesTG.getSelectedToggle();
+        newProfile.medical.setPersonalDiabetes(endpDiaRB.getText());
+        
+        
+        /*Allergy collecting*/
         if(AllergyGUI.cbA1.isSelected()){
             newProfile.allergy.dairyA = AllergyGUI.cbA1.getText();
         }
