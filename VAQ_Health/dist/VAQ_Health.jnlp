@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="VAQ_Health.jnlp">
+  <information>
+    <title>VAQ_Health</title>
+    <vendor>^.^</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="VAQ_Health.jar" size="25108" download="eager" />
+    <jar href="lib/jfoenix.jar" size="2384520" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="VAQ_Health" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="vaq_health.VAQ_Health"  name="VAQ_Health" />
+  <update check="always"/>
+</jnlp>
