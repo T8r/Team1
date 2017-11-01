@@ -13,19 +13,18 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author ^.^
+ * @author Stephen
  */
-public class VAQ_Health extends Application {
+public class VAQ_HEALTH extends Application {
     
-   static public Stage mainStage;
-   static public Profile profile = new Profile();
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Profile/Personal1/Profile_Personal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        
         Scene scene = new Scene(root);
+        
         stage.setScene(scene);
         stage.show();
-        mainStage = stage;
     }
 
     /**
