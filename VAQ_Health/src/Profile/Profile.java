@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Profile.DataClasses;
+package Profile;
 
-import Profile.DataClasses.Allergy;
-import Profile.DataClasses.Medical;
-import Profile.DataClasses.Personal;
+import Profile.Allergies.Allergy;
+import Profile.Medical.Medical;
+import Profile.Personal1.Personal;
+import Profile.Personal1.Personal;
+import Profile.Personal1.Personal;
 
 /**
  *

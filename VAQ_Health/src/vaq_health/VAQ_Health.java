@@ -5,7 +5,7 @@
  */
 package vaq_health;
 
-import Profile.DataClasses.Profile;
+import Profile.Profile;
 import java.security.MessageDigest;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

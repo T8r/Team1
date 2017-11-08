@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
-import Profile.DataClasses.Profile;
+import Profile.Profile;
 
 /**
  *
@@ -188,8 +188,9 @@ public class DatabaseManager {
         Profile profile = new Profile();
         String hashedUsername ="";
         
-        Connect();
+       
          try {
+          Connect();
           hashedUsername = sha256(username);
           myRs = myStmt.executeQuery("select* from user where username='"+hashedUsername+"'");
           myRs.next();
@@ -209,10 +210,11 @@ public class DatabaseManager {
                 profile.personal.setEmail(myRs.getString("email"));
                 profile.personal.setBirthday(myRs.getString("birthday"));
             }
+            Close();
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        Close();
+        
        
         
         return profile;

@@ -9,7 +9,6 @@ package Profile.Personal1;
  */
 
 import Database.DatabaseManager;
-import Profile.DataClasses.Personal;
 import Profile.ProfileController;
 import vaq_health.*;
 import com.jfoenix.controls.JFXTextField;

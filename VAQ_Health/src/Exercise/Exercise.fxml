@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Exercise.ExerciseController">
     <stylesheets>
@@ -40,7 +41,9 @@
                         <Font size="29.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="exerciseLV" layoutX="27.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="exerciseLV" layoutX="31.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
+                  <CheckComboBox fx:id="exerciseCCB" layoutX="31.0" layoutY="80.0" prefHeight="25.0" prefWidth="88.0" />
+                  <Label layoutX="37.0" layoutY="63.0" text="Equipment" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="407.0" layoutY="140.0" prefHeight="394.0" prefWidth="380.0" style="-fx-background-color: #e9e9e9;">

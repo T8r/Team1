@@ -30,6 +30,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import Database.DatabaseManager;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import org.controlsfx.control.CheckComboBox;
 
 /**
  * FXML Controller class
@@ -55,6 +58,8 @@ public class ExerciseController implements Initializable {
     Label caloriesL;
     @FXML
     Label metL;
+    @FXML
+    CheckComboBox exerciseCCB;
     
     Exercise selectedExercise ;
     Image balanceImage = new Image("balance.png");
@@ -71,6 +76,18 @@ public class ExerciseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       
+        // create the data to show in the CheckComboBox 
+        exerciseCCB.getItems().add("Bike");
+        exerciseCCB.getItems().add("Weights");
+        // Create the CheckComboBox with the data 
+        
+
+        // and listen to the relevant events (e.g. when the selected indices or 
+        // selected items change).
+        
+    
+        
         discriptionTA.setWrapText(true);
         workoutTimeCB.setItems(FXCollections.observableList(timeOpts));
         workoutTimeCB.getSelectionModel().selectFirst();
