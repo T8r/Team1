@@ -40,11 +40,44 @@ public class ProfileController {
     
     public void OpenAllergies()throws IOException
     {
-       Parent root = FXMLLoader.load(getClass().getResource("/Profile/Allergies/Allergies.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Profile/Allergies/Allergies.fxml"));
+        Scene scene = new Scene(root);
+        VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainStage.show();
+    }
+    public void OpenExercise() throws IOException
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("/Exercise/Exercise.fxml"));
+        Scene scene = new Scene(root);
+        VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainStage.show(); 
+    }
+    
+    public void OpenHome() throws IOException
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("/Home/Home.fxml"));
         
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
         VAQ_Health.mainStage.show();
     }
+    
+    public void OpenCreateAccount() throws IOException
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("/SignIn/CreateAccount/CreateAccount.fxml"));
+        Scene scene = new Scene(root);
+        VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainStage.show(); 
+    }
+    
+    public void OpenSignIn() throws IOException
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("/SignIn/SignIn.fxml"));
+        Scene scene = new Scene(root);
+        VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainStage.show(); 
+    }
+    
+  
     
 }

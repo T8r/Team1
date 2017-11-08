@@ -60,6 +60,13 @@ public class Profile_Medical1Controller implements Initializable {
         profileController.OpenAllergies();
     }
     @FXML
+    public void OpenHome() throws IOException
+    {
+        profileController.OpenHome();
+    }
+    
+    
+    @FXML
     public void SaveButtion()
     {
         if (weightTF.getText() != null)

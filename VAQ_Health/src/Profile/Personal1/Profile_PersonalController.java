@@ -8,6 +8,7 @@ package Profile.Personal1;
  * and open the template in the editor.
  */
 
+import Profile.Data.Personal;
 import Profile.ProfileController;
 import vaq_health.*;
 import com.jfoenix.controls.JFXTextField;
@@ -77,12 +78,19 @@ public class Profile_PersonalController implements Initializable {
         sexCB.setItems(FXCollections.observableArrayList(new ArrayList<String>(Arrays.asList("Male","Female"))));
         stateCB.getSelectionModel().select(0);
         sexCB.getSelectionModel().select(0);
+        
+        FillPersonal();
 
     }    
 
     @FXML
     private void OpenMedical() throws IOException {
         profileController.OpenMedical();
+    }
+    @FXML
+    private void OpenHome() throws IOException
+    {
+         profileController.OpenHome();
     }
     @FXML
     private void OpenAllergies(MouseEvent event) throws IOException {
@@ -114,9 +122,41 @@ public class Profile_PersonalController implements Initializable {
             VAQ_Health.profile.personal.setAge(Integer.parseInt(ageTF.getText()));
         if (birthdayTF.getText() != null)
             VAQ_Health.profile.personal.setBirthday(birthdayTF.getText());
-            
+         
+        DatabaseManager.UpdateProfile(VAQ_Health.profile);
         System.out.println(VAQ_Health.profile);
         
+    }
+
+    private void FillPersonal() {
+         if (VAQ_Health.profile.personal.getFname() != null)
+         {
+             fNameTF.setText(VAQ_Health.profile.personal.getFname());
+         }
+         if (VAQ_Health.profile.personal.getlName()!= null)
+         {
+             lNameTF.setText(VAQ_Health.profile.personal.getlName());
+         }
+         if (VAQ_Health.profile.personal.getAddress()!= null)
+         {
+             addressTF.setText(VAQ_Health.profile.personal.getAddress());
+         }
+         if (VAQ_Health.profile.personal.getCity()!= null)
+         {
+             cityTF.setText(VAQ_Health.profile.personal.getCity());
+         }
+         if (VAQ_Health.profile.personal.getState()!= null)
+         {
+             //stateTF.setText(VAQ_Health.profile.personal.getState());
+         }
+         if (VAQ_Health.profile.personal.getZipCode()!= null)
+         {
+             zipTF.setText(VAQ_Health.profile.personal.getZipCode());
+         }
+         if (VAQ_Health.profile.personal.getEmail()!= null)
+         {
+             emailTF.setText(VAQ_Health.profile.personal.getEmail());
+         }
     }
     
 }

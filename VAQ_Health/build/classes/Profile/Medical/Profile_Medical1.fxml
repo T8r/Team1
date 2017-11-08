@@ -25,7 +25,7 @@
                         <Blend />
                      </effect>
                   </Label>
-                  <ImageView fitHeight="55.0" fitWidth="86.0" layoutX="25.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="55.0" fitWidth="86.0" layoutX="25.0" layoutY="15.0" onMouseClicked="#OpenHome" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../arrow_back_white_192x192.png" />
                      </image>

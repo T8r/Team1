@@ -63,10 +63,17 @@ public class AllergiesController implements Initializable {
         
     }    
     
+    @FXML
     public void OpenMedical() throws IOException
     {
         profileController.OpenMedical();
     }
+    @FXML
+    public void OpenHome() throws IOException
+    {
+         profileController.OpenHome();
+    }
+    @FXML
     public void OpenPersonal() throws IOException
     {
          profileController.OpenPersonal();

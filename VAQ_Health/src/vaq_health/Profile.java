@@ -17,6 +17,9 @@ public class Profile {
     public Personal personal = new Personal();
     public Medical medical = new Medical();
     public Allergy allergies = new Allergy();
+    public String username;
+    public String password;
+    int id;
     
     @Override
     public String toString()
