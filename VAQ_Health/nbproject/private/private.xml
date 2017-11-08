@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/Profile/Medical/Profile_Medical1Controller.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/SignIn/SignInController.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/Profile/Personal1/Profile_PersonalController.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/Profile/Data/Personal.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/vaq_health/VAQ_Health.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/vaq_health/DatabaseManager.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/Exercise/ExerciseController.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/vaq_health/Profile.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/SignIn/CreateAccount/CreateAccountController.java</file>
-            <file>file:/C:/Users/Ghost/Downloads/Team1-master%20(1)/Team1-master/VAQ_Health/src/Profile/Allergies/AllergiesController.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/SignIn/CreateAccount/CreateAccountController.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/DataClasses/Profile.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Personal1/Profile_PersonalController.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/vaq_health/VAQ_Health.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Database/DatabaseManager.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/SignIn/SignInController.java</file>
         </group>
     </open-files>
 </project-private>

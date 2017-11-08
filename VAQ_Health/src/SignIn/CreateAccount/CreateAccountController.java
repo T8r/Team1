@@ -18,7 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import vaq_health.DatabaseManager;
+import Database.DatabaseManager;
 
 /**
  * FXML Controller class
@@ -56,11 +56,17 @@ public class CreateAccountController implements Initializable {
        String username = usernameTF.getText();
        String password = passwordTF.getText();
        String email = emailTF.getText();
+       
+       if (username.isEmpty() || password.isEmpty())
+       {
+           errorL.setText("Username/Password have to be ...");
+           return;
+       }
+       
         try {
             if (!DatabaseManager.UsernameExists(username))
             {
-                System.out.println("Username Available");
-                
+                System.out.println("Username Available");  
             }
             else
             {
@@ -71,7 +77,7 @@ public class CreateAccountController implements Initializable {
             Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }       
         errorL.setText("Account Created");
         errorL.setTextFill(Color.GREEN);
        DatabaseManager.AddUser(username, password, email);

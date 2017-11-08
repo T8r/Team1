@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javax.xml.bind.DatatypeConverter;
-import vaq_health.DatabaseManager;
+import Database.DatabaseManager;
 import vaq_health.VAQ_Health;
 
 /**
@@ -32,8 +32,6 @@ import vaq_health.VAQ_Health;
  *
  * @author ^.^
  */
-
-
 public class SignInController implements Initializable {
 
     /**
@@ -46,11 +44,12 @@ public class SignInController implements Initializable {
     @FXML
     Label errorL;
     String password;
-    
+
     ProfileController profileController = new ProfileController();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        password ="";
         usernameTF.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
@@ -65,7 +64,7 @@ public class SignInController implements Initializable {
                 }
             }
         });
-        
+
         passwordTF.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
@@ -80,48 +79,46 @@ public class SignInController implements Initializable {
                 }
             }
         });
-        
-        passwordTF.setOnKeyTyped(event -> {  
-            String p =  passwordTF.getText();
-              if (p.length() == 0) {
-                  password = "";
-                return;
-            }
-              
-    
-                char[] c = p.toCharArray();
-                password += c[p.length()-1];
-                c[p.length()-1] = '*';  
-                System.out.println(password);
-               passwordTF.setText(String.valueOf(c));
-               passwordTF.positionCaret(passwordTF.getText().length());
-               
+
+        passwordTF.setOnKeyPressed(event -> {
+            
+            
+//            String p = passwordTF.getText();
+//            if (p.length() == 0) {
+//                password = "";
+//                return;
+//            }
+//            char[] c = p.toCharArray();
+//            password += c[p.length() - 1];
+//            c[p.length() - 1] = '*';
+//            System.out.println(password);
+//            passwordTF.setText(String.valueOf(c));
+//            passwordTF.positionCaret(passwordTF.getText().length());
+
         });
-    }  
-    
+    }
+
     @FXML
-    public void OpenCreateAccount() throws IOException
-    {
+    public void OpenCreateAccount() throws IOException {
         profileController.OpenCreateAccount();
     }
-    
+
     @FXML
-    private void SignIn() throws IOException, NoSuchAlgorithmException
-    {
-         if (usernameTF.getText().isEmpty() || passwordTF.getText().isEmpty())
-             return;
-         
-        if (DatabaseManager.UserExists(usernameTF.getText(),password))
-        {
+    private void SignIn() throws IOException, NoSuchAlgorithmException {
+        
+        if (usernameTF.getText().isEmpty() || passwordTF.getText().isEmpty()) {
+            return;
+        }
+        
+        if (DatabaseManager.UserExists(usernameTF.getText(),passwordTF.getText())) {
             System.out.println("User logged in");
             VAQ_Health.profile = DatabaseManager.GetProfile(usernameTF.getText());
             VAQ_Health.profile.username = usernameTF.getText();
             VAQ_Health.profile.password = password;
             profileController.OpenHome();
-        }
-        else
+        } else {
             errorL.setText("Incorrect username/password");
+        }
     }
 
-    
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vaq_health;
+package Database;
 
 import Exercise.Exercise;
 import java.io.UnsupportedEncodingException;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
+import Profile.DataClasses.Profile;
 
 /**
  *
@@ -33,28 +34,30 @@ public class DatabaseManager {
    
     
     public static void AddUser(String username, String password, String email)
-    {
-        Connect();
+    {        
         try {
+            Connect();
+            String hashedUsername = sha256(username);
+            String hashedPassword = sha256(password);
             myRs = myStmt.executeQuery("SELECT COUNT(*) FROM user");
-            // get the number of rows from the result set
             myRs.next();
             int rowCount = myRs.getInt(1) + 1;
             String sql = "INSERT INTO User (ID, username, password) VALUES (?, ?, ?)";
 
             PreparedStatement statement = myConnection.prepareStatement(sql);
             statement.setInt(1, rowCount);
-            statement.setString(2, username);
-            statement.setString(3, password);
+            statement.setString(2, hashedUsername);
+            statement.setString(3, hashedPassword);
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("A new user was inserted successfully!");
             }
+            Close();
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        Close();
+      
     }
     public static boolean UsernameExists(String username) throws NoSuchAlgorithmException, UnsupportedEncodingException
     {

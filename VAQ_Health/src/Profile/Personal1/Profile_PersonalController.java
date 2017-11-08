@@ -8,7 +8,8 @@ package Profile.Personal1;
  * and open the template in the editor.
  */
 
-import Profile.Data.Personal;
+import Database.DatabaseManager;
+import Profile.DataClasses.Personal;
 import Profile.ProfileController;
 import vaq_health.*;
 import com.jfoenix.controls.JFXTextField;

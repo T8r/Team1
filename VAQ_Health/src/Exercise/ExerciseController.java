@@ -29,7 +29,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import vaq_health.DatabaseManager;
+import Database.DatabaseManager;
 
 /**
  * FXML Controller class
