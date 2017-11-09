@@ -16,29 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `badexercisefordisease`
+-- Table structure for table `exerciseequipment`
 --
 
-DROP TABLE IF EXISTS `badexercisefordisease`;
+DROP TABLE IF EXISTS `exerciseequipment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `badexercisefordisease` (
-  `diseaseID` int(11) NOT NULL,
-  `exerciseID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`diseaseID`),
-  KEY `befdExerciseID_idx` (`exerciseID`),
-  CONSTRAINT `befdDiseaseID` FOREIGN KEY (`diseaseID`) REFERENCES `disease` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `befdExerciseID` FOREIGN KEY (`exerciseID`) REFERENCES `exercise` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `exerciseequipment` (
+  `ID` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `badexercisefordisease`
+-- Dumping data for table `exerciseequipment`
 --
 
-LOCK TABLES `badexercisefordisease` WRITE;
-/*!40000 ALTER TABLE `badexercisefordisease` DISABLE KEYS */;
-/*!40000 ALTER TABLE `badexercisefordisease` ENABLE KEYS */;
+LOCK TABLES `exerciseequipment` WRITE;
+/*!40000 ALTER TABLE `exerciseequipment` DISABLE KEYS */;
+INSERT INTO `exerciseequipment` VALUES (1,'Bicycle'),(2,'Dumb Bells'),(3,'Pull Up Bar'),(4,'Jump Rope');
+/*!40000 ALTER TABLE `exerciseequipment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

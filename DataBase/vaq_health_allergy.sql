@@ -38,7 +38,7 @@ CREATE TABLE `allergy` (
 
 LOCK TABLES `allergy` WRITE;
 /*!40000 ALTER TABLE `allergy` DISABLE KEYS */;
-INSERT INTO `allergy` VALUES (1,1,'Dairy Allergy'),(2,2,'Soy Allergy'),(3,3,'Egg Allergy'),(4,4,'Peanut Allergy'),(5,5,'Fish Allergy'),(6,6,'Wheat Allergy'),(7,7,'Fructans Allergy'),(8,8,'Sesame Allergy'),(9,9,'Gluten Allergy'),(10,10,'Lactose Allergy'),(11,11,'Fructose Allergy'),(12,12,'Sulfites Allergy'),(13,13,'Histamines Allergy'),(14,14,'Nitrites Allergy'),(15,15,'Night Shades Allergy');
+INSERT INTO `allergy` VALUES (1,1,'Dairy'),(2,2,'Soy'),(3,3,'Egg'),(4,4,'Peanut'),(5,5,'Fish'),(6,6,'Wheat'),(7,7,'Fructans'),(8,8,'Sesame'),(9,9,'Gluten'),(10,10,'Lactose'),(11,11,'Fructose'),(12,12,'Sulfites'),(13,13,'Histamines'),(14,14,'Nitrites'),(15,15,'Night Shades');
 /*!40000 ALTER TABLE `allergy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 11:29:06
+-- Dump completed on 2017-11-08 21:43:13
