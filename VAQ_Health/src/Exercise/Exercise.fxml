@@ -42,7 +42,7 @@
                      </font>
                   </Label>
                   <ListView fx:id="exerciseLV" layoutX="31.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
-                  <CheckComboBox fx:id="exerciseCCB" layoutX="31.0" layoutY="80.0" prefHeight="25.0" prefWidth="88.0" />
+                  <CheckComboBox fx:id="exerciseEquipCCB" layoutX="31.0" layoutY="80.0" prefHeight="25.0" prefWidth="88.0" />
                   <Label layoutX="37.0" layoutY="63.0" text="Equipment" />
                </children>
             </AnchorPane>

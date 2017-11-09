@@ -38,9 +38,9 @@ public class ProfileController {
         VAQ_Health.mainStage.show();
     }
     
-    public void OpenAllergies()throws IOException
+    public void OpenProfileExercise()throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource("/Profile/Allergies/Allergies.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Profile/Exercise/ExerciseProfile.fxml"));
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
         VAQ_Health.mainStage.show();

@@ -30,6 +30,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import Database.DatabaseManager;
+import java.util.stream.Collectors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import org.controlsfx.control.CheckComboBox;
@@ -59,70 +60,100 @@ public class ExerciseController implements Initializable {
     @FXML
     Label metL;
     @FXML
-    CheckComboBox exerciseCCB;
-    
-    Exercise selectedExercise ;
+    CheckComboBox exerciseEquipCCB;
+
+    Exercise selectedExercise;
     Image balanceImage = new Image("balance.png");
     Image cardioImage = new Image("cardio.png");
-    Image strengthImage = new Image("strength.png");;
-    Image flexibilityImage = new Image("flexibility.png");;
+    Image strengthImage = new Image("strength.png");
+    ;
+    Image flexibilityImage = new Image("flexibility.png");
+    ;
     ArrayList<Exercise> exerciseList = new ArrayList<>();
-    List<String> timeOpts = Arrays.asList("10m","20m","30m","40m","50m","60m");
+    List<String> timeOpts = Arrays.asList("10m", "20m", "30m", "40m", "50m", "60m");
     Connection myConnection;
     Statement myStmt;
     ResultSet myRs;
     ProfileController profileController = new ProfileController();
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       
-        // create the data to show in the CheckComboBox 
-        exerciseCCB.getItems().add("Bike");
-        exerciseCCB.getItems().add("Weights");
-        // Create the CheckComboBox with the data 
-        
 
-        // and listen to the relevant events (e.g. when the selected indices or 
-        // selected items change).
-        
-    
-        
+        exerciseList = DatabaseManager.GetExerciseTable();
+        if (exerciseList.size() > 0) {
+            System.out.println(exerciseList.get(0).name);
+        }
+
+        ArrayList<String> equipList = DatabaseManager.GetExerEquipList();
+        for (String equipment : equipList) {
+            exerciseEquipCCB.getItems().add(equipment);
+        }
+        //Get rid of exercises that require equipment the user doesnt have
+        UpdateExerciseList();
+
         discriptionTA.setWrapText(true);
         workoutTimeCB.setItems(FXCollections.observableList(timeOpts));
         workoutTimeCB.getSelectionModel().selectFirst();
+
+        //EVENT HANDLERS
         workoutTimeCB.setOnAction(new EventHandler() {
             @Override
             public void handle(Event event) {
-              SetCalories();
+                SetCalories();
             }
         });
         exerciseLV.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Exercise>() {
-        
+
             @Override
             public void changed(ObservableValue<? extends Exercise> observable, Exercise oldValue, Exercise newValue) {
                 selectedExercise = newValue;
                 nameLabel.setText(selectedExercise.name);
                 discriptionTA.setText(selectedExercise.discription);
                 metL.setText(String.valueOf(selectedExercise.met));
-               switch(selectedExercise.type){
-                   case "CARDIO":  typeImageV.setImage(cardioImage);
-                                   break;
-                   case "BALANCE": typeImageV.setImage(balanceImage);
-                                   break;
-                   case "STRENGTH": typeImageV.setImage(strengthImage);
-                                   break;
-                   case "FLEXIBILITY": typeImageV.setImage(flexibilityImage);
-               }
-              
-               DisplayExercise(selectedExercise);
+                switch (selectedExercise.type) {
+                    case "CARDIO":
+                        typeImageV.setImage(cardioImage);
+                        break;
+                    case "BALANCE":
+                        typeImageV.setImage(balanceImage);
+                        break;
+                    case "STRENGTH":
+                        typeImageV.setImage(strengthImage);
+                        break;
+                    case "FLEXIBILITY":
+                        typeImageV.setImage(flexibilityImage);
+                }
+
+                DisplayExercise(selectedExercise);
             }
         });
-        GetExercisesFromDB();
-    } 
-    
-    public void SetCalories()
-    {
+
+        exerciseEquipCCB.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
+
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends String> c) {
+                System.out.println("test");
+                UpdateExerciseList();
+            }
+        });
+
+    }
+
+    private void UpdateExerciseList() {
+        ObservableList<String> equipL = exerciseEquipCCB.getCheckModel().getCheckedItems();
+        ArrayList<Exercise> filterdList = new ArrayList();
+        for (int i = 0; i < exerciseList.size(); i++) {
+            if (!exerciseList.get(i).equipment.equals("0") && !equipL.contains(exerciseList.get(i).equipment)) {
+              System.out.println("User doesnt have equipment");
+            }
+            else
+                filterdList.add(exerciseList.get(i));
+        }
+        exerciseLV.setItems(FXCollections.observableList(filterdList));
+    }
+
+    public void SetCalories() {
         double t = 0;
         switch (workoutTimeCB.getSelectionModel().getSelectedItem().toString()) {
             case "10m":
@@ -150,21 +181,13 @@ public class ExerciseController implements Initializable {
 
         caloriesL.setText(dec.format(caloriesBurned));
     }
-    public void DisplayExercise(Exercise exercise)
-    {
+
+    public void DisplayExercise(Exercise exercise) {
         SetCalories();
     }
-    
-    public void GetExercisesFromDB()
-    {
-        exerciseList = DatabaseManager.GetExerciseTable();
-        if (exerciseList.size() > 0)
-            System.out.println(exerciseList.get(0).name);
-        exerciseLV.setItems(FXCollections.observableList(exerciseList));            
-    }
-    
-    public void OpenHome() throws IOException
-    {
+
+    public void OpenHome() throws IOException {
         profileController.OpenHome();
     }
+
 }

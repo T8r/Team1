@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckListView?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Profile.Medical.Profile_Medical1Controller">
    <children>
@@ -45,7 +46,7 @@
                         <Font size="22.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutY="152.0" onMouseClicked="#OpenAllergies" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@Header.css" text="Alergies" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" layoutY="152.0" onMouseClicked="#OpenAllergies" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@Header.css" text="Exercise" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -63,7 +64,7 @@
                </font>
             </JFXButton>
             <AnchorPane layoutX="145.0" layoutY="80.0" prefHeight="520.0" prefWidth="4.0" style="-fx-background-color: orange;" />
-            <AnchorPane layoutX="205.0" layoutY="129.0" prefHeight="337.0" prefWidth="474.0" style="-fx-background-color: e9e9e9; -fx-background-radius: 5;">
+            <AnchorPane layoutX="171.0" layoutY="111.0" prefHeight="458.0" prefWidth="630.0" style="-fx-background-color: e9e9e9; -fx-background-radius: 5;">
                <children>
                   <CheckBox fx:id="hasDiabetesChB" layoutX="52.0" layoutY="148.0" mnemonicParsing="false" text="Diabetes">
                      <font>
@@ -107,6 +108,12 @@
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
+                  <CheckListView fx:id="allergyCCB" layoutX="49.0" layoutY="304.0" prefHeight="140.0" prefWidth="179.0" />
+                  <Label layoutX="100.0" layoutY="277.0" text="Alergies">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>

@@ -35,7 +35,7 @@
                   <Font size="22.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutY="152.0" onMouseClicked="#OpenAllergies" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@Header.css" text="Alergies" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutY="152.0" onMouseClicked="#OpenAllergies" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@Header.css" text="Exercise" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>

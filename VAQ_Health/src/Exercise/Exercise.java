@@ -15,6 +15,7 @@ public class Exercise {
     public String workOutTime;
     public String discription;
     public String type;
+    public String equipment;
     public int met;
     @Override
     public String toString()

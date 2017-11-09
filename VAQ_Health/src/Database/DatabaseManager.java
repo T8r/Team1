@@ -25,18 +25,42 @@ import Profile.Profile;
  * @author ^.^
  */
 public class DatabaseManager {
-    
+
     static Connection myConnection;
     static Statement myStmt;
     static ResultSet myRs;
+
     
-    
-   
-    
-    public static void AddUser(String username, String password, String email)
-    {        
+     static void OpenConnection() {
         try {
-            Connect();
+            // 1. Get a connection to database
+            myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaq_health", "root", "password");
+            myStmt = myConnection.createStatement();
+
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+
+    static void CloseConnection() {
+        try {
+            if (myRs != null) {
+                myRs.close();
+            }
+            if (myStmt != null) {
+                myStmt.close();
+            }
+            if (myConnection != null) {
+                myConnection.close();
+            }
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+    
+    public static void AddUser(String username, String password, String email) {
+        try {
+            OpenConnection();
             String hashedUsername = sha256(username);
             String hashedPassword = sha256(password);
             myRs = myStmt.executeQuery("SELECT COUNT(*) FROM user");
@@ -53,32 +77,32 @@ public class DatabaseManager {
             if (rowsInserted > 0) {
                 System.out.println("A new user was inserted successfully!");
             }
-            Close();
+            CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-      
+
     }
-    public static boolean UsernameExists(String username) throws NoSuchAlgorithmException, UnsupportedEncodingException
-    {
+
+    public static boolean UsernameExists(String username) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         boolean found = false;
         String hashedUsername = sha256(username);
-        
-        Connect();
+
         try {
-            myRs = myStmt.executeQuery("select* from user where username='"+hashedUsername+"'");
+            OpenConnection();
+            myRs = myStmt.executeQuery("select* from user where username='" + hashedUsername + "'");
             // 4. Process the result set
             while (myRs.next()) {
-             found = true;  
+                found = true;
             }
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        Close();
+        CloseConnection();
         return found;
     }
-     public static boolean UserExists(String username,String password)
-    {
+
+    public static boolean UserExists(String username, String password) {
         boolean found = false;
         String hashedUsername = "";
         String hashedPassword = "";
@@ -91,113 +115,115 @@ public class DatabaseManager {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Connect();
         try {
-            myRs = myStmt.executeQuery("select* from user where username='"+hashedUsername+"' and password='"+hashedPassword+"'");
+            OpenConnection();
+            myRs = myStmt.executeQuery("select* from user where username='" + hashedUsername + "' and password='" + hashedPassword + "'");
             // 4. Process the result set
             while (myRs.next()) {
-             found = true;  
+                found = true;
             }
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        Close();
+        CloseConnection();
         return found;
     }
-     
-    public static  ArrayList<Exercise> GetExerciseTable()
+
+    
+    public static ArrayList<String> GetExerEquipList()
     {
+        ArrayList<String> equipList = new ArrayList<>();
+
+         try {
+            OpenConnection();
+            
+            myRs = myStmt.executeQuery("select* from exerciseequipment");
+            // 4. Process the result set
+            while (myRs.next()) {
+               equipList.add(myRs.getString("name"));
+            }
+            CloseConnection();
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        return equipList;
+    }
+    public static ArrayList<Exercise> GetExerciseTable() {
         ArrayList<Exercise> exerciseList = new ArrayList<>();
-        
-        Connect();
+
         try {
+            OpenConnection();
             myRs = myStmt.executeQuery("select* from exercise");
 
             // 4. Process the result set
             while (myRs.next()) {
                 Exercise newExercise = new Exercise();
-                newExercise.name = myRs.getString("Name");  
+                newExercise.name = myRs.getString("Name");
                 newExercise.difficulty = myRs.getString("difficulty");
                 newExercise.discription = myRs.getString("discription");
                 newExercise.type = myRs.getString("type");
                 newExercise.met = myRs.getInt("met");
+                newExercise.equipment = Integer.toString(myRs.getInt("equipmentID"));
                 exerciseList.add(newExercise);
-                
-            }
-        } catch (Exception exc) {
-            exc.printStackTrace();
-        }
-        Close();
-       return exerciseList;
-    }
-    
-    static void Connect()
-    {
-          try {
-            // 1. Get a connection to database
-            myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaq_health", "root", "password");
-             myStmt = myConnection.createStatement();
 
+            }
+            for (Exercise exercise : exerciseList)
+            {
+                if (exercise.equipment.equals("0"))
+                    continue;
+                myRs = myStmt.executeQuery("select* from exerciseequipment where ID="+exercise.equipment);
+                myRs.next();
+                exercise.equipment = myRs.getString("name");
+                System.out.println(exercise.name + "   " + exercise.equipment);
+            }
+            
+            CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
         }
+        
+        return exerciseList;
     }
-    
-    static void Close()
-    {
+
+
+
+    public static void UpdateProfile(Profile profile) {
+        String hashedUsername = "";
+
+        OpenConnection();
+
         try {
-            if (myRs != null) {
-                myRs.close();
-            }
-            if (myStmt != null) {
-                myStmt.close();
-            }
-            if (myConnection != null) {
-                myConnection.close();
-            }
+            hashedUsername = sha256(profile.username);
+            PreparedStatement ps = myConnection.prepareStatement(
+                    "UPDATE personal SET firstName = ?, lastName = ? WHERE userID=" + profile.id);
+
+            // set the preparedstatement parameters
+            ps.setString(1, profile.personal.getFname());
+            ps.setString(2, profile.personal.getlName());
+
+            // call executeUpdate to execute our sql update statement
+            ps.executeUpdate();
+            ps.close();
+            CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
         }
+        
     }
 
-    public static void UpdateProfile(Profile profile)
-    {
-        String hashedUsername ="";
-        
-        Connect();
-        
-         try {
-          hashedUsername = sha256(profile.username);
-             PreparedStatement ps = myConnection.prepareStatement(
-                     "UPDATE personal SET firstName = ?, lastName = ? WHERE userID="+profile.id);
-
-             // set the preparedstatement parameters
-             ps.setString(1, profile.personal.getFname());
-             ps.setString(2, profile.personal.getlName());
-
-             // call executeUpdate to execute our sql update statement
-             ps.executeUpdate();
-             ps.close();
-        } catch (Exception exc) {
-            exc.printStackTrace();
-        }
-        Close();  
-    }
-    
-     public static Profile GetProfile(String username) {
+    public static Profile GetProfile(String username) {
         Profile profile = new Profile();
-        String hashedUsername ="";
-        
-       
-         try {
-          Connect();
-          hashedUsername = sha256(username);
-          myRs = myStmt.executeQuery("select* from user where username='"+hashedUsername+"'");
-          myRs.next();
-          int userID = myRs.getInt("ID");
-          profile.id = userID;
-          myRs = myStmt.executeQuery("select* from personal where userID="+userID+"");
-          
+        String hashedUsername = "";
+
+        try {
+            OpenConnection();
+            hashedUsername = sha256(username);
+            myRs = myStmt.executeQuery("select* from user where username='" + hashedUsername + "'");
+            myRs.next();
+            int userID = myRs.getInt("ID");
+            profile.id = userID;
+            myRs = myStmt.executeQuery("select* from personal where userID=" + userID + "");
+
             // 4. Process the result set
             while (myRs.next()) {
                 profile.personal.setFname(myRs.getString("firstName"));
@@ -210,24 +236,55 @@ public class DatabaseManager {
                 profile.personal.setEmail(myRs.getString("email"));
                 profile.personal.setBirthday(myRs.getString("birthday"));
             }
-            Close();
+            CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        
-       
-        
+
         return profile;
     }
-    
-    
-    static private String sha256(String username) throws NoSuchAlgorithmException, UnsupportedEncodingException
-    {
+
+    static private String sha256(String username) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(username.getBytes("UTF-8"));
         System.out.println(DatatypeConverter.printHexBinary(hash));
         return DatatypeConverter.printHexBinary(hash);
     }
-    
-    
+
+    public static ArrayList<String> GetAllergyList() {
+        ArrayList<String> allergyList = new ArrayList<>();
+
+         try {
+            OpenConnection();
+            
+            myRs = myStmt.executeQuery("select* from allergy");
+            // 4. Process the result set
+            while (myRs.next()) {
+               allergyList.add(myRs.getString("discription"));
+            }
+            CloseConnection();
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        return allergyList;
+    }
+
+    public static ArrayList<String> GetEquipmentList() {
+        ArrayList<String> equipmentList = new ArrayList<>();
+
+         try {
+            OpenConnection();
+            
+            myRs = myStmt.executeQuery("select* from exerciseequipment");
+            // 4. Process the result set
+            while (myRs.next()) {
+               equipmentList.add(myRs.getString("name"));
+            }
+            CloseConnection();
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        return equipmentList;
+    }
+
 }

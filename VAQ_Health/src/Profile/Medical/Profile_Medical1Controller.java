@@ -5,14 +5,18 @@
  */
 package Profile.Medical;
 
+import Database.DatabaseManager;
 import Profile.ProfileController;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.CheckListView;
 import vaq_health.VAQ_Health;
 
 /**
@@ -43,10 +47,17 @@ public class Profile_Medical1Controller implements Initializable {
     CheckBox hasHighBloodPressure = new CheckBox();
     @FXML
     CheckBox hasGout = new CheckBox();
+    @FXML
+    CheckListView allergyCCB;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ArrayList<String> allergyList = DatabaseManager.GetAllergyList();
+
+        for (String allergy : allergyList) {
+            allergyCCB.getItems().add(allergy);
+        }
     }  
     
     @FXML
@@ -57,7 +68,7 @@ public class Profile_Medical1Controller implements Initializable {
     @FXML
     public void OpenAllergies() throws IOException
     {
-        profileController.OpenAllergies();
+        profileController.OpenProfileExercise();
     }
     @FXML
     public void OpenHome() throws IOException

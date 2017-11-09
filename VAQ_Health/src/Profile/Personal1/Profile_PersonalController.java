@@ -94,7 +94,7 @@ public class Profile_PersonalController implements Initializable {
     }
     @FXML
     private void OpenAllergies(MouseEvent event) throws IOException {
-        profileController.OpenAllergies();
+        profileController.OpenProfileExercise();
     }
     
     @FXML
