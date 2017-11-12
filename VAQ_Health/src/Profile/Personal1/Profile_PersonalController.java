@@ -134,7 +134,7 @@ public class Profile_PersonalController implements Initializable {
       if (profileIV.getImage()!= null)
             VAQ_Health.profile.imagePath = imageFile.getAbsolutePath();
       
-        DatabaseManager.UpdateProfile(VAQ_Health.profile);
+        DatabaseManager.UpdatePersonal(VAQ_Health.profile);
         System.out.println(VAQ_Health.profile);
         
     }

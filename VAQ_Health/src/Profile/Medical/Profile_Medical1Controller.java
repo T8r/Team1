@@ -140,7 +140,15 @@ public class Profile_Medical1Controller implements Initializable {
         else
             VAQ_Health.profile.medical.setHasGout(false);
         
+        
+        for (int i=0; i < VAQ_Health.profile.allergies.map.size(); i++)
+        {
+            VAQ_Health.profile.allergies.map.replace(allergyCCB.getCheckModel().getItem(i).toString(),allergyCCB.getCheckModel().isChecked(i) );
+            System.out.println("Allergy: " + allergyCCB.getCheckModel().getItem(i).toString() + ":   " + allergyCCB.getCheckModel().isChecked(i) );
+            
+        }
         System.out.println(VAQ_Health.profile.medical);
+        DatabaseManager.UpdateMedical(VAQ_Health.profile);
     }
     
 }

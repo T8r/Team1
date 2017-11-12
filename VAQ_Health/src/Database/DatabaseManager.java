@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import static java.time.Instant.now;
 import static java.time.OffsetTime.now;
 import java.util.Calendar;
@@ -40,6 +41,8 @@ public class DatabaseManager {
     static Connection myConnection;
     static Statement myStmt;
     static ResultSet myRs;
+
+    static private ArrayList<String> allergyList = new ArrayList<>();
 
     static void OpenConnection() {
         try {
@@ -69,7 +72,7 @@ public class DatabaseManager {
     }
 
     public static void AddUser(String username, String password, String email) {
-        
+
         try {
             OpenConnection();
             String hashedUsername = sha256(username);
@@ -195,7 +198,37 @@ public class DatabaseManager {
         return exerciseList;
     }
 
-    public static void UpdateProfile(Profile profile) {
+    public static void UpdateMedical(Profile profile) {
+
+        int userID;
+        int allergyID; 
+        try {
+            OpenConnection();
+            for (int i = 0; i < allergyList.size(); i++) {
+                if (profile.allergies.map.get(allergyList.get(i))) {
+                    myRs = myStmt.executeQuery("select* from allergy where discription='"+allergyList.get(i)+"'");
+                    myRs.next();
+                    allergyID = myRs.getInt("ID");
+                    myRs = myStmt.executeQuery("select* from userAllergies where userID=" + profile.id + " AND allergyID="+allergyID);                    
+                    if (myRs.next()) {
+                        System.out.println("User already has allergy listed");
+                    } else {
+                        System.out.println("Listing User: " + profile.username + " Allergy: " + allergyList.get(i));                      
+                        String sql = "INSERT INTO userAllergies (userID,allergyID) VALUES (?, ?)";
+                        PreparedStatement statement = myConnection.prepareStatement(sql);
+                        statement.setInt(1,profile.id);
+                        statement.setInt(2,allergyID);
+                        statement.executeUpdate();
+                    }
+                }
+            }
+            CloseConnection();
+        } catch (Exception e) {
+        }
+
+    }
+
+    public static void UpdatePersonal(Profile profile) {
         String hashedUsername = "";
 
         OpenConnection();
@@ -204,14 +237,14 @@ public class DatabaseManager {
             hashedUsername = sha256(profile.username);
             PreparedStatement ps = myConnection.prepareStatement(
                     "UPDATE personal SET "
-                            + "firstName = ?, "
-                            + "lastName = ?, "
-                            + "address = ?, "
-                            + "city = ?, "
-                            //+ "state = ?, "
-                            + "zipcode = ?, "
-                            + "birthday = ? "
-                            + "WHERE userID=" + profile.id);
+                    + "firstName = ?, "
+                    + "lastName = ?, "
+                    + "address = ?, "
+                    + "city = ?, "
+                    //+ "state = ?, "
+                    + "zipcode = ?, "
+                    + "birthday = ? "
+                    + "WHERE userID=" + profile.id);
 
             // set the preparedstatement parameters
             ps.setString(1, profile.personal.getFname());
@@ -231,12 +264,11 @@ public class DatabaseManager {
             FileInputStream fin = new FileInputStream(imgfile);
 
             PreparedStatement pre = myConnection.prepareStatement(
-                            "UPDATE profilePicture SET image = ? WHERE userID=" + profile.id);
-           
+                    "UPDATE profilePicture SET image = ? WHERE userID=" + profile.id);
+
             pre.setBinaryStream(1, (InputStream) fin, (int) imgfile.length());
             pre.executeUpdate();
             System.out.println("Successfully inserted the file into the database!");
-
             CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -251,13 +283,13 @@ public class DatabaseManager {
         try {
             OpenConnection();
             hashedUsername = sha256(username);
-            
+
             //Get UserID
             myRs = myStmt.executeQuery("select* from user where username='" + hashedUsername + "'");
             myRs.next();
             int userID = myRs.getInt("ID");
             profile.id = userID;
-            
+
             //Get Personal
             myRs = myStmt.executeQuery("select* from personal where userID=" + userID + "");
             while (myRs.next()) {
@@ -271,7 +303,7 @@ public class DatabaseManager {
                 profile.personal.setEmail(myRs.getString("email"));
                 profile.personal.setBirthday(myRs.getString("birthday"));
             }
-            
+
 //            //Get Medical
 //             myRs = myStmt.executeQuery("select* from disease where userID=" + userID + "");
 //            while (myRs.next()) {
@@ -285,42 +317,37 @@ public class DatabaseManager {
 //                profile.personal.setEmail(myRs.getString("email"));
 //                profile.personal.setBirthday(myRs.getString("birthday"));
 //            }
-
             //Get Allergies
             myRs = myStmt.executeQuery("select* from allergy");
             ResultSetMetaData rsmd = myRs.getMetaData();
-            while (myRs.next())
-            {
-                 profile.allergies.map.put(myRs.getString("discription"), false);
+            while (myRs.next()) {
+                profile.allergies.map.put(myRs.getString("discription"), false);
             }
-            
+
             myRs = myStmt.executeQuery(""
                     + "Select* from allergy a Inner Join("
-                        + "Select* from userAllergies where userID=" + userID + ""
-                    +")AS t1 ON t1.allergyID =a.ID" 
+                    + "Select* from userAllergies where userID=" + userID + ""
+                    + ")AS t1 ON t1.allergyID =a.ID"
             );
-                 
+
             //myRs.next();
-            while (myRs.next())
-            {
-                profile.allergies.map.replace(myRs.getString("discription"),true);
+            while (myRs.next()) {
+                profile.allergies.map.replace(myRs.getString("discription"), true);
                 System.out.println(myRs.getString("discription"));
             }
             rsmd = myRs.getMetaData();
-            for (int i=1; i <= rsmd.getColumnCount(); i++)
-            {
-                 
+            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+
             }
-           
+
             //Get Profile Picture
             myRs = myStmt.executeQuery("select* from profilePicture where userID=" + userID + "");
             myRs.next();
             Blob blob = myRs.getBlob("image");
-            byte[] byteImage = blob.getBytes(1,(int)blob.length());
-            profile.image =  new Image(new ByteArrayInputStream(byteImage));   
-            
+            byte[] byteImage = blob.getBytes(1, (int) blob.length());
+            profile.image = new Image(new ByteArrayInputStream(byteImage));
+
             //Get Medical
-            
             CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -337,7 +364,6 @@ public class DatabaseManager {
     }
 
     public static ArrayList<String> GetAllergyList() {
-        ArrayList<String> allergyList = new ArrayList<>();
 
         try {
             OpenConnection();
