@@ -10,24 +10,31 @@ package Profile.Personal1;
 
 import Database.DatabaseManager;
 import Profile.ProfileController;
-import vaq_health.*;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import vaq_health.VAQ_Health;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import vaq_health.VAQ_Health;
 
 /**
@@ -66,8 +73,13 @@ public class Profile_PersonalController implements Initializable {
     ProfileController profileController = new ProfileController();
     @FXML
     private Label label;
+    @FXML 
+    ImageView profileIV;
     @FXML
-    private JFXTextField ageTF;
+    Button profileUploadBTN;
+    
+    
+    private File imageFile;
     /**
      * Initializes the controller class.
      */
@@ -116,13 +128,12 @@ public class Profile_PersonalController implements Initializable {
             VAQ_Health.profile.personal.setSex(sexCB.getSelectionModel().getSelectedItem().toString());
         if (emailTF.getText() != null)
             VAQ_Health.profile.personal.setEmail(emailTF.getText());
-        if (ageTF.getText().equals(""))//Check if int
-               VAQ_Health.profile.personal.setAge(0);
-        else 
-            VAQ_Health.profile.personal.setAge(Integer.parseInt(ageTF.getText()));
         if (birthdayTF.getText() != null)
             VAQ_Health.profile.personal.setBirthday(birthdayTF.getText());
          
+      if (profileIV.getImage()!= null)
+            VAQ_Health.profile.imagePath = imageFile.getAbsolutePath();
+      
         DatabaseManager.UpdateProfile(VAQ_Health.profile);
         System.out.println(VAQ_Health.profile);
         
@@ -157,6 +168,35 @@ public class Profile_PersonalController implements Initializable {
          {
              emailTF.setText(VAQ_Health.profile.personal.getEmail());
          }
+         
+         
+         
+         if (VAQ_Health.profile.image != null)
+         {
+            profileIV.setImage(VAQ_Health.profile.image);
+         }
     }
+    
+    public void UploadImage() {
+            FileChooser fileChooser = new FileChooser();
+             
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+              
+            //Show open file dialog
+            File file = fileChooser.showOpenDialog(null);
+                       
+            try {
+                BufferedImage bufferedImage = ImageIO.read(file);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                profileIV.setImage(image);
+                imageFile = file;
+            } catch (IOException ex) {
+               // Logger.getLogger(JavaFXPixel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+ 
+        }
     
 }

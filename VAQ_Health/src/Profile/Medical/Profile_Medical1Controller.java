@@ -53,12 +53,39 @@ public class Profile_Medical1Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        FillAllergyList();
+      
+    }  
+    
+    private void FillAllergyList()
+    {
         ArrayList<String> allergyList = DatabaseManager.GetAllergyList();
 
         for (String allergy : allergyList) {
-            allergyCCB.getItems().add(allergy);
+   
+            allergyCCB.getItems().add(allergy);          
         }
-    }  
+        //Doesnt let you check after adding. Adding apparently resets the checks of all the elements.... so loop again
+        for (int i=0; i < allergyList.size(); i++)
+        {
+            if (VAQ_Health.profile.allergies.map.get(allergyList.get(i)))
+            {
+               allergyCCB.getCheckModel().check(allergyList.get(i));
+            }
+        }
+        
+    }
+    
+    private void FillMedicalGUI()
+    {
+        weightTF.setText(VAQ_Health.profile.medical.getWeight());
+        heightTF.setText(VAQ_Health.profile.medical.getHeight());
+        hasCeliacDisease.setDisable(VAQ_Health.profile.medical.getHasCeliacDisease());
+        hasKidneyDisease.setDisable(VAQ_Health.profile.medical.getHasKidneyDisease());
+        hasHighBloodPressure.setDisable(VAQ_Health.profile.medical.getHasHighBloodPressure());
+        hasGout.setDisable(VAQ_Health.profile.medical.getHasGout());   
+    }
     
     @FXML
     public void OpenPersonal() throws IOException
@@ -74,8 +101,7 @@ public class Profile_Medical1Controller implements Initializable {
     public void OpenHome() throws IOException
     {
         profileController.OpenHome();
-    }
-    
+    } 
     
     @FXML
     public void SaveButtion()

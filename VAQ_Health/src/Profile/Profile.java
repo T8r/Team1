@@ -10,6 +10,7 @@ import Profile.Medical.Medical;
 import Profile.Personal1.Personal;
 import Profile.Personal1.Personal;
 import Profile.Personal1.Personal;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -21,6 +22,8 @@ public class Profile {
     public Allergy allergies = new Allergy();
     public String username;
     public String password;
+    public String imagePath;
+    public Image image;
     public int id;
     
     @Override

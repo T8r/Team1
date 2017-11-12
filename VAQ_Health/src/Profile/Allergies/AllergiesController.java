@@ -79,24 +79,24 @@ public class AllergiesController implements Initializable {
          profileController.OpenPersonal();
     }
     
-    @FXML
-    public void SaveButtion()
-    {
-        VAQ_Health.profile.allergies.setDairyA(dairy.isSelected());
-        VAQ_Health.profile.allergies.setSoyA(soy.isSelected());
-        VAQ_Health.profile.allergies.setEggsA(eggs.isSelected());
-        VAQ_Health.profile.allergies.setPeanutsA(peanuts.isSelected());
-        VAQ_Health.profile.allergies.setFishA(fish.isSelected());
-        VAQ_Health.profile.allergies.setWheatA(wheat.isSelected());
-        VAQ_Health.profile.allergies.setSesameA(sesame.isSelected());
-        VAQ_Health.profile.allergies.setGlutenI(gluten.isSelected());
-        VAQ_Health.profile.allergies.setLactoseI(lactose.isSelected());
-        VAQ_Health.profile.allergies.setFructoseI(fructose.isSelected());
-        VAQ_Health.profile.allergies.setHistaminesI(histamines.isSelected());
-        VAQ_Health.profile.allergies.setNitritesI(nitrites.isSelected());
-        VAQ_Health.profile.allergies.setNightshadesI(nightshades.isSelected());
-        VAQ_Health.profile.allergies.setFructansI(fructans.isSelected());
-        
-        System.out.println(VAQ_Health.profile.allergies);
-    }
+    //@FXML
+//    public void SaveButtion()
+//    {
+//        VAQ_Health.profile.allergies.setDairyA(dairy.isSelected());
+//        VAQ_Health.profile.allergies.setSoyA(soy.isSelected());
+//        VAQ_Health.profile.allergies.setEggsA(eggs.isSelected());
+//        VAQ_Health.profile.allergies.setPeanutsA(peanuts.isSelected());
+//        VAQ_Health.profile.allergies.setFishA(fish.isSelected());
+//        VAQ_Health.profile.allergies.setWheatA(wheat.isSelected());
+//        VAQ_Health.profile.allergies.setSesameA(sesame.isSelected());
+//        VAQ_Health.profile.allergies.setGlutenI(gluten.isSelected());
+//        VAQ_Health.profile.allergies.setLactoseI(lactose.isSelected());
+//        VAQ_Health.profile.allergies.setFructoseI(fructose.isSelected());
+//        VAQ_Health.profile.allergies.setHistaminesI(histamines.isSelected());
+//        VAQ_Health.profile.allergies.setNitritesI(nitrites.isSelected());
+//        VAQ_Health.profile.allergies.setNightshadesI(nightshades.isSelected());
+//        VAQ_Health.profile.allergies.setFructansI(fructans.isSelected());
+//        
+//        System.out.println(VAQ_Health.profile.allergies);
+//    }
 }

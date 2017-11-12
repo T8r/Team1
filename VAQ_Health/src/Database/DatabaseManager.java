@@ -19,6 +19,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
 import Profile.Profile;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.Date;
+import java.sql.ResultSetMetaData;
+import static java.time.Instant.now;
+import static java.time.OffsetTime.now;
+import java.util.Calendar;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -30,8 +41,7 @@ public class DatabaseManager {
     static Statement myStmt;
     static ResultSet myRs;
 
-    
-     static void OpenConnection() {
+    static void OpenConnection() {
         try {
             // 1. Get a connection to database
             myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaq_health", "root", "password");
@@ -57,8 +67,9 @@ public class DatabaseManager {
             exc.printStackTrace();
         }
     }
-    
+
     public static void AddUser(String username, String password, String email) {
+        
         try {
             OpenConnection();
             String hashedUsername = sha256(username);
@@ -129,18 +140,16 @@ public class DatabaseManager {
         return found;
     }
 
-    
-    public static ArrayList<String> GetExerEquipList()
-    {
+    public static ArrayList<String> GetExerEquipList() {
         ArrayList<String> equipList = new ArrayList<>();
 
-         try {
+        try {
             OpenConnection();
-            
+
             myRs = myStmt.executeQuery("select* from exerciseequipment");
             // 4. Process the result set
             while (myRs.next()) {
-               equipList.add(myRs.getString("name"));
+                equipList.add(myRs.getString("name"));
             }
             CloseConnection();
         } catch (Exception exc) {
@@ -148,6 +157,7 @@ public class DatabaseManager {
         }
         return equipList;
     }
+
     public static ArrayList<Exercise> GetExerciseTable() {
         ArrayList<Exercise> exerciseList = new ArrayList<>();
 
@@ -167,25 +177,23 @@ public class DatabaseManager {
                 exerciseList.add(newExercise);
 
             }
-            for (Exercise exercise : exerciseList)
-            {
-                if (exercise.equipment.equals("0"))
+            for (Exercise exercise : exerciseList) {
+                if (exercise.equipment.equals("0")) {
                     continue;
-                myRs = myStmt.executeQuery("select* from exerciseequipment where ID="+exercise.equipment);
+                }
+                myRs = myStmt.executeQuery("select* from exerciseequipment where ID=" + exercise.equipment);
                 myRs.next();
                 exercise.equipment = myRs.getString("name");
                 System.out.println(exercise.name + "   " + exercise.equipment);
             }
-            
+
             CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        
+
         return exerciseList;
     }
-
-
 
     public static void UpdateProfile(Profile profile) {
         String hashedUsername = "";
@@ -195,20 +203,45 @@ public class DatabaseManager {
         try {
             hashedUsername = sha256(profile.username);
             PreparedStatement ps = myConnection.prepareStatement(
-                    "UPDATE personal SET firstName = ?, lastName = ? WHERE userID=" + profile.id);
+                    "UPDATE personal SET "
+                            + "firstName = ?, "
+                            + "lastName = ?, "
+                            + "address = ?, "
+                            + "city = ?, "
+                            //+ "state = ?, "
+                            + "zipcode = ?, "
+                            + "birthday = ? "
+                            + "WHERE userID=" + profile.id);
 
             // set the preparedstatement parameters
             ps.setString(1, profile.personal.getFname());
             ps.setString(2, profile.personal.getlName());
-
+            ps.setString(3, profile.personal.getAddress());
+            ps.setString(4, profile.personal.getCity());
+            //ps.setString(5, profile.personal.getState());
+            ps.setString(5, profile.personal.getZipCode());
+            ps.setDate(6, java.sql.Date.valueOf(profile.personal.getBirthday()));
             // call executeUpdate to execute our sql update statement
             ps.executeUpdate();
             ps.close();
+
+            Statement st = myConnection.createStatement();
+            File imgfile = new File(profile.imagePath);
+
+            FileInputStream fin = new FileInputStream(imgfile);
+
+            PreparedStatement pre = myConnection.prepareStatement(
+                            "UPDATE profilePicture SET image = ? WHERE userID=" + profile.id);
+           
+            pre.setBinaryStream(1, (InputStream) fin, (int) imgfile.length());
+            pre.executeUpdate();
+            System.out.println("Successfully inserted the file into the database!");
+
             CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
         }
-        
+
     }
 
     public static Profile GetProfile(String username) {
@@ -218,13 +251,15 @@ public class DatabaseManager {
         try {
             OpenConnection();
             hashedUsername = sha256(username);
+            
+            //Get UserID
             myRs = myStmt.executeQuery("select* from user where username='" + hashedUsername + "'");
             myRs.next();
             int userID = myRs.getInt("ID");
             profile.id = userID;
+            
+            //Get Personal
             myRs = myStmt.executeQuery("select* from personal where userID=" + userID + "");
-
-            // 4. Process the result set
             while (myRs.next()) {
                 profile.personal.setFname(myRs.getString("firstName"));
                 profile.personal.setlName(myRs.getString("lastName"));
@@ -236,6 +271,56 @@ public class DatabaseManager {
                 profile.personal.setEmail(myRs.getString("email"));
                 profile.personal.setBirthday(myRs.getString("birthday"));
             }
+            
+//            //Get Medical
+//             myRs = myStmt.executeQuery("select* from disease where userID=" + userID + "");
+//            while (myRs.next()) {
+//                profile.medical.(myRs.getString("firstName"));
+//                profile.personal.setlName(myRs.getString("lastName"));
+//                profile.personal.setAddress(myRs.getString("address"));
+//                profile.personal.setSex(myRs.getString("sex"));
+//                profile.personal.setState(myRs.getString("state"));
+//                profile.personal.setCity(myRs.getString("city"));
+//                profile.personal.setZipCode(myRs.getString("zipcode"));
+//                profile.personal.setEmail(myRs.getString("email"));
+//                profile.personal.setBirthday(myRs.getString("birthday"));
+//            }
+
+            //Get Allergies
+            myRs = myStmt.executeQuery("select* from allergy");
+            ResultSetMetaData rsmd = myRs.getMetaData();
+            while (myRs.next())
+            {
+                 profile.allergies.map.put(myRs.getString("discription"), false);
+            }
+            
+            myRs = myStmt.executeQuery(""
+                    + "Select* from allergy a Inner Join("
+                        + "Select* from userAllergies where userID=" + userID + ""
+                    +")AS t1 ON t1.allergyID =a.ID" 
+            );
+                 
+            //myRs.next();
+            while (myRs.next())
+            {
+                profile.allergies.map.replace(myRs.getString("discription"),true);
+                System.out.println(myRs.getString("discription"));
+            }
+            rsmd = myRs.getMetaData();
+            for (int i=1; i <= rsmd.getColumnCount(); i++)
+            {
+                 
+            }
+           
+            //Get Profile Picture
+            myRs = myStmt.executeQuery("select* from profilePicture where userID=" + userID + "");
+            myRs.next();
+            Blob blob = myRs.getBlob("image");
+            byte[] byteImage = blob.getBytes(1,(int)blob.length());
+            profile.image =  new Image(new ByteArrayInputStream(byteImage));   
+            
+            //Get Medical
+            
             CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -254,13 +339,13 @@ public class DatabaseManager {
     public static ArrayList<String> GetAllergyList() {
         ArrayList<String> allergyList = new ArrayList<>();
 
-         try {
+        try {
             OpenConnection();
-            
+
             myRs = myStmt.executeQuery("select* from allergy");
             // 4. Process the result set
             while (myRs.next()) {
-               allergyList.add(myRs.getString("discription"));
+                allergyList.add(myRs.getString("discription"));
             }
             CloseConnection();
         } catch (Exception exc) {
@@ -272,13 +357,13 @@ public class DatabaseManager {
     public static ArrayList<String> GetEquipmentList() {
         ArrayList<String> equipmentList = new ArrayList<>();
 
-         try {
+        try {
             OpenConnection();
-            
+
             myRs = myStmt.executeQuery("select* from exerciseequipment");
             // 4. Process the result set
             while (myRs.next()) {
-               equipmentList.add(myRs.getString("name"));
+                equipmentList.add(myRs.getString("name"));
             }
             CloseConnection();
         } catch (Exception exc) {
