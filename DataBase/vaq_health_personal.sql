@@ -44,7 +44,7 @@ CREATE TABLE `personal` (
 
 LOCK TABLES `personal` WRITE;
 /*!40000 ALTER TABLE `personal` DISABLE KEYS */;
-INSERT INTO `personal` VALUES (1,'Joe','A','M','28433','TX','Harlingen','78552','hur@gmail.com','2000-09-01');
+INSERT INTO `personal` VALUES (1,'Stephen','Izquierdo','M','V Cr.','TX','Harlingen','78552','hur@gmail.com','2000-01-01');
 /*!40000 ALTER TABLE `personal` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 21:43:13
+-- Dump completed on 2017-11-13 15:25:26

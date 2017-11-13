@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `userdiseases`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userdiseases` (
   `userID` int(11) NOT NULL,
-  `diseaseID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`userID`),
+  `diseaseID` int(11) NOT NULL,
+  PRIMARY KEY (`userID`,`diseaseID`),
   KEY `ID_idx` (`diseaseID`),
   CONSTRAINT `diseaseID` FOREIGN KEY (`diseaseID`) REFERENCES `disease` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -38,6 +38,7 @@ CREATE TABLE `userdiseases` (
 
 LOCK TABLES `userdiseases` WRITE;
 /*!40000 ALTER TABLE `userdiseases` DISABLE KEYS */;
+INSERT INTO `userdiseases` VALUES (1,5),(1,6);
 /*!40000 ALTER TABLE `userdiseases` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 21:43:13
+-- Dump completed on 2017-11-13 15:25:26

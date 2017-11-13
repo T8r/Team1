@@ -25,7 +25,8 @@ DROP TABLE IF EXISTS `allergy`;
 CREATE TABLE `allergy` (
   `ID` int(11) NOT NULL,
   `foodCatID` int(11) DEFAULT NULL,
-  `discription` varchar(45) DEFAULT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `aFoodCatID_idx` (`foodCatID`),
   CONSTRAINT `aFoodCatID` FOREIGN KEY (`foodCatID`) REFERENCES `foodcat` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -38,7 +39,7 @@ CREATE TABLE `allergy` (
 
 LOCK TABLES `allergy` WRITE;
 /*!40000 ALTER TABLE `allergy` DISABLE KEYS */;
-INSERT INTO `allergy` VALUES (1,1,'Dairy'),(2,2,'Soy'),(3,3,'Egg'),(4,4,'Peanut'),(5,5,'Fish'),(6,6,'Wheat'),(7,7,'Fructans'),(8,8,'Sesame'),(9,9,'Gluten'),(10,10,'Lactose'),(11,11,'Fructose'),(12,12,'Sulfites'),(13,13,'Histamines'),(14,14,'Nitrites'),(15,15,'Night Shades');
+INSERT INTO `allergy` VALUES (1,1,'Dairy','Dairy'),(2,2,'Soy','Soy'),(3,3,'Egg','Egg'),(4,4,'Peanut','Peanut'),(5,5,'Fish','Fish'),(6,6,'Wheat','Wheat'),(7,7,'Fructans','Fructans'),(8,8,'Sesame','Sesame'),(9,9,'Gluten','Gluten'),(10,10,'Lactose','Lactose'),(11,11,'Fructose','Fructose'),(12,12,'Sulfites','Sulfites'),(13,13,'Histamines','Histamines'),(14,14,'Nitrites','Nitrites'),(15,15,'Night Shades','Night Shades');
 /*!40000 ALTER TABLE `allergy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 21:43:13
+-- Dump completed on 2017-11-13 15:25:26

@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `disease`;
 CREATE TABLE `disease` (
   `ID` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
-  `discription` varchar(1000) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 21:43:13
+-- Dump completed on 2017-11-13 15:25:27

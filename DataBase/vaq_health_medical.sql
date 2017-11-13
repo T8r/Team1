@@ -16,27 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `exerciseequipment`
+-- Table structure for table `medical`
 --
 
-DROP TABLE IF EXISTS `exerciseequipment`;
+DROP TABLE IF EXISTS `medical`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `exerciseequipment` (
-  `ID` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+CREATE TABLE `medical` (
+  `userID` int(11) NOT NULL,
+  `height` int(11) DEFAULT NULL,
+  `weight` int(11) DEFAULT NULL,
+  PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exerciseequipment`
+-- Dumping data for table `medical`
 --
 
-LOCK TABLES `exerciseequipment` WRITE;
-/*!40000 ALTER TABLE `exerciseequipment` DISABLE KEYS */;
-INSERT INTO `exerciseequipment` VALUES (1,'Bicycle'),(2,'Dumb Bells'),(3,'Pull Up Bar'),(4,'Jump Rope');
-/*!40000 ALTER TABLE `exerciseequipment` ENABLE KEYS */;
+LOCK TABLES `medical` WRITE;
+/*!40000 ALTER TABLE `medical` DISABLE KEYS */;
+INSERT INTO `medical` VALUES (1,10,10);
+/*!40000 ALTER TABLE `medical` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

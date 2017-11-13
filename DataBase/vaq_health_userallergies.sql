@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `userallergies`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userallergies` (
   `userID` int(11) NOT NULL,
-  `allergyID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`userID`),
+  `allergyID` int(11) NOT NULL,
+  PRIMARY KEY (`userID`,`allergyID`),
   KEY `allergyID_idx` (`allergyID`),
   CONSTRAINT `userID1` FOREIGN KEY (`userID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -37,6 +37,7 @@ CREATE TABLE `userallergies` (
 
 LOCK TABLES `userallergies` WRITE;
 /*!40000 ALTER TABLE `userallergies` DISABLE KEYS */;
+INSERT INTO `userallergies` VALUES (1,1),(1,6),(1,10);
 /*!40000 ALTER TABLE `userallergies` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 21:43:13
+-- Dump completed on 2017-11-13 15:25:27
