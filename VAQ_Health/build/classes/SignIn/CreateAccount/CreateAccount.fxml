@@ -20,7 +20,7 @@
                         <AnchorPane prefHeight="84.0" prefWidth="1000.0" styleClass="Header" stylesheets="@../../Profile/Medical/Header.css">
                            <children>
                               <AnchorPane layoutY="76.0" prefHeight="8.0" prefWidth="1000.0" style="-fx-background-color: orange;" />
-                              <Label layoutX="385.0" layoutY="17.0" text="VAQ Health" textFill="WHITE">
+                              <Label layoutX="385.0" layoutY="17.0" text="VAQ Health" textFill="#00264b">
                                  <font>
                                     <Font name="Verdana" size="40.0" />
                                  </font>

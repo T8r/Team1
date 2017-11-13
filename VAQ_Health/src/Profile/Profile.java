@@ -6,7 +6,6 @@
 package Profile;
 
 import Disease.Disease;
-import Profile.Allergies.Allergy;
 import Profile.Medical.Medical;
 import Profile.Personal1.Personal;
 import Profile.Personal1.Personal;
@@ -22,7 +21,6 @@ import javafx.scene.image.Image;
 public class Profile {
     public Personal personal = new Personal();
     public Medical medical = new Medical();
-    public Allergy allergies = new Allergy();
     public String username;
     public String password;
     public String imagePath;

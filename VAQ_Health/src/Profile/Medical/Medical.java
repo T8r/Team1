@@ -6,6 +6,7 @@
 package Profile.Medical;
 
 import Disease.Disease;
+import Profile.Allergies.Allergy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,7 +135,7 @@ public class Medical {
      */
 
     public List<Disease>  diseaseList = new ArrayList<>();
-
+    public List<Allergy> allergyList = new ArrayList<>();
     private String weight;
     private String height;
     private Boolean hasDiabetes;

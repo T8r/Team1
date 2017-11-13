@@ -7,6 +7,8 @@ package Database;
 
 import Disease.Disease;
 import Exercise.Exercise;
+import Exercise.Exercise.ExerciseTypeE;
+import Profile.Allergies.Allergy;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -20,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
 import Profile.Profile;
+import static Utility.Utility.isValidDate;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,6 +31,8 @@ import java.sql.Blob;
 import java.sql.Date;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import static java.time.Instant.now;
 import static java.time.OffsetTime.now;
 import java.util.Calendar;
@@ -43,8 +48,8 @@ public class DatabaseManager {
     static Statement myStmt;
     static ResultSet myRs;
 
-    static private ArrayList<String> allergyList = new ArrayList<>();
-    static private ArrayList<String> diseaseList = new ArrayList<>();
+    static private ArrayList<Allergy> allergyList = new ArrayList<>();
+    static private ArrayList<Disease> diseaseList = new ArrayList<>();
 
     static void OpenConnection() {
         try {
@@ -175,8 +180,8 @@ public class DatabaseManager {
                 Exercise newExercise = new Exercise();
                 newExercise.name = myRs.getString("Name");
                 newExercise.difficulty = myRs.getString("difficulty");
-                newExercise.discription = myRs.getString("discription");
-                newExercise.type = myRs.getString("type");
+                newExercise.description = myRs.getString("description");
+                newExercise.type = ExerciseTypeE.valueOf(myRs.getString("type"));
                 newExercise.met = myRs.getInt("met");
                 newExercise.equipment = Integer.toString(myRs.getInt("equipmentID"));
                 exerciseList.add(newExercise);
@@ -202,8 +207,7 @@ public class DatabaseManager {
 
     public static void UpdateMedical(Profile profile) {
 
-        int userID;
-        int allergyID; 
+        int userID, allergyID,diseaseID;
         try {
             OpenConnection();
             
@@ -219,10 +223,11 @@ public class DatabaseManager {
            
             //Allergies
             for (int i = 0; i < allergyList.size(); i++) {
-                if (profile.allergies.map.get(allergyList.get(i))) {
-                    myRs = myStmt.executeQuery("select* from allergy where discription='"+allergyList.get(i)+"'");
-                    myRs.next();
-                    allergyID = myRs.getInt("ID");
+                myRs = myStmt.executeQuery("select* from allergy where description='" + allergyList.get(i) + "'");
+                myRs.next();
+                allergyID = myRs.getInt("ID");
+                Allergy allergy = allergyList.get(i);
+                if (profile.medical.allergyList.contains(allergy)) {
                     myRs = myStmt.executeQuery("select* from userAllergies where userID=" + profile.id + " AND allergyID="+allergyID);                    
                     if (myRs.next()) {
                         System.out.println("User already has allergy listed");
@@ -235,10 +240,58 @@ public class DatabaseManager {
                         statement.executeUpdate();
                     }
                 }
+                else
+                {
+                    myRs = myStmt.executeQuery("select* FROM userAllergies where userID=" + profile.id + " AND allergyID="+allergyID);
+                    if (myRs.next())
+                    {
+                        System.out.println("Removing allergy from user in userAllergies Table");
+                        String SQL = "DELETE FROM userAllergies WHERE userID = ? and allergyID = ? ";
+                        PreparedStatement pstmt = null;
+                        pstmt = myConnection.prepareStatement(SQL);
+                        pstmt.setInt(1, profile.id);
+                        pstmt.setInt(2, allergyID);
+                        pstmt.executeUpdate();
+                    }
+                }
             }
             
+           //Diseases
+            for (int i = 0; i < diseaseList.size(); i++) {
+                myRs = myStmt.executeQuery("select* from disease where name='" + diseaseList.get(i) + "'");
+                myRs.next();
+                diseaseID = myRs.getInt("ID");
+                Disease disease = diseaseList.get(i);
+                if (profile.medical.diseaseList.contains(disease)) {
+                    myRs = myStmt.executeQuery("select* from userDiseases where userID=" + profile.id + " AND diseaseID="+diseaseID);                    
+                    if (myRs.next()) {
+                        System.out.println("User already has disease listed");
+                    } else {
+                        System.out.println("Listing User: " + profile.username + " Disease: " + diseaseList.get(i));                      
+                        String sql = "INSERT INTO userDiseases (userID,diseaseID) VALUES (?, ?)";
+                        PreparedStatement statement = myConnection.prepareStatement(sql);
+                        statement.setInt(1,profile.id);
+                        statement.setInt(2,diseaseID);
+                        statement.executeUpdate();
+                    }
+                }
+                else
+                {
+                    myRs = myStmt.executeQuery("select* FROM userDiseases where userID=" + profile.id + " AND diseaseID="+diseaseID);
+                    if (myRs.next())
+                    {
+                        System.out.println("Removing disease from user in userAllergies Table");
+                        String SQL = "DELETE FROM userDiseases WHERE userID = ? and diseaseID = ? ";
+                        PreparedStatement pstmt = null;
+                        pstmt = myConnection.prepareStatement(SQL);
+                        pstmt.setInt(1, profile.id);
+                        pstmt.setInt(2, diseaseID);
+                        pstmt.executeUpdate();
+                    }
+                }
+            }
 
-            CloseConnection();
+           CloseConnection();
         } catch (Exception e) {
         }
 
@@ -262,29 +315,29 @@ public class DatabaseManager {
                     + "birthday = ? "
                     + "WHERE userID=" + profile.id);
 
-            // set the preparedstatement parameters
             ps.setString(1, profile.personal.getFname());
             ps.setString(2, profile.personal.getlName());
             ps.setString(3, profile.personal.getAddress());
             ps.setString(4, profile.personal.getCity());
-            //ps.setString(5, profile.personal.getState());
             ps.setString(5, profile.personal.getZipCode());
-            ps.setDate(6, java.sql.Date.valueOf(profile.personal.getBirthday()));
-            // call executeUpdate to execute our sql update statement
+            if (isValidDate(profile.personal.getBirthday().toString()))
+                ps.setDate(6,profile.personal.getBirthday());
+            else
+                ps.setDate(6, java.sql.Date.valueOf("2000-01-01"));
             ps.executeUpdate();
             ps.close();
 
-            Statement st = myConnection.createStatement();
-            File imgfile = new File(profile.imagePath);
-
-            FileInputStream fin = new FileInputStream(imgfile);
-
-            PreparedStatement pre = myConnection.prepareStatement(
-                    "UPDATE profilePicture SET image = ? WHERE userID=" + profile.id);
-
-            pre.setBinaryStream(1, (InputStream) fin, (int) imgfile.length());
-            pre.executeUpdate();
-            System.out.println("Successfully inserted the file into the database!");
+            if (profile.imagePath != null)
+            {
+                File imgfile = new File(profile.imagePath);
+                FileInputStream fin = new FileInputStream(imgfile);
+                PreparedStatement pre = myConnection.prepareStatement(
+                        "UPDATE profilePicture SET image = ? WHERE userID=" + profile.id);
+                pre.setBinaryStream(1, (InputStream) fin, (int) imgfile.length());
+                pre.executeUpdate();
+                System.out.println("Successfully inserted the file into the database!");
+            }
+            
             CloseConnection();
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -317,7 +370,7 @@ public class DatabaseManager {
                 profile.personal.setCity(myRs.getString("city"));
                 profile.personal.setZipCode(myRs.getString("zipcode"));
                 profile.personal.setEmail(myRs.getString("email"));
-                profile.personal.setBirthday(myRs.getString("birthday"));
+                profile.personal.setBirthday(myRs.getDate("birthday"));
             }
 
             //Get Medical
@@ -327,11 +380,6 @@ public class DatabaseManager {
             profile.medical.setWeight(myRs.getString("weight"));   
 
             //Get Allergies
-            myRs = myStmt.executeQuery("select* from allergy");
-            while (myRs.next()) {
-                profile.allergies.map.put(myRs.getString("discription"), false);
-            }
-
             myRs = myStmt.executeQuery(""
                     + "Select* from allergy a Inner Join("
                     + "Select* from userAllergies where userID=" + userID + ""
@@ -340,8 +388,9 @@ public class DatabaseManager {
 
             //myRs.next();
             while (myRs.next()) {
-                profile.allergies.map.replace(myRs.getString("discription"), true);
-                System.out.println(myRs.getString("discription"));
+                Allergy allergy = new Allergy(myRs.getString("description"),myRs.getString("description"));
+                profile.medical.allergyList.add(allergy);
+                System.out.println(myRs.getString("description"));
             }
             
              //Get Diseases      
@@ -353,7 +402,7 @@ public class DatabaseManager {
 
             //myRs.next();
             while (myRs.next()) {
-                Disease disease = new Disease(myRs.getString("name"),true);
+                Disease disease = new Disease(myRs.getString("name"),myRs.getString("description"));
                 profile.medical.diseaseList.add(disease);
             }
         
@@ -380,15 +429,17 @@ public class DatabaseManager {
         return DatatypeConverter.printHexBinary(hash);
     }
 
-    public static ArrayList<String> GetAllergyList() {
+    public static ArrayList<Allergy> GetAllergyList() {
 
+        allergyList.clear();
         try {
             OpenConnection();
 
             myRs = myStmt.executeQuery("select* from allergy");
             // 4. Process the result set
             while (myRs.next()) {
-                allergyList.add(myRs.getString("discription"));
+                Allergy allergy = new Allergy(myRs.getString("name"),myRs.getString("description"));
+                allergyList.add(allergy);
             }
             CloseConnection();
         } catch (Exception exc) {
@@ -415,14 +466,14 @@ public class DatabaseManager {
         return equipmentList;
     }
 
-    public static ArrayList<String> GetDiseaseList() {
+    public static ArrayList<Disease> GetDiseaseList() {
           try {
             OpenConnection();
-
-            myRs = myStmt.executeQuery("select* from disease");
-            // 4. Process the result set
+            diseaseList.clear();
+            myRs = myStmt.executeQuery("select* from disease");       
             while (myRs.next()) {
-                diseaseList.add(myRs.getString("name"));
+                Disease disease = new Disease(myRs.getString("name"),myRs.getString("description"));
+                diseaseList.add(disease);
             }
             CloseConnection();
         } catch (Exception exc) {
@@ -430,5 +481,8 @@ public class DatabaseManager {
         }
         return diseaseList;
     }
+    
+   
+
 
 }

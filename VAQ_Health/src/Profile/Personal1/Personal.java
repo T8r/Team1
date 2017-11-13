@@ -5,11 +5,27 @@
  */
 package Profile.Personal1;
 
+import java.sql.Date;
+
 /**
  *
  * @author ^.^
  */
 public class Personal {
+
+    /**
+     * @return the birthday
+     */
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    /**
+     * @param birthday the birthday to set
+     */
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     /**
      * @return the zipCode
@@ -25,37 +41,23 @@ public class Personal {
         this.zipCode = zipCode;
     }
 
-    /**
-     * @return the birthday
-     */
-    public String getBirthday() {
-        return birthday;
-    }
 
-    /**
-     * @param birthday the birthday to set
-     */
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
     
     private String fname;
     private String lName;
     private String sex;
-    private Integer age;
     private String address;
     private String state;
     private String city;
     private String zipCode;
     private String email;
-    private String birthday;
+    private Date birthday;
 
-    public Personal(String fname, String lName, String sex, Integer age, 
+    public Personal(String fname, String lName, String sex, 
             String address, String state, String city, String email) {
         this.fname = fname;
         this.lName = lName;
         this.sex = sex;
-        this.age = age;
         this.address = address;
         this.state = state;
         this.city = city;
@@ -66,7 +68,6 @@ public class Personal {
         this.fname = "No input";
         this.lName = "No input";
         this.sex = "No input";
-        this.age = 0;
         this.address = "No input";
         this.state = "No input";
         this.city = "No input";
@@ -98,15 +99,6 @@ public class Personal {
     public void setSex(String sex) {
         this.sex = sex;
     }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -152,8 +144,7 @@ public class Personal {
                "\n\tState: "+getState()+              
                "\n\tSex: "+getSex()+
                "\n\tEmail: "+getEmail()+
-               "\n\tAge: "+getAge().toString()+
-               "\n\tBirthday: "+ getBirthday();
+               "\n\tBirthday: "+ getBirthday().toString();
     }
     
 }

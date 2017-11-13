@@ -6,7 +6,10 @@
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Home/HomeController.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Allergies/Allergy.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Medical/Profile_Medical1Controller.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Utility/Utility.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Personal1/Profile_PersonalController.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Personal1/Header.css</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Exercise/Equipment/Equipment.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Disease/Disease.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/SignIn/CreateAccount/CreateAccountController.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Exercise/ExerciseProfile.fxml</file>
@@ -19,6 +22,7 @@
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Exercise/ExerciseProfileController.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/vaq_health/VAQ_Health.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Database/DatabaseManager.java</file>
+            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/SignIn/Header.css</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Exercise/ExerciseController.java</file>
             <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/SignIn/SignInController.java</file>
         </group>

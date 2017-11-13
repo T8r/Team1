@@ -9,19 +9,31 @@ package Exercise;
  *
  * @author ^.^
  */
+
+
 public class Exercise {
+    
+      public enum ExerciseTypeE {
+        CARDIO,
+        BALANCE,
+        FLEXIBILITY,
+        STRENGTH
+    }
+      
     public String name;
     public String difficulty;
     public String workOutTime;
-    public String discription;
-    public String type;
+    public String description;
+    public ExerciseTypeE type;
     public String equipment;
     public int met;
+    
     @Override
     public String toString()
     {
         return name;
     }
+  
     
     // met = metabolic equivalent
     public static double CaloriesBurned(int met, double hrs,double weightKG)

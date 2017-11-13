@@ -109,19 +109,19 @@ public class ExerciseController implements Initializable {
             public void changed(ObservableValue<? extends Exercise> observable, Exercise oldValue, Exercise newValue) {
                 selectedExercise = newValue;
                 nameLabel.setText(selectedExercise.name);
-                discriptionTA.setText(selectedExercise.discription);
+                discriptionTA.setText(selectedExercise.description);
                 metL.setText(String.valueOf(selectedExercise.met));
                 switch (selectedExercise.type) {
-                    case "CARDIO":
+                    case CARDIO:
                         typeImageV.setImage(cardioImage);
                         break;
-                    case "BALANCE":
+                    case BALANCE:
                         typeImageV.setImage(balanceImage);
                         break;
-                    case "STRENGTH":
+                    case STRENGTH:
                         typeImageV.setImage(strengthImage);
                         break;
-                    case "FLEXIBILITY":
+                    case FLEXIBILITY:
                         typeImageV.setImage(flexibilityImage);
                 }
 

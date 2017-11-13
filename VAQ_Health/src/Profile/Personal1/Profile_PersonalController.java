@@ -10,6 +10,7 @@ package Profile.Personal1;
 
 import Database.DatabaseManager;
 import Profile.ProfileController;
+import static Utility.Utility.isValidDate;
 import com.jfoenix.controls.JFXTextField;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -65,7 +66,11 @@ public class Profile_PersonalController implements Initializable {
     @FXML
     private TextField emailTF;
     @FXML
-    private TextField birthdayTF;
+    private TextField birthdayMonthTF;
+    @FXML
+    private TextField birthdayDayTF;
+    @FXML
+    private TextField birthdayYearTF;
     
     
     //Medical Fields
@@ -128,10 +133,14 @@ public class Profile_PersonalController implements Initializable {
             VAQ_Health.profile.personal.setSex(sexCB.getSelectionModel().getSelectedItem().toString());
         if (emailTF.getText() != null)
             VAQ_Health.profile.personal.setEmail(emailTF.getText());
-        if (birthdayTF.getText() != null)
-            VAQ_Health.profile.personal.setBirthday(birthdayTF.getText());
+        if (isValidDate(birthdayYearTF.getText()+ "-" + birthdayMonthTF.getText()+ "-" + birthdayDayTF.getText()))
+            VAQ_Health.profile.personal.setBirthday(java.sql.Date.valueOf(
+                    birthdayYearTF.getText()
+                    + "-" + birthdayMonthTF.getText()
+                    + "-" + birthdayDayTF.getText()
+            ));
          
-      if (profileIV.getImage()!= null)
+      if (imageFile != null)
             VAQ_Health.profile.imagePath = imageFile.getAbsolutePath();
       
         DatabaseManager.UpdatePersonal(VAQ_Health.profile);

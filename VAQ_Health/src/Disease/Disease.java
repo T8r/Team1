@@ -11,16 +11,28 @@ package Disease;
  */
 public class Disease {
 
-    
-    private String name;
-    private boolean has;
-    
-    public Disease(String n, boolean h)
-    {
-        this.name = n;
-        this.has = h;
+    /**
+     * @return the description
+     */
+    public String getDiscription() {
+        return description;
     }
-    
+
+    /**
+     * @param description the description to set
+     */
+    public void setDiscription(String discription) {
+        this.description = discription;
+    }
+
+    private String name;
+    private String description;
+
+    public Disease(String n, String d) {
+        this.name = n;
+        this.description = d;
+    }
+
     /**
      * @return the name
      */
@@ -35,18 +47,31 @@ public class Disease {
         this.name = name;
     }
 
-    /**
-     * @return the has
-     */
-    public boolean isHas() {
-        return has;
+    @Override
+    public String toString() {
+        return getName();
     }
 
-    /**
-     * @param has the has to set
-     */
-    public void setHas(boolean has) {
-        this.has = has;
+    public boolean equals(Object o) {
+
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Disease)) {
+            return false;
+        }
+
+        Disease disease = (Disease) o;
+
+        return disease.name.equals(name);
     }
-    
+
+    //Idea from effective Java : Item 9
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
 }
