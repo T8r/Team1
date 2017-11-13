@@ -6,6 +6,7 @@
 package Profile.Medical;
 
 import Database.DatabaseManager;
+import Profile.Profile;
 import Profile.ProfileController;
 import java.io.IOException;
 import java.net.URL;
@@ -30,7 +31,7 @@ public class Profile_Medical1Controller implements Initializable {
      * Initializes the controller class.
      */
     ProfileController profileController = new ProfileController();
-    
+
     @FXML
     TextField weightTF = new TextField();
     @FXML
@@ -49,106 +50,113 @@ public class Profile_Medical1Controller implements Initializable {
     CheckBox hasGout = new CheckBox();
     @FXML
     CheckListView allergyCCB;
+    @FXML
+    CheckListView diseaseCCB;
 
+    Profile profile;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        FillAllergyList();
-      
-    }  
-    
-    private void FillAllergyList()
-    {
-        ArrayList<String> allergyList = DatabaseManager.GetAllergyList();
+        profile = VAQ_Health.profile;
+        DisplayMedicalProfile();
 
+    }
+
+    private void DisplayMedicalProfile() {
+        ArrayList<String> allergyList = DatabaseManager.GetAllergyList();
+        ArrayList<String> diseaseList = DatabaseManager.GetDiseaseList();
+
+        //Allergy
         for (String allergy : allergyList) {
-   
-            allergyCCB.getItems().add(allergy);          
+
+            allergyCCB.getItems().add(allergy);
         }
-        //Doesnt let you check after adding. Adding apparently resets the checks of all the elements.... so loop again
-        for (int i=0; i < allergyList.size(); i++)
-        {
-            if (VAQ_Health.profile.allergies.map.get(allergyList.get(i)))
-            {
-               allergyCCB.getCheckModel().check(allergyList.get(i));
+        for (int i = 0; i < allergyList.size(); i++) {
+            if (VAQ_Health.profile.allergies.map.get(allergyList.get(i))) {
+                allergyCCB.getCheckModel().check(allergyList.get(i));
             }
         }
+
+        //Disease
+        for (String disease : diseaseList) {
+
+            diseaseCCB.getItems().add(disease);
+        }
+        for (int i = 0; i < VAQ_Health.profile.medical.diseaseList.size(); i++) {
+            diseaseCCB.getCheckModel().check(VAQ_Health.profile.medical.diseaseList.get(i).getName());
+        }
         
+        //Weight & Height
+        weightTF.setText(profile.medical.getWeight());
+        heightTF.setText(profile.medical.getHeight());
+
     }
-    
-    private void FillMedicalGUI()
-    {
-        weightTF.setText(VAQ_Health.profile.medical.getWeight());
-        heightTF.setText(VAQ_Health.profile.medical.getHeight());
-        hasCeliacDisease.setDisable(VAQ_Health.profile.medical.getHasCeliacDisease());
-        hasKidneyDisease.setDisable(VAQ_Health.profile.medical.getHasKidneyDisease());
-        hasHighBloodPressure.setDisable(VAQ_Health.profile.medical.getHasHighBloodPressure());
-        hasGout.setDisable(VAQ_Health.profile.medical.getHasGout());   
-    }
-    
+
     @FXML
-    public void OpenPersonal() throws IOException
-    {
+    public void OpenPersonal() throws IOException {
         profileController.OpenPersonal();
     }
+
     @FXML
-    public void OpenAllergies() throws IOException
-    {
+    public void OpenAllergies() throws IOException {
         profileController.OpenProfileExercise();
     }
+
     @FXML
-    public void OpenHome() throws IOException
-    {
+    public void OpenHome() throws IOException {
         profileController.OpenHome();
-    } 
-    
+    }
+
     @FXML
-    public void SaveButtion()
-    {
-        if (weightTF.getText() != null)
-            VAQ_Health.profile.medical.setWeight(weightTF.getText()); 
-        if (heightTF.getText() != null)
+    public void SaveButtion() {
+        if (weightTF.getText() != null) {
+            VAQ_Health.profile.medical.setWeight(weightTF.getText());
+        }
+        if (heightTF.getText() != null) {
             VAQ_Health.profile.medical.setHeight(heightTF.getText());
-        if (hasDiabetesChB.isSelected())
+        }
+        if (hasDiabetesChB.isSelected()) {
             VAQ_Health.profile.medical.setHasDiabetes(true);
-        else
+        } else {
             VAQ_Health.profile.medical.setHasDiabetes(false);
-        
-        if (hasHighCholesterol.isSelected())
+        }
+
+        if (hasHighCholesterol.isSelected()) {
             VAQ_Health.profile.medical.setHasHighCholesterol(true);
-        else
+        } else {
             VAQ_Health.profile.medical.setHasHighCholesterol(false);
-        
-        if (hasCeliacDisease.isSelected())
+        }
+
+        if (hasCeliacDisease.isSelected()) {
             VAQ_Health.profile.medical.setHasCeliacDisease(true);
-        else
+        } else {
             VAQ_Health.profile.medical.setHasCeliacDisease(false);
-        
-        if (hasKidneyDisease.isSelected())
+        }
+
+        if (hasKidneyDisease.isSelected()) {
             VAQ_Health.profile.medical.setHasKidneyDisease(true);
-        else
+        } else {
             VAQ_Health.profile.medical.setHasKidneyDisease(false);
-        
-        if (hasHighBloodPressure.isSelected())
+        }
+
+        if (hasHighBloodPressure.isSelected()) {
             VAQ_Health.profile.medical.setHasHighBloodPressure(true);
-        else
+        } else {
             VAQ_Health.profile.medical.setHasHighBloodPressure(false);
-        
-        if (hasGout.isSelected())
+        }
+
+        if (hasGout.isSelected()) {
             VAQ_Health.profile.medical.setHasGout(true);
-        else
+        } else {
             VAQ_Health.profile.medical.setHasGout(false);
-        
-        
-        for (int i=0; i < VAQ_Health.profile.allergies.map.size(); i++)
-        {
-            VAQ_Health.profile.allergies.map.replace(allergyCCB.getCheckModel().getItem(i).toString(),allergyCCB.getCheckModel().isChecked(i) );
-            System.out.println("Allergy: " + allergyCCB.getCheckModel().getItem(i).toString() + ":   " + allergyCCB.getCheckModel().isChecked(i) );
-            
+        }
+
+        for (int i = 0; i < VAQ_Health.profile.allergies.map.size(); i++) {
+            VAQ_Health.profile.allergies.map.replace(allergyCCB.getCheckModel().getItem(i).toString(), allergyCCB.getCheckModel().isChecked(i));
+            System.out.println("Allergy: " + allergyCCB.getCheckModel().getItem(i).toString() + ":   " + allergyCCB.getCheckModel().isChecked(i));
         }
         System.out.println(VAQ_Health.profile.medical);
         DatabaseManager.UpdateMedical(VAQ_Health.profile);
     }
-    
+
 }

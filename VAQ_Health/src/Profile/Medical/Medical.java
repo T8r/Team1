@@ -5,6 +5,10 @@
  */
 package Profile.Medical;
 
+import Disease.Disease;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author ^.^
@@ -128,6 +132,8 @@ public class Medical {
      * 
      * Maybe make into activation switches for more options?
      */
+
+    public List<Disease>  diseaseList = new ArrayList<>();
 
     private String weight;
     private String height;

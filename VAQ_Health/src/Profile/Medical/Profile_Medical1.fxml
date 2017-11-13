@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
@@ -66,11 +65,6 @@
             <AnchorPane layoutX="145.0" layoutY="80.0" prefHeight="520.0" prefWidth="4.0" style="-fx-background-color: orange;" />
             <AnchorPane layoutX="171.0" layoutY="111.0" prefHeight="458.0" prefWidth="630.0" style="-fx-background-color: e9e9e9; -fx-background-radius: 5;">
                <children>
-                  <CheckBox fx:id="hasDiabetesChB" layoutX="52.0" layoutY="148.0" mnemonicParsing="false" text="Diabetes">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </CheckBox>
                   <Label layoutX="52.0" layoutY="48.0" text="Weight">
                      <font>
                         <Font size="15.0" />
@@ -83,33 +77,14 @@
                      </font>
                   </Label>
                   <JFXTextField fx:id="heightTF" layoutX="138.0" layoutY="59.0" prefHeight="25.0" prefWidth="54.0" />
-                  <CheckBox fx:id="hasHighCholesterol" layoutX="52.0" layoutY="219.0" mnemonicParsing="false" text="High Cholesterol">
+                  <CheckListView fx:id="allergyCCB" layoutX="52.0" layoutY="179.0" prefHeight="140.0" prefWidth="179.0" />
+                  <Label layoutX="103.0" layoutY="152.0" text="Alergies">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="18.0" />
                      </font>
-                  </CheckBox>
-                  <CheckBox fx:id="hasKidneyDisease" layoutX="225.0" layoutY="148.0" mnemonicParsing="false" text="Kidney Disease">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </CheckBox>
-                  <CheckBox fx:id="hasCeliacDisease" layoutX="52.0" layoutY="184.0" mnemonicParsing="false" text="Celiac Disease">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </CheckBox>
-                  <CheckBox fx:id="hasGout" layoutX="225.0" layoutY="184.0" mnemonicParsing="false" text="Gout">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </CheckBox>
-                  <CheckBox fx:id="hasHighBloodPressure" layoutX="225.0" layoutY="219.0" mnemonicParsing="false" text="High Blood Pressure">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </CheckBox>
-                  <CheckListView fx:id="allergyCCB" layoutX="49.0" layoutY="304.0" prefHeight="140.0" prefWidth="179.0" />
-                  <Label layoutX="100.0" layoutY="277.0" text="Alergies">
+                  </Label>
+                  <CheckListView fx:id="diseaseCCB" layoutX="289.0" layoutY="179.0" prefHeight="140.0" prefWidth="179.0" />
+                  <Label layoutX="340.0" layoutY="152.0" prefHeight="27.0" prefWidth="69.0" text="Diseases">
                      <font>
                         <Font size="18.0" />
                      </font>

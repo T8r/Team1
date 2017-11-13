@@ -5,11 +5,14 @@
  */
 package Profile;
 
+import Disease.Disease;
 import Profile.Allergies.Allergy;
 import Profile.Medical.Medical;
 import Profile.Personal1.Personal;
 import Profile.Personal1.Personal;
 import Profile.Personal1.Personal;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.image.Image;
 
 /**

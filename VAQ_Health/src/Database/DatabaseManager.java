@@ -5,6 +5,7 @@
  */
 package Database;
 
+import Disease.Disease;
 import Exercise.Exercise;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -43,6 +44,7 @@ public class DatabaseManager {
     static ResultSet myRs;
 
     static private ArrayList<String> allergyList = new ArrayList<>();
+    static private ArrayList<String> diseaseList = new ArrayList<>();
 
     static void OpenConnection() {
         try {
@@ -204,6 +206,18 @@ public class DatabaseManager {
         int allergyID; 
         try {
             OpenConnection();
+            
+           //Medical
+           PreparedStatement ps = myConnection.prepareStatement(
+                    "UPDATE medical SET "
+                    + "weight = ?, "
+                    + "height = ? "
+           );
+           ps.setInt(1, Integer.parseInt(profile.medical.getWeight()));
+           ps.setInt(2, Integer.parseInt(profile.medical.getHeight()));
+           ps.executeUpdate();
+           
+            //Allergies
             for (int i = 0; i < allergyList.size(); i++) {
                 if (profile.allergies.map.get(allergyList.get(i))) {
                     myRs = myStmt.executeQuery("select* from allergy where discription='"+allergyList.get(i)+"'");
@@ -222,6 +236,8 @@ public class DatabaseManager {
                     }
                 }
             }
+            
+
             CloseConnection();
         } catch (Exception e) {
         }
@@ -304,22 +320,14 @@ public class DatabaseManager {
                 profile.personal.setBirthday(myRs.getString("birthday"));
             }
 
-//            //Get Medical
-//             myRs = myStmt.executeQuery("select* from disease where userID=" + userID + "");
-//            while (myRs.next()) {
-//                profile.medical.(myRs.getString("firstName"));
-//                profile.personal.setlName(myRs.getString("lastName"));
-//                profile.personal.setAddress(myRs.getString("address"));
-//                profile.personal.setSex(myRs.getString("sex"));
-//                profile.personal.setState(myRs.getString("state"));
-//                profile.personal.setCity(myRs.getString("city"));
-//                profile.personal.setZipCode(myRs.getString("zipcode"));
-//                profile.personal.setEmail(myRs.getString("email"));
-//                profile.personal.setBirthday(myRs.getString("birthday"));
-//            }
+            //Get Medical
+            myRs = myStmt.executeQuery("select* from medical where userID=" + userID + "");
+            myRs.next();
+            profile.medical.setHeight(myRs.getString("height"));
+            profile.medical.setWeight(myRs.getString("weight"));   
+
             //Get Allergies
             myRs = myStmt.executeQuery("select* from allergy");
-            ResultSetMetaData rsmd = myRs.getMetaData();
             while (myRs.next()) {
                 profile.allergies.map.put(myRs.getString("discription"), false);
             }
@@ -335,11 +343,20 @@ public class DatabaseManager {
                 profile.allergies.map.replace(myRs.getString("discription"), true);
                 System.out.println(myRs.getString("discription"));
             }
-            rsmd = myRs.getMetaData();
-            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+            
+             //Get Diseases      
+            myRs = myStmt.executeQuery(""
+                    + "Select* from disease a Inner Join("
+                    + "Select* from userDiseases where userID=" + userID + ""
+                    + ")AS t1 ON t1.diseaseID =a.ID"
+            );
 
+            //myRs.next();
+            while (myRs.next()) {
+                Disease disease = new Disease(myRs.getString("name"),true);
+                profile.medical.diseaseList.add(disease);
             }
-
+        
             //Get Profile Picture
             myRs = myStmt.executeQuery("select* from profilePicture where userID=" + userID + "");
             myRs.next();
@@ -396,6 +413,22 @@ public class DatabaseManager {
             exc.printStackTrace();
         }
         return equipmentList;
+    }
+
+    public static ArrayList<String> GetDiseaseList() {
+          try {
+            OpenConnection();
+
+            myRs = myStmt.executeQuery("select* from disease");
+            // 4. Process the result set
+            while (myRs.next()) {
+                diseaseList.add(myRs.getString("name"));
+            }
+            CloseConnection();
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        return diseaseList;
     }
 
 }
