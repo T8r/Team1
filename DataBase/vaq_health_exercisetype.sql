@@ -16,29 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `goodexercisefordisease`
+-- Table structure for table `exercisetype`
 --
 
-DROP TABLE IF EXISTS `goodexercisefordisease`;
+DROP TABLE IF EXISTS `exercisetype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `goodexercisefordisease` (
-  `diseaseID` int(11) NOT NULL,
-  `exerciseID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`diseaseID`),
-  KEY `gefdExerciseID_idx` (`exerciseID`),
-  CONSTRAINT `gefdDiseaseID` FOREIGN KEY (`diseaseID`) REFERENCES `disease` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `gefdExerciseID` FOREIGN KEY (`exerciseID`) REFERENCES `exercise` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `exercisetype` (
+  `ID` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `goodexercisefordisease`
+-- Dumping data for table `exercisetype`
 --
 
-LOCK TABLES `goodexercisefordisease` WRITE;
-/*!40000 ALTER TABLE `goodexercisefordisease` DISABLE KEYS */;
-/*!40000 ALTER TABLE `goodexercisefordisease` ENABLE KEYS */;
+LOCK TABLES `exercisetype` WRITE;
+/*!40000 ALTER TABLE `exercisetype` DISABLE KEYS */;
+INSERT INTO `exercisetype` VALUES (1,'CARDIO');
+/*!40000 ALTER TABLE `exercisetype` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-13 15:25:27
+-- Dump completed on 2017-11-15 13:48:59

@@ -37,7 +37,7 @@ CREATE TABLE `userallergies` (
 
 LOCK TABLES `userallergies` WRITE;
 /*!40000 ALTER TABLE `userallergies` DISABLE KEYS */;
-INSERT INTO `userallergies` VALUES (1,1),(1,6),(1,10);
+INSERT INTO `userallergies` VALUES (1,15);
 /*!40000 ALTER TABLE `userallergies` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-13 15:25:27
+-- Dump completed on 2017-11-15 13:48:59

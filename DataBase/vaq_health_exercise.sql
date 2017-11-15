@@ -32,7 +32,7 @@ CREATE TABLE `exercise` (
   `equipmentID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `equipmentFK_idx` (`equipmentID`),
-  CONSTRAINT `equipmentFK` FOREIGN KEY (`equipmentID`) REFERENCES `exerciseequipment` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `equipmentFK` FOREIGN KEY (`equipmentID`) REFERENCES `equipment` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-13 15:25:27
+-- Dump completed on 2017-11-15 13:49:00

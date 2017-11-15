@@ -38,7 +38,7 @@ CREATE TABLE `userdiseases` (
 
 LOCK TABLES `userdiseases` WRITE;
 /*!40000 ALTER TABLE `userdiseases` DISABLE KEYS */;
-INSERT INTO `userdiseases` VALUES (1,5),(1,6);
+INSERT INTO `userdiseases` VALUES (1,2);
 /*!40000 ALTER TABLE `userdiseases` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-13 15:25:26
+-- Dump completed on 2017-11-15 13:48:59

@@ -16,27 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `exerciseequipment`
+-- Table structure for table `goodexercisetypefordisease`
 --
 
-DROP TABLE IF EXISTS `exerciseequipment`;
+DROP TABLE IF EXISTS `goodexercisetypefordisease`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `exerciseequipment` (
-  `ID` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+CREATE TABLE `goodexercisetypefordisease` (
+  `diseaseID` int(11) NOT NULL,
+  `exerciseType` int(11) DEFAULT NULL,
+  PRIMARY KEY (`diseaseID`),
+  KEY `gefdType_idx` (`exerciseType`),
+  CONSTRAINT `gefdDiseaseID` FOREIGN KEY (`diseaseID`) REFERENCES `disease` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `gefdType` FOREIGN KEY (`exerciseType`) REFERENCES `exercisetype` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exerciseequipment`
+-- Dumping data for table `goodexercisetypefordisease`
 --
 
-LOCK TABLES `exerciseequipment` WRITE;
-/*!40000 ALTER TABLE `exerciseequipment` DISABLE KEYS */;
-INSERT INTO `exerciseequipment` VALUES (1,'Bicycle'),(2,'Dumb Bells'),(3,'Pull Up Bar'),(4,'Jump Rope');
-/*!40000 ALTER TABLE `exerciseequipment` ENABLE KEYS */;
+LOCK TABLES `goodexercisetypefordisease` WRITE;
+/*!40000 ALTER TABLE `goodexercisetypefordisease` DISABLE KEYS */;
+INSERT INTO `goodexercisetypefordisease` VALUES (1,1);
+/*!40000 ALTER TABLE `goodexercisetypefordisease` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-13 15:25:26
+-- Dump completed on 2017-11-15 13:48:59

@@ -16,28 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `medical`
+-- Table structure for table `userequipment`
 --
 
-DROP TABLE IF EXISTS `medical`;
+DROP TABLE IF EXISTS `userequipment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `medical` (
+CREATE TABLE `userequipment` (
   `userID` int(11) NOT NULL,
-  `height` int(11) DEFAULT NULL,
-  `weight` int(11) DEFAULT NULL,
-  PRIMARY KEY (`userID`)
+  `equipmentID` varchar(45) NOT NULL,
+  PRIMARY KEY (`userID`,`equipmentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `medical`
+-- Dumping data for table `userequipment`
 --
 
-LOCK TABLES `medical` WRITE;
-/*!40000 ALTER TABLE `medical` DISABLE KEYS */;
-INSERT INTO `medical` VALUES (1,20,20);
-/*!40000 ALTER TABLE `medical` ENABLE KEYS */;
+LOCK TABLES `userequipment` WRITE;
+/*!40000 ALTER TABLE `userequipment` DISABLE KEYS */;
+INSERT INTO `userequipment` VALUES (1,'1'),(1,'4');
+/*!40000 ALTER TABLE `userequipment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
