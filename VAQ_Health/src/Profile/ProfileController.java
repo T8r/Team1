@@ -26,6 +26,7 @@ public class ProfileController {
         
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainScene = scene;
         VAQ_Health.mainStage.show();
     }
     
@@ -35,6 +36,7 @@ public class ProfileController {
         
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainScene = scene;
         VAQ_Health.mainStage.show();
     }
     
@@ -43,13 +45,16 @@ public class ProfileController {
         Parent root = FXMLLoader.load(getClass().getResource("/Profile/Exercise/ExerciseProfile.fxml"));
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainScene = scene;
         VAQ_Health.mainStage.show();
     }
-    public void OpenExercise() throws IOException
+    public void OpenExerciseHome() throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource("/Exercise/Exercise.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ExerciseHome/ExerciseHome.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/ExerciseHome/ExerciseHome.css").getPath());
         VAQ_Health.mainStage.setScene(scene);
+       VAQ_Health.mainScene = scene;
         VAQ_Health.mainStage.show(); 
     }
     
@@ -59,6 +64,7 @@ public class ProfileController {
         
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainScene = scene;
         VAQ_Health.mainStage.show();
     }
     
@@ -67,6 +73,7 @@ public class ProfileController {
         Parent root = FXMLLoader.load(getClass().getResource("/SignIn/CreateAccount/CreateAccount.fxml"));
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainScene = scene;
         VAQ_Health.mainStage.show(); 
     }
     
@@ -75,7 +82,32 @@ public class ProfileController {
         Parent root = FXMLLoader.load(getClass().getResource("/SignIn/SignIn.fxml"));
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
+        VAQ_Health.mainScene = scene;
         VAQ_Health.mainStage.show(); 
+    }
+
+    public void OpenExercises() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Exercise/Exercise.fxml"));
+        Scene scene = new Scene(root);
+        VAQ_Health.mainStage.setScene(scene); 
+        VAQ_Health.mainScene = scene;
+        VAQ_Health.mainStage.show();
+    }
+    
+    public void OpenRoutine() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Routine/Routine.fxml"));
+        Scene scene = new Scene(root);
+        VAQ_Health.mainStage.setScene(scene);  
+        VAQ_Health.mainScene = scene; 
+        VAQ_Health.mainStage.show();
+    }
+
+    public void OpenProfileExport() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Profile/Export/Export.fxml"));
+        Scene scene = new Scene(root);
+        VAQ_Health.mainStage.setScene(scene);  
+        VAQ_Health.mainScene = scene; 
+        VAQ_Health.mainStage.show();
     }
     
   

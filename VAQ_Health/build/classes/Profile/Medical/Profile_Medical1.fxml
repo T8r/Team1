@@ -24,7 +24,7 @@
                         <Image url="@../../arrow_back_white_192x192.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="425.0" layoutY="17.0" text="Medical" textFill="#00264b">
+                  <Label layoutX="425.0" layoutY="17.0" text="Medical" textFill="WHITE">
                      <font>
                         <Font name="Verdana" size="40.0" />
                      </font>
@@ -37,26 +37,31 @@
             <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
             <AnchorPane layoutY="84.0" prefHeight="516.0" prefWidth="106.0" style="-fx-background-color: gray;" stylesheets="@Header.css">
                <children>
-                  <JFXButton buttonType="RAISED" layoutY="26.0" onMouseClicked="#OpenPersonal" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@Header.css" text="Personal" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutY="86.0" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@Header.css" text="Medical" textFill="WHITE" underline="true">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutY="152.0" onMouseClicked="#OpenAllergies" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@Header.css" text="Exercise" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </JFXButton>
                   <ImageView fitHeight="48.0" fitWidth="113.0" layoutX="18.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../Rockin%20R%20Initials-White.png" />
                      </image>
                   </ImageView>
+                  <JFXButton buttonType="RAISED" layoutY="44.0" onMouseClicked="#OpenPersonal" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Personal1/Header.css" text="Personal" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutY="107.0" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Personal1/Header.css" text="Medical" textFill="WHITE" underline="true">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutY="169.0" onMouseClicked="#OpenExercise" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Personal1/Header.css" text="Exercise" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutY="230.0" onMouseClicked="#OpenExport" prefHeight="48.0" prefWidth="149.0" style="-fx-background-color: orange;" styleClass="Header" stylesheets="@../Personal1/Header.css" text="Export" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
             <JFXButton buttonType="RAISED" layoutX="816.0" layoutY="502.0" onMouseClicked="#SaveButtion" style="-fx-background-color: orange;" text="Save" textFill="WHITE">
@@ -65,7 +70,7 @@
                </font>
             </JFXButton>
             <AnchorPane layoutX="145.0" layoutY="80.0" prefHeight="520.0" prefWidth="4.0" style="-fx-background-color: orange;" />
-            <ScrollPane layoutX="211.0" layoutY="151.0" prefHeight="436.0" prefWidth="586.0">
+            <ScrollPane layoutX="211.0" layoutY="128.0" prefHeight="436.0" prefWidth="586.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="652.0" prefWidth="538.0">
                      <children>

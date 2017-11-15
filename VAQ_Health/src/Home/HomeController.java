@@ -37,7 +37,7 @@ public class HomeController implements Initializable {
     @FXML
     public void OpenExercise() throws IOException
     {
-        profileController.OpenExercise();
+        profileController.OpenExerciseHome();
     }
     
     @FXML

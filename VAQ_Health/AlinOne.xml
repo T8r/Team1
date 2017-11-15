@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Personal>
+     <PersonalInformation>
+     <PersonalComponent id="1">
+          <firstname>Joe</firstname>
+          <lastname>G</lastname>
+          <address>VV.</address>
+          <city>Harlingen</city>
+          <state>TX</state>
+          <email>hur@gmail.com</email>
+          <sex>M</sex>
+     </PersonalComponent>
+</PersonalInformation>
+     <PersonalInformation>
+     <PersonalComponent id="1">
+          <firstname>Joe</firstname>
+          <lastname>G</lastname>
+          <address>VV.</address>
+          <city>Harlingen</city>
+          <state>TX</state>
+          <email>hur@gmail.com</email>
+          <sex>M</sex>
+     </PersonalComponent>
+</PersonalInformation>
+</Personal>

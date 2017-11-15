@@ -115,6 +115,10 @@ public class Profile_PersonalController implements Initializable {
     private void OpenAllergies(MouseEvent event) throws IOException {
         profileController.OpenProfileExercise();
     }
+    @FXML
+    private void OpenExport(MouseEvent event) throws IOException {
+        profileController.OpenProfileExport();
+    }
     
     @FXML
     public void SaveButton()

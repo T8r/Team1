@@ -22,6 +22,7 @@ import javax.xml.bind.DatatypeConverter;
 public class VAQ_Health extends Application {
     
    static public Stage mainStage;
+   static public Scene mainScene;
    static public Profile profile = new Profile();
    
    
@@ -31,7 +32,7 @@ public class VAQ_Health extends Application {
             
         Scene scene = new Scene(root);
         stage.setScene(scene);
-
+        mainScene = scene;
         stage.show();
         mainStage = stage;
        

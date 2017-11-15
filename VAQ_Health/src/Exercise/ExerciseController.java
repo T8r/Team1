@@ -31,6 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import Database.DatabaseManager;
 import Exercise.Equipment.Equipment;
+import Exercise.Exercise.ExerciseTypeE;
 import java.util.stream.Collectors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -63,6 +64,8 @@ public class ExerciseController implements Initializable {
     Label metL;
     @FXML
     CheckComboBox exerciseEquipCCB;
+    @FXML
+    CheckComboBox exerciseTypeCCB;
 
     Exercise selectedExercise;
     Image balanceImage = new Image("balance.png");
@@ -82,7 +85,13 @@ public class ExerciseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+        exerciseTypeCCB.getItems().add(ExerciseTypeE.BALANCE.toString());
+        exerciseTypeCCB.getItems().add(ExerciseTypeE.CARDIO.toString());
+        exerciseTypeCCB.getItems().add(ExerciseTypeE.FLEXIBILITY.toString());
+        exerciseTypeCCB.getItems().add(ExerciseTypeE.STRENGTH.toString());
+        
         exerciseList = DatabaseManager.GetExerciseTable();
+        
         if (exerciseList.size() > 0) {
             System.out.println(exerciseList.get(0).name);
         }
@@ -214,7 +223,7 @@ public class ExerciseController implements Initializable {
     }
 
     public void OpenHome() throws IOException {
-        profileController.OpenHome();
+        profileController.OpenExerciseHome();
     }
 
 }

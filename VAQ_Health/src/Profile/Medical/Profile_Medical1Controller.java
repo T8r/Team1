@@ -135,7 +135,7 @@ public class Profile_Medical1Controller implements Initializable {
     }
 
     @FXML
-    public void OpenAllergies() throws IOException {
+    public void OpenExercise() throws IOException {
         profileController.OpenProfileExercise();
     }
 
@@ -144,6 +144,11 @@ public class Profile_Medical1Controller implements Initializable {
         profileController.OpenHome();
     }
 
+    @FXML
+    public void OpenExport() throws IOException {
+        profileController.OpenProfileExport();
+    }
+    
     @FXML
     public void SaveButtion() {
         if (weightTF.getText() != null) {

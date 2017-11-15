@@ -115,5 +115,12 @@ public class ExerciseProfileController implements Initializable {
     {
         profileController.OpenMedical();
     }
+    @FXML
+    public void OpenProfileExport() throws IOException
+    {
+        profileController.OpenProfileExport();
+    }
+    
+    
     
 }
