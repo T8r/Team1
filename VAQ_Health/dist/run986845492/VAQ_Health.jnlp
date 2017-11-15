@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="VAQ_Health.jar" size="283653" download="eager" />
+    <jar href="VAQ_Health.jar" size="283580" download="eager" />
     <jar href="lib\controlsfx-8.40.14.jar" size="1215643" download="eager" />
     <jar href="lib\core-renderer.jar" size="1079323" download="eager" />
     <jar href="lib\iText-2.0.8.jar" size="1213150" download="eager" />

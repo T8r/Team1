@@ -95,7 +95,7 @@ public class ProfileController {
     }
     
     public void OpenRoutine() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Routine/Routine.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/RoutineHome/RoutineHome.fxml"));
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);  
         VAQ_Health.mainScene = scene; 
@@ -109,7 +109,5 @@ public class ProfileController {
         VAQ_Health.mainScene = scene; 
         VAQ_Health.mainStage.show();
     }
-    
-  
-    
+
 }
