@@ -46,15 +46,43 @@ public class Equipment {
     private String name;
     private ExerciseTypeE type;
     
+    public Equipment(String n,ExerciseTypeE e)
+    {
+        this.name = n;
+        type = e;
+    }
     public Equipment(String n)
     {
         this.name = n;
     }
     
-    @Override
-    public String toString()
-    {
+       @Override
+    public String toString() {
         return getName();
     }
+
+    public boolean equals(Object o) {
+
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Equipment)) {
+            return false;
+        }
+
+        Equipment equipment = (Equipment) o;
+
+        return equipment.name.equals(name);
+    }
+
+    //Idea from effective Java : Item 9
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+    
+  
     
 }

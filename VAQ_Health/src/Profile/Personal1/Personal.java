@@ -143,8 +143,8 @@ public class Personal {
                "\n\tnCity: "+getCity()+
                "\n\tState: "+getState()+              
                "\n\tSex: "+getSex()+
-               "\n\tEmail: "+getEmail()+
-               "\n\tBirthday: "+ getBirthday().toString();
+               "\n\tEmail: "+getEmail();
+               //"\n\tBirthday: "+ getBirthday().toString();
     }
     
 }

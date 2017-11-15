@@ -6,8 +6,10 @@
 package Profile.Exercise;
 
 import Database.DatabaseManager;
+import Disease.Disease;
 import Exercise.Equipment.Equipment;
 import Exercise.Exercise;
+import Profile.Allergies.Allergy;
 import Profile.ProfileController;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.controlsfx.control.CheckListView;
+import vaq_health.VAQ_Health;
 
 /**
  * FXML Controller class
@@ -41,16 +44,17 @@ public class ExerciseProfileController implements Initializable {
     Image weightImage = new Image("/Equipment/weight.jpg");
     Image jumpRopeImage = new Image("/Equipment/jumpRope.png");
     ProfileController profileController = new ProfileController();
+    ArrayList<Equipment> equipmentList;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-         ArrayList<String> equipmentList = DatabaseManager.GetEquipmentList();
+         equipmentList = DatabaseManager.GetEquipmentList();
 
-        for (String equipmentName : equipmentList) {
-            Equipment equipment = new Equipment(equipmentName);
+        for (Equipment equipment : equipmentList) {         
             equipmentCCB.getItems().add(equipment);
         }
-        
+       
         equipmentCCB.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Equipment>() {
              @Override
              public void changed(ObservableValue<? extends Equipment> observable, Equipment oldValue, Equipment equipment) {
@@ -64,11 +68,37 @@ public class ExerciseProfileController implements Initializable {
                     equipmentIV.setImage(weightImage);
              }
            
-        });
-          
-        
-                
+        });   
+         DisplayExerciseProfile();
     }  
+    
+    private void DisplayExerciseProfile() {
+
+        for (int i = 0; i < VAQ_Health.profile.exerciseProfile.equipmentList.size(); i++) {
+             equipmentCCB.getCheckModel().check(VAQ_Health.profile.exerciseProfile.equipmentList.get(i));
+        }
+//        if (equipmentList.size() > 0){
+//            equipmentCCB.getSelectionModel().select(0);                   
+//        }
+    }
+    
+    @FXML
+    public void Save()
+    {
+        for (int i = 0; i < equipmentList.size(); i++) {
+            Equipment equipment = equipmentList.get(i);
+            if (VAQ_Health.profile.exerciseProfile.equipmentList.contains(equipment))
+            {
+                 if (!equipmentCCB.getCheckModel().isChecked(i))
+                    VAQ_Health.profile.exerciseProfile.equipmentList.remove(equipment);   
+            }
+            else if (equipmentCCB.getCheckModel().isChecked(i))
+                VAQ_Health.profile.exerciseProfile.equipmentList.add(equipment);     
+                
+            System.out.println("Equipment: " + equipmentCCB.getCheckModel().getItem(i).toString() + ":   " + equipmentCCB.getCheckModel().isChecked(i));
+        }
+        DatabaseManager.UpdateExerciseProfile(VAQ_Health.profile);
+    }
     
      @FXML
     public void OpenPersonal() throws IOException

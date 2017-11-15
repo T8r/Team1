@@ -6,6 +6,7 @@
 package Database;
 
 import Disease.Disease;
+import Exercise.Equipment.Equipment;
 import Exercise.Exercise;
 import Exercise.Exercise.ExerciseTypeE;
 import Profile.Allergies.Allergy;
@@ -50,7 +51,8 @@ public class DatabaseManager {
 
     static private ArrayList<Allergy> allergyList = new ArrayList<>();
     static private ArrayList<Disease> diseaseList = new ArrayList<>();
-
+    static private ArrayList<Equipment> equipmentList = new ArrayList<>();
+    
     static void OpenConnection() {
         try {
             // 1. Get a connection to database
@@ -156,7 +158,7 @@ public class DatabaseManager {
         try {
             OpenConnection();
 
-            myRs = myStmt.executeQuery("select* from exerciseequipment");
+            myRs = myStmt.executeQuery("select* from equipment");
             // 4. Process the result set
             while (myRs.next()) {
                 equipList.add(myRs.getString("name"));
@@ -183,17 +185,18 @@ public class DatabaseManager {
                 newExercise.description = myRs.getString("description");
                 newExercise.type = ExerciseTypeE.valueOf(myRs.getString("type"));
                 newExercise.met = myRs.getInt("met");
-                newExercise.equipment = Integer.toString(myRs.getInt("equipmentID"));
+                newExercise.equipment = new Equipment(Integer.toString(myRs.getInt("equipmentID")));
                 exerciseList.add(newExercise);
 
             }
             for (Exercise exercise : exerciseList) {
-                if (exercise.equipment.equals("0")) {
+                if (exercise.equipment.getName().equals("0")) {
                     continue;
                 }
-                myRs = myStmt.executeQuery("select* from exerciseequipment where ID=" + exercise.equipment);
+                myRs = myStmt.executeQuery("select* from equipment where ID=" + exercise.equipment);
                 myRs.next();
-                exercise.equipment = myRs.getString("name");
+                exercise.equipment.setName(myRs.getString("name"));
+                exercise.equipment.setType(ExerciseTypeE.valueOf(myRs.getString("type")));
                 System.out.println(exercise.name + "   " + exercise.equipment);
             }
 
@@ -297,6 +300,52 @@ public class DatabaseManager {
 
     }
 
+    public static void UpdateExerciseProfile(Profile profile)
+    {
+        int equipmentID;
+        try{
+            OpenConnection();
+            
+            //Update Equipment List
+            for (int i = 0; i < equipmentList.size(); i++) {
+                myRs = myStmt.executeQuery("select* from equipment where name='" + equipmentList.get(i).getName() + "'");
+                myRs.next();
+                equipmentID = myRs.getInt("ID");
+                Equipment equipment = equipmentList.get(i);
+                if (profile.exerciseProfile.equipmentList.contains(equipment)) {
+                    myRs = myStmt.executeQuery("select* from userEquipment where userID=" + profile.id + " AND equipmentID="+equipmentID);                    
+                    if (myRs.next()) {
+                        System.out.println("User already has equipment listed");
+                    } else {
+                        System.out.println("Listing User: " + profile.username + " Equipment: " + equipmentList.get(i));                      
+                        String sql = "INSERT INTO userEquipment (userID,equipmentID) VALUES (?, ?)";
+                        PreparedStatement statement = myConnection.prepareStatement(sql);
+                        statement.setInt(1,profile.id);
+                        statement.setInt(2,equipmentID);
+                        statement.executeUpdate();
+                    }
+                }
+                else
+                {
+                    myRs = myStmt.executeQuery("select* FROM userEquipment where userID=" + profile.id + " AND equipmentID="+equipmentID);
+                    if (myRs.next())
+                    {
+                        System.out.println("Removing equipment from user in userEquipment Table");
+                        String SQL = "DELETE FROM userEquipment WHERE userID = ? and equipmentID = ? ";
+                        PreparedStatement pstmt = null;
+                        pstmt = myConnection.prepareStatement(SQL);
+                        pstmt.setInt(1, profile.id);
+                        pstmt.setInt(2, equipmentID);
+                        pstmt.executeUpdate();
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+        }
+        
+    }
     public static void UpdatePersonal(Profile profile) {
         String hashedUsername = "";
 
@@ -406,6 +455,21 @@ public class DatabaseManager {
                 profile.medical.diseaseList.add(disease);
             }
         
+            
+            //Get Equipment
+            myRs = myStmt.executeQuery(""
+                    + "Select* from equipment a Inner Join("
+                    + "Select* from userEquipment where userID=" + userID + ""
+                    + ")AS t1 ON t1.equipmentID =a.ID"
+            );
+
+            while (myRs.next()) {
+                Equipment equipment = new Equipment(myRs.getString("name"),ExerciseTypeE.valueOf(myRs.getString("type")));
+                profile.exerciseProfile.equipmentList.add(equipment);
+                System.out.println(myRs.getString("name"));
+            }
+            
+            
             //Get Profile Picture
             myRs = myStmt.executeQuery("select* from profilePicture where userID=" + userID + "");
             myRs.next();
@@ -448,16 +512,16 @@ public class DatabaseManager {
         return allergyList;
     }
 
-    public static ArrayList<String> GetEquipmentList() {
-        ArrayList<String> equipmentList = new ArrayList<>();
-
+    public static ArrayList<Equipment> GetEquipmentList() {
+       
         try {
             OpenConnection();
-
-            myRs = myStmt.executeQuery("select* from exerciseequipment");
+            equipmentList.clear();
+            myRs = myStmt.executeQuery("select* from equipment");
             // 4. Process the result set
             while (myRs.next()) {
-                equipmentList.add(myRs.getString("name"));
+                Equipment equipment = new Equipment(myRs.getString("name"),ExerciseTypeE.valueOf(myRs.getString("type")));
+                equipmentList.add(equipment);
             }
             CloseConnection();
         } catch (Exception exc) {

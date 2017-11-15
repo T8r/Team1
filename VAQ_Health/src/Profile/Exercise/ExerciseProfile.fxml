@@ -49,7 +49,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <JFXButton buttonType="RAISED" layoutX="816.0" layoutY="502.0" style="-fx-background-color: orange;" text="Save" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" layoutX="816.0" layoutY="502.0" onMouseClicked="#Save" style="-fx-background-color: orange;" text="Save" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="30.0" />
                      </font>

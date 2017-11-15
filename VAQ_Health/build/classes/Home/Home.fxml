@@ -26,12 +26,12 @@
                   <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
                   <AnchorPane layoutY="84.0" prefHeight="516.0" prefWidth="106.0" style="-fx-background-color: gray;" stylesheets="@../Profile/Header.css">
                      <children>
-                        <JFXButton buttonType="RAISED" layoutY="26.0" onMouseClicked="#OpenExercise" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Exercise" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutY="62.0" onMouseClicked="#OpenExercise" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Exercise" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" layoutY="86.0" onMouseClicked="#OpenProfile" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Profile" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutY="252.0" onMouseClicked="#OpenProfile" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Profile" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -41,7 +41,7 @@
                               <Image url="@../Rockin%20R%20Initials-White.png" />
                            </image>
                         </ImageView>
-                        <JFXButton buttonType="RAISED" layoutY="321.0" onMouseClicked="#OpenSignIn" prefHeight="48.0" prefWidth="149.0" style="-fx-background-color: maroon;" stylesheets="@../Profile/Header.css" text="Logout" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutY="321.0" onMouseClicked="#OpenSignIn" prefHeight="48.0" prefWidth="149.0" style="-fx-background-color: green;" stylesheets="@../Profile/Header.css" text="Logout" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -49,7 +49,7 @@
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="145.0" layoutY="80.0" prefHeight="520.0" prefWidth="4.0" style="-fx-background-color: orange;" />
-                  <AnchorPane layoutX="276.0" layoutY="148.0" prefHeight="338.0" prefWidth="448.0" style="-fx-background-color: #e9e9e9; -fx-background-radius: 5;" />
+                  <AnchorPane layoutX="149.0" layoutY="84.0" prefHeight="3.0" prefWidth="851.0" style="-fx-background-color: grey;" />
                </children>
             </AnchorPane>
          </children>

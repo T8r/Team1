@@ -5,6 +5,8 @@
  */
 package Exercise;
 
+import Exercise.Equipment.Equipment;
+
 /**
  *
  * @author ^.^
@@ -25,7 +27,7 @@ public class Exercise {
     public String workOutTime;
     public String description;
     public ExerciseTypeE type;
-    public String equipment;
+    public Equipment equipment;
     public int met;
     
     @Override

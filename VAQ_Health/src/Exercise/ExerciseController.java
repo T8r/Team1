@@ -30,10 +30,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import Database.DatabaseManager;
+import Exercise.Equipment.Equipment;
 import java.util.stream.Collectors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import org.controlsfx.control.CheckComboBox;
+import vaq_health.VAQ_Health;
 
 /**
  * FXML Controller class
@@ -85,10 +87,35 @@ public class ExerciseController implements Initializable {
             System.out.println(exerciseList.get(0).name);
         }
 
-        ArrayList<String> equipList = DatabaseManager.GetExerEquipList();
-        for (String equipment : equipList) {
+        ArrayList<Equipment> equipList = DatabaseManager.GetEquipmentList();
+        for (Equipment equipment : equipList) {
             exerciseEquipCCB.getItems().add(equipment);
         }
+        for (int i = 0; i < VAQ_Health.profile.exerciseProfile.equipmentList.size(); i++) {
+             exerciseEquipCCB.getCheckModel().check(VAQ_Health.profile.exerciseProfile.equipmentList.get(i));
+        }
+         if (exerciseList.size() > 0)
+        {
+            exerciseLV.getSelectionModel().clearAndSelect(0);                   
+            nameLabel.setText(exerciseList.get(0).name);
+            discriptionTA.setText(exerciseList.get(0).description);
+            metL.setText(String.valueOf(exerciseList.get(0).met));
+                switch (exerciseList.get(0).type) {
+                    case CARDIO:
+                        typeImageV.setImage(cardioImage);
+                        break;
+                    case BALANCE:
+                        typeImageV.setImage(balanceImage);
+                        break;
+                    case STRENGTH:
+                        typeImageV.setImage(strengthImage);
+                        break;
+                    case FLEXIBILITY:
+                        typeImageV.setImage(flexibilityImage);
+                }
+            
+        }
+        
         //Get rid of exercises that require equipment the user doesnt have
         UpdateExerciseList();
 
@@ -141,10 +168,10 @@ public class ExerciseController implements Initializable {
     }
 
     private void UpdateExerciseList() {
-        ObservableList<String> equipL = exerciseEquipCCB.getCheckModel().getCheckedItems();
+        ObservableList<Equipment> equipL = exerciseEquipCCB.getCheckModel().getCheckedItems();
         ArrayList<Exercise> filterdList = new ArrayList();
         for (int i = 0; i < exerciseList.size(); i++) {
-            if (!exerciseList.get(i).equipment.equals("0") && !equipL.contains(exerciseList.get(i).equipment)) {
+            if (!exerciseList.get(i).equipment.getName().equals("0") && !equipL.contains(exerciseList.get(i).equipment)) {
               System.out.println("User doesnt have equipment");
             }
             else

@@ -6,6 +6,7 @@
 package Profile;
 
 import Disease.Disease;
+import Exercise.ExerciseProfile;
 import Profile.Medical.Medical;
 import Profile.Personal1.Personal;
 import Profile.Personal1.Personal;
@@ -21,6 +22,7 @@ import javafx.scene.image.Image;
 public class Profile {
     public Personal personal = new Personal();
     public Medical medical = new Medical();
+    public ExerciseProfile exerciseProfile = new ExerciseProfile();
     public String username;
     public String password;
     public String imagePath;

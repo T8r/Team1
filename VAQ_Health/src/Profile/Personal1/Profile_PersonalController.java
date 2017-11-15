@@ -16,8 +16,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -178,7 +180,19 @@ public class Profile_PersonalController implements Initializable {
              emailTF.setText(VAQ_Health.profile.personal.getEmail());
          }
          
-         
+        if (VAQ_Health.profile.personal.getBirthday()!= null)
+        {
+            Date date = VAQ_Health.profile.personal.getBirthday();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int month = cal.get(Calendar.MONTH)+1;
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            int year = cal.get(Calendar.YEAR);
+            birthdayMonthTF.setText(Integer.toString(month));
+            birthdayYearTF.setText(Integer.toString(year));
+            birthdayDayTF.setText(Integer.toString(day));
+        }
+        
          
          if (VAQ_Health.profile.image != null)
          {
