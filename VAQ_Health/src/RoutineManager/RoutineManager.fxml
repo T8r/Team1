@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Routine.RoutineController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RoutineManager.RoutineController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass">
          <stylesheets>
@@ -80,9 +80,9 @@
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" layoutX="38.0" layoutY="389.0" style="-fx-background-color: green;" text="Create" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutX="46.0" layoutY="361.0" prefHeight="51.0" prefWidth="114.0" style="-fx-background-color: green;" text="Create" textFill="WHITE">
                            <font>
-                              <Font name="Segoe UI Semibold" size="19.0" />
+                              <Font name="Segoe UI Semibold" size="23.0" />
                            </font>
                         </JFXButton>
                         <JFXButton buttonType="RAISED" layoutX="606.0" layoutY="368.0" prefHeight="31.0" prefWidth="201.0" style="-fx-background-color: orange;" text="Add" textFill="WHITE">
@@ -91,6 +91,11 @@
                            </font>
                         </JFXButton>
                         <TextArea layoutX="605.0" layoutY="72.0" prefHeight="37.0" prefWidth="201.0" promptText="Search..." />
+                        <JFXButton buttonType="RAISED" layoutX="41.0" layoutY="42.0" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: orange;" text="Recomended" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="84.0" prefWidth="1000.0" styleClass="Header" stylesheets="@../Profile/Personal1/Header.css">
@@ -105,7 +110,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="55.0" fitWidth="86.0" layoutX="25.0" layoutY="15.0" onMouseClicked="#OpenExerciseHome" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="55.0" fitWidth="86.0" layoutX="25.0" layoutY="15.0" onMouseClicked="#OpenRoutineHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../arrow_back_white_192x192.png" />
                </image>

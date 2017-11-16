@@ -32,12 +32,7 @@
                               <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
                               <AnchorPane layoutY="84.0" prefHeight="516.0" prefWidth="106.0" style="-fx-background-color: gray;" stylesheets="@../Profile/Header.css">
                                  <children>
-                                    <JFXButton buttonType="RAISED" layoutY="44.0" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Exercises" textFill="WHITE">
-                                       <font>
-                                          <Font size="22.0" />
-                                       </font>
-                                    </JFXButton>
-                                    <JFXButton buttonType="RAISED" layoutY="107.0" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Routine" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutY="44.0" onMouseClicked="#OpenManager" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Manager" textFill="WHITE">
                                        <font>
                                           <Font size="22.0" />
                                        </font>
@@ -50,11 +45,11 @@
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="145.0" layoutY="80.0" prefHeight="520.0" prefWidth="4.0" style="-fx-background-color: orange;" />
-                              <ScrollPane layoutX="189.0" layoutY="191.0" prefHeight="356.0" prefWidth="775.0">
+                              <ScrollPane layoutX="179.0" layoutY="84.0" prefHeight="516.0" prefWidth="820.0">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="656.0" prefWidth="748.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="687.0" prefWidth="748.0" style="-fx-background-color: white;">
                                        <children>
-                                          <VBox layoutX="22.0" layoutY="21.0" prefHeight="616.0" prefWidth="704.0">
+                                          <VBox layoutX="31.0" layoutY="281.0" prefHeight="616.0" prefWidth="704.0">
                                              <children>
                                                 <VBox fx:id="mondayVBox" prefHeight="16.0" prefWidth="704.0">
                                                    <children>
@@ -97,15 +92,50 @@
                                                 </JFXButton>
                                              </children>
                                           </VBox>
+                                          <Label layoutX="277.0" layoutY="22.0" text="Cardio Routine 1" underline="true">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="568.0" layoutY="84.0" text="Todays Progress" underline="true">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <ImageView fitHeight="111.0" fitWidth="163.0" layoutX="574.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../progress2.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label layoutX="47.0" layoutY="110.0" text="Day:" underline="true">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="88.0" layoutY="113.0" text="Monday">
+                                             <font>
+                                                <Font name="Yu Gothic Regular" size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="47.0" layoutY="149.0" text="Exercise Type:" underline="true">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="157.0" layoutY="152.0" text="Cardio">
+                                             <font>
+                                                <Font name="Yu Gothic Regular" size="17.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </AnchorPane>
                                 </content>
                               </ScrollPane>
-                              <Label layoutX="464.0" layoutY="137.0" text="Name of Routine">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
+                              <ImageView fitHeight="55.0" fitWidth="86.0" layoutX="25.0" layoutY="15.0" onMouseClicked="#OpenHome" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../arrow_back_white_192x192.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                      </children>

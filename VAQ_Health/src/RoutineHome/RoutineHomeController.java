@@ -5,6 +5,7 @@
  */
 package RoutineHome;
 
+import Profile.ProfileController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,7 +33,7 @@ public class RoutineHomeController implements Initializable {
     VBox mondayVBox = new VBox();
     @FXML
     AnchorPane exerciseSlotTemplate;
-    
+    ProfileController profileController  = new ProfileController();
     boolean isMondayOpen;
     
     
@@ -62,5 +63,18 @@ public class RoutineHomeController implements Initializable {
         isMondayOpen = !isMondayOpen;
         
     }
+    
+    @FXML
+    private void OpenHome() throws IOException
+    {
+        profileController.OpenHome();
+    }
+    
+    @FXML
+    private void OpenManager() throws IOException
+    {
+        profileController.OpenRoutineManager();
+    }
+   
     
 }

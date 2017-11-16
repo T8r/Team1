@@ -223,7 +223,7 @@ public class ExerciseController implements Initializable {
     }
 
     public void OpenHome() throws IOException {
-        profileController.OpenExerciseHome();
+        profileController.OpenHome();
     }
 
 }

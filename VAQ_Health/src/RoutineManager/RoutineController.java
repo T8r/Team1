@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Routine;
+package RoutineManager;
 
 import Database.DatabaseManager;
 import Exercise.Exercise;
@@ -57,9 +57,9 @@ public class RoutineController implements Initializable {
     }   
     
     @FXML
-    public void OpenExerciseHome() throws IOException
+    public void OpenRoutineHome() throws IOException
     {
-        profileController.OpenExerciseHome();
+        profileController.OpenRoutine();
     }
     
 }

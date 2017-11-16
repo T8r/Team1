@@ -39,6 +39,11 @@ public class HomeController implements Initializable {
     {
         profileController.OpenExerciseHome();
     }
+    @FXML
+    private void OpenRoutine() throws IOException
+    {
+        profileController.OpenRoutine();
+    }
     
     @FXML
     private void OpenSignIn() throws IOException
