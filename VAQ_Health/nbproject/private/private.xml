@@ -3,43 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/RoutineManager/RoutineManager.fxml</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Home/HomeController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Utility/Utility.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Export/ExportController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Personal1/Profile_PersonalController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Disease/Disease.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/RoutineHome/RoutineHome.fxml</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/ExerciseHome/ExerciseHomeController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Converter/Converter.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Exercise/ExerciseProfile.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Personal1/Personal.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Database/DatabaseManager.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/RoutineManager/RoutineController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Converter/XMLGenerator.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Allergies/Allergy.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Medical/Profile_Medical1Controller.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Export/Export.fxml</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/RoutineExerciseSlot/RoutineExerciseSlot.fxml</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Converter/HTML2PDF.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/RoutineHome/RoutineHomeController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Personal1/Header.css</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Exercise/Equipment/Equipment.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/SignIn/CreateAccount/CreateAccountController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Exercise/ExerciseProfile.fxml</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Allergies/AllergiesController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/RoutineExerciseSlot/RoutineExerciseSlotController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/ProfileController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Medical/Medical.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Profile.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Exercise/Exercise.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Exercise/ExerciseProfileController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/vaq_health/VAQ_Health.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/ExerciseHome/ExerciseHome.css</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Profile/Converter/XML2HTML.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/SignIn/Header.css</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/Exercise/ExerciseController.java</file>
-            <file>file:/C:/Users/Ghost/Desktop/Team1/VAQ_Health/src/SignIn/SignInController.java</file>
+            <file>file:/C:/Users/JacobS/Documents/Classes/Fall%202017/CSCI%203340-SW/gitProj3/VAQ_Health/src/Email/jEmailController.java</file>
+            <file>file:/C:/Users/JacobS/Documents/Classes/Fall%202017/CSCI%203340-SW/gitProj3/VAQ_Health/src/Email/EmailGUI.java</file>
         </group>
     </open-files>
 </project-private>
