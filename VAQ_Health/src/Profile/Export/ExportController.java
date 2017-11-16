@@ -112,7 +112,7 @@ public class ExportController implements Initializable {
 
     @FXML
     public void Export() {
-        if (directoryPath.equals(""))
+        if (directoryPath == null || directoryPath.equals("") )
         {
             System.out.println("Directory not set");
             return;

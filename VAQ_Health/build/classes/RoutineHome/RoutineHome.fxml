@@ -92,7 +92,7 @@
                                                 </JFXButton>
                                              </children>
                                           </VBox>
-                                          <Label layoutX="277.0" layoutY="22.0" text="Cardio Routine 1" underline="true">
+                                          <Label layoutX="277.0" layoutY="69.0" text="Cardio Routine 1" underline="true">
                                              <font>
                                                 <Font size="30.0" />
                                              </font>

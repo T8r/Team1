@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Personal>
-     <PersonalInformation>
+<Profile>
+     <ProfileInformation>
      <PersonalComponent id="1">
           <firstname>Joe</firstname>
           <lastname>G</lastname>
@@ -10,8 +10,17 @@
           <email>hur@gmail.com</email>
           <sex>M</sex>
      </PersonalComponent>
-</PersonalInformation>
-     <PersonalInformation>
+     <MedicalComponent id="1">
+          <weight>20</weight>
+          <height>20</height>
+          <disease>Celiac; </disease>
+          <allergy>Night Shades; </allergy>
+     </MedicalComponent>
+     <ExerciseComponent id="1">
+          <exercise>Bicycle; Jump Rope; </exercise>
+     </ExerciseComponent>
+</ProfileInformation>
+     <ProfileInformation>
      <PersonalComponent id="1">
           <firstname>Joe</firstname>
           <lastname>G</lastname>
@@ -21,5 +30,14 @@
           <email>hur@gmail.com</email>
           <sex>M</sex>
      </PersonalComponent>
-</PersonalInformation>
-</Personal>
+     <MedicalComponent id="1">
+          <weight>20</weight>
+          <height>20</height>
+          <disease>Celiac; </disease>
+          <allergy>Night Shades; </allergy>
+     </MedicalComponent>
+     <ExerciseComponent id="1">
+          <exercise>Bicycle; Jump Rope; </exercise>
+     </ExerciseComponent>
+</ProfileInformation>
+</Profile>

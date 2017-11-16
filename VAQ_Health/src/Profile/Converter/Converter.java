@@ -23,12 +23,12 @@ public class Converter {
     public static void converter(String directory) {
 
         // input files:
-        String xmlFile  = "personalXml.xml";
-        String xslFile  = "personalXsl.xsl";
+        String xmlFile  = "profileXml.xml";
+        String xslFile  = "profileXsl.xsl";
        
         // Output Files
-        String htmlFile = "PersonalProfileHtml.htm";
-        String pdfFile  = "PersonalProfile.pdf";
+        String htmlFile = "ProfileHtml.htm";
+        String pdfFile  = "Profile.pdf";
         
         // Create XML document; you should have the xsl designed for it as well
         XMLGenerator jobXML = new XMLGenerator(xmlFile,directory);
@@ -45,20 +45,20 @@ public class Converter {
         // Testing combine xml files into another xml
           List<String> list = new ArrayList<>();
           //list is hard coded...
-          list.add("personalXml.xml");
-          list.add("personalXml.xml");
+          list.add("profileXml.xml");
+          list.add("profileXml.xml");
           //mergeMultipleXMLDocs(list of files,root node, output file);
-          mergeMultipleXMLDocs(list,"Personal", "AlinOne.xml");
+          mergeMultipleXMLDocs(list,"Profile", "AlinOne.xml");
 
     }
     public static void HTML(String directory)
     {
         // input files:
-        String xmlFile  = "personalXml.xml";
-        String xslFile  = "personalXsl.xsl";
+        String xmlFile  = "profileXml.xml";
+        String xslFile  = "profileXsl.xsl";
        
         // Output Files
-        String htmlFile = "PersonalProfileHtml.htm";
+        String htmlFile = "ProfileHtml.htm";
         
         // Create XML document; you should have the xsl designed for it as well
         XMLGenerator jobXML = new XMLGenerator(xmlFile,directory);
@@ -73,12 +73,12 @@ public class Converter {
     {
        
         // input files:
-        String xmlFile  = "personalXml.xml";
-        String xslFile  = "personalXsl.xsl";
+        String xmlFile  = "profileXml.xml";
+        String xslFile  = "profileXsl.xsl";
        
         // Output Files
-        String htmlFile = "PersonalProfileHtml.htm";
-        String pdfFile  = "PersonalProfile.pdf";
+        String htmlFile = "ProfileHtml.htm";
+        String pdfFile  = "Profile.pdf";
         
         // Create XML document; you should have the xsl designed for it as well
         XMLGenerator jobXML = new XMLGenerator(xmlFile,directory);
@@ -96,7 +96,7 @@ public class Converter {
 
     public static void XML(String directoryPath) {
         // input files:
-        String xmlFile  = "personalXml.xml";
+        String xmlFile  = "profileXml.xml";
         
         // Create XML document; you should have the xsl designed for it as well
         XMLGenerator jobXML = new XMLGenerator(xmlFile, directoryPath);
@@ -105,10 +105,10 @@ public class Converter {
         // Testing combine xml files into another xml
         List<String> list = new ArrayList<>();
         //list is hard coded...
-        list.add("personalXml.xml");
-        list.add("personalXml.xml");
+        list.add("profileXml.xml");
+        list.add("profileXml.xml");
         //mergeMultipleXMLDocs(list of files,root node, output file);
-        mergeMultipleXMLDocs(list, "Personal", "AlinOne.xml");
+        mergeMultipleXMLDocs(list, "Profile", "AlinOne.xml");
 
     }
 }

@@ -22,6 +22,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import Profile.Personal1.Personal;
 import Database.DatabaseManager;
+import Disease.Disease;
+import Exercise.Equipment.Equipment;
+import Exercise.ExerciseProfile;
+import Profile.Allergies.Allergy;
+import Profile.Medical.Medical;
 import vaq_health.VAQ_Health;
 import Profile.Profile;
 
@@ -52,13 +57,18 @@ public class XMLGenerator {
             icBuilder = icFactory.newDocumentBuilder();
 
             doc = icBuilder.newDocument();
-            Element mainRootElement = doc.createElement("PersonalInformation"); // doc.createElementNS();
+            Element mainRootElement = doc.createElement("ProfileInformation"); // doc.createElementNS();
             doc.appendChild(mainRootElement);
 
             // Append child elements to root element
             Profile myProfile = DatabaseManager.GetProfile(VAQ_Health.profile.username);
             Personal personal1 = myProfile.personal;
+            Medical medical1 = myProfile.medical;
+            ExerciseProfile exerciseProfile1 = myProfile.exerciseProfile;
+            
             mainRootElement.appendChild(getPersonal(doc, personal1, 1));
+            mainRootElement.appendChild(getMedical(doc, medical1, 1));
+            mainRootElement.appendChild(getExerciseProfile(doc, exerciseProfile1, 1));
 
             // Output DOM XML to xml file 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -159,9 +169,46 @@ public class XMLGenerator {
         personalComponent.appendChild(getJobElements(doc, personalComponent, "city", personalObject.getCity()));
         personalComponent.appendChild(getJobElements(doc, personalComponent, "state", personalObject.getState()));
         personalComponent.appendChild(getJobElements(doc, personalComponent, "email", personalObject.getEmail()));
-        //personalComponent.appendChild(getJobElements(doc, personalComponent, "age", Integer.toString(personalObject.getAge())));
         personalComponent.appendChild(getJobElements(doc, personalComponent, "sex", personalObject.getSex()));
         return personalComponent;
+    }
+    
+    public Node getMedical(Document doc, Medical medicalObject, int id) {
+        Element medicalComponent = doc.createElement("MedicalComponent");
+        // Top level attributes
+        medicalComponent.setAttribute("id", Integer.toString(id));
+
+        // Medical subelements
+	medicalComponent.appendChild(getJobElements(doc, medicalComponent, "weight", medicalObject.getWeight()));
+        medicalComponent.appendChild(getJobElements(doc, medicalComponent, "height", medicalObject.getHeight()));
+        String listString_Disease = "";
+        for (Disease d : medicalObject.diseaseList)
+        {
+            listString_Disease += d.toString() + "; ";
+        }
+        medicalComponent.appendChild(getJobElements(doc, medicalComponent, "disease", listString_Disease));
+        String listString_Allergy = "";
+        for (Allergy a : medicalObject.allergyList)
+        {
+            listString_Allergy += a.toString() + "; ";
+        }
+        medicalComponent.appendChild(getJobElements(doc, medicalComponent, "allergy", listString_Allergy));
+        return medicalComponent;
+    }
+    
+    public Node getExerciseProfile(Document doc, ExerciseProfile exerciseObject, int id) {
+        Element exerciseComponent = doc.createElement("ExerciseComponent");
+        // Top level attributes
+        exerciseComponent.setAttribute("id", Integer.toString(id));
+
+        // Exercise Equipment subelements
+        String listString_Equipment = "";
+        for (Equipment e : exerciseObject.equipmentList)
+        {
+            listString_Equipment += e.toString() + "; ";
+        }
+	exerciseComponent.appendChild(getJobElements(doc, exerciseComponent, "exercise", listString_Equipment));
+        return exerciseComponent;
     }
 
     // utility method to create text node
