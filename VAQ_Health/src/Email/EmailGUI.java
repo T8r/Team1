@@ -19,13 +19,14 @@ public class EmailGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         jEmailModel model = new jEmailModel();
-        model.setHost("smtp.mail.gmail.com");
-        model.setPassword("");
+        model.setHost("smtp.gmail.com");
+        model.setPassword("utrgvcssw");
         model.setPort("465");
         model.setSubject("Sending File");
         model.setToAddress("");
-        model.setUserName("");
+        model.setUserName("softwareengineeringutrgv@gmail.com");
         model.setMessage("File sent.");
+        model.setFile("bla.txt");
         jEmailView root = new jEmailView();
         jEmailController controller = new jEmailController(root, model);
         //this information ought to be gleaned from outside the program

@@ -28,7 +28,7 @@ import javax.mail.internet.MimeMultipart;
  * @author JacobS
  */
 public class jEmailModel {
-    private File file;
+    private String file;
     private String host;
     private String port;
     private String userName;
@@ -45,6 +45,7 @@ public class jEmailModel {
         this.toAddress = "";
         this.subject = "";
         this.message = "";
+        this.file="";
     };
     
     jEmailModel(String host, String port, String userName
@@ -57,10 +58,11 @@ public class jEmailModel {
         this.toAddress = toAddress;
         this.subject = subject;
         this.message = message;
+        this.file="";
     }
     
 
-    public File getFile() {
+    public String getFile() {
         return file;
     }
 
@@ -92,7 +94,7 @@ public class jEmailModel {
         return message;
     }
 
-    public void setFile(File file) {
+    public void setFile(String file) {
         this.file = file;
     }
 
@@ -128,6 +130,8 @@ public class jEmailModel {
     public void sendEmail()
             throws AddressException, MessagingException
     {
+        
+        
         String SSL_FACTORY="javax.net.ssl.SSLSocketFactory";
         Properties prop = System.getProperties();
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
@@ -152,12 +156,21 @@ public class jEmailModel {
             }
         };
         Session session = Session.getInstance(prop, auth);
-        
+
         Message msg = new MimeMessage(session);
-        
+
         msg.setFrom(new InternetAddress(userName));
-        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(toAddress));
-        
+        InternetAddress[] toAddresses = {new InternetAddress(toAddress)};
+        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+
+        String[] ccEmails ={};
+        int ccLength=0;
+        if (ccEmails != null) {
+                ccLength = ccEmails.length;
+        }
+        for (int i = 0; i < ccLength; i++) {
+                msg.addRecipients(Message.RecipientType.CC, InternetAddress.parse(ccEmails[i], false));
+          }
         msg.setSubject(subject);
         msg.setSentDate(new Date());
         
@@ -166,26 +179,10 @@ public class jEmailModel {
         
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(msgBPart);
-        /*
-        if(attachFile != null && attachFile.length()>0)
-        {
-            for(String filePath : attachFile)
-            {
-                MimeBodyPart attachPart = new MimeBodypart();
-                try{
-                    attachPart.attachFile(filePath);
-                }catch(IOException ex){
-                
-                }
-                multipart.addBodyPart(attachPart);
-            }
-            
-        }*/
-        
         
         MimeBodyPart attachPart = new MimeBodyPart();
         try{
-            attachPart.attachFile(file);
+            attachPart.attachFile(file.toString());
         }catch(IOException ex){
             
         }

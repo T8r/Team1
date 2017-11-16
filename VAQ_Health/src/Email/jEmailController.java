@@ -44,8 +44,8 @@ public class jEmailController {
                 Stage stage = new Stage();
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Select Attachment File");
-                model.setFile(fileChooser.showOpenDialog(stage));
-                view.getFileL().setText(model.getFile().getPath());
+                model.setFile(fileChooser.showOpenDialog(stage).getPath());
+                view.getFileL().setText(model.getFile());
             }
         });
         view.getSendBtn().setOnAction(new EventHandler<ActionEvent>()
