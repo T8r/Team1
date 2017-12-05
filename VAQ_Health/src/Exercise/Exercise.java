@@ -6,6 +6,7 @@
 package Exercise;
 
 import Exercise.Equipment.Equipment;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -14,26 +15,125 @@ import Exercise.Equipment.Equipment;
 
 
 public class Exercise {
+
+    /**
+     * @return the image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the difficulty
+     */
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    /**
+     * @param difficulty the difficulty to set
+     */
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
     
-      public enum ExerciseTypeE {
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the type
+     */
+    public ExerciseTypeE getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(ExerciseTypeE type) {
+        this.type = type;
+    }
+
+    /**
+     * @return the equipment
+     */
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    /**
+     * @param equipment the equipment to set
+     */
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
+    }
+
+    /**
+     * @return the met
+     */
+    public int getMet() {
+        return met;
+    }
+
+    /**
+     * @param met the met to set
+     */
+    public void setMet(int met) {
+        this.met = met;
+    }
+    
+    public enum ExerciseTypeE {
         CARDIO,
         BALANCE,
         FLEXIBILITY,
         STRENGTH
     }
       
-    public String name;
-    public String difficulty;
-    public String workOutTime;
-    public String description;
-    public ExerciseTypeE type;
-    public Equipment equipment;
-    public int met;
+    private String name;
+    private String difficulty;
+    private String description;
+    private Image image;
+    private ExerciseTypeE type;
+    private Equipment equipment;
+    private int met;
     
     @Override
     public String toString()
     {
-        return name;
+        return getName();
     }
   
     
@@ -43,9 +143,7 @@ public class Exercise {
         if (hrs < 1)
             return met * weightKG*hrs;
         else
-            return met * weightKG/hrs;
-
-        
+            return met * weightKG/hrs;       
     }
     
     public double PoundsToKG(double lb)

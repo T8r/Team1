@@ -8,10 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="VAQ_Health.jar" size="305145" download="eager" />
+    <jar href="VAQ_Health.jar" size="342075" download="eager" />
     <jar href="lib\controlsfx-8.40.14.jar" size="1215643" download="eager" />
     <jar href="lib\core-renderer.jar" size="1079323" download="eager" />
     <jar href="lib\iText-2.0.8.jar" size="1213150" download="eager" />
+    <jar href="lib\javax.mail.jar" size="608084" download="eager" />
     <jar href="lib\jfoenix.jar" size="2384520" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
   </resources>

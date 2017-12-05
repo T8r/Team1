@@ -10,7 +10,7 @@ import Disease.Disease;
 import Exercise.Equipment.Equipment;
 import Exercise.Exercise;
 import Profile.Allergies.Allergy;
-import Profile.ProfileController;
+import TabManager.TabManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
 import vaq_health.VAQ_Health;
 
@@ -38,19 +39,20 @@ public class ExerciseProfileController implements Initializable {
     @FXML
     CheckListView equipmentCCB;
     @FXML
+    CheckComboBox exerciseTypeCCB;
+    @FXML
     ImageView equipmentIV;
-    
-    Image bicycleImage = new Image("/Equipment/bike.jpg");
-    Image weightImage = new Image("/Equipment/weight.jpg");
-    Image jumpRopeImage = new Image("/Equipment/jumpRope.png");
-    ProfileController profileController = new ProfileController();
     ArrayList<Equipment> equipmentList;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-         equipmentList = DatabaseManager.GetEquipmentList();
-
+        equipmentList = DatabaseManager.GetEquipmentList();
+        exerciseTypeCCB.getItems().add(Exercise.ExerciseTypeE.BALANCE.toString());
+        exerciseTypeCCB.getItems().add(Exercise.ExerciseTypeE.CARDIO.toString());
+        exerciseTypeCCB.getItems().add(Exercise.ExerciseTypeE.FLEXIBILITY.toString());
+        exerciseTypeCCB.getItems().add(Exercise.ExerciseTypeE.STRENGTH.toString());
+        
         for (Equipment equipment : equipmentList) {         
             equipmentCCB.getItems().add(equipment);
         }
@@ -58,14 +60,7 @@ public class ExerciseProfileController implements Initializable {
         equipmentCCB.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Equipment>() {
              @Override
              public void changed(ObservableValue<? extends Equipment> observable, Equipment oldValue, Equipment equipment) {
-                 if (equipment.getName().equals("Bicycle"))
-                {
-                    equipmentIV.setImage(bicycleImage);
-                }
-                else if (equipment.getName().equals("Jump Rope"))
-                    equipmentIV.setImage(jumpRopeImage);
-                else
-                    equipmentIV.setImage(weightImage);
+                 equipmentIV.setImage(equipment.getImage());
              }
            
         });   
@@ -103,22 +98,22 @@ public class ExerciseProfileController implements Initializable {
      @FXML
     public void OpenPersonal() throws IOException
     {
-        profileController.OpenPersonal();
+        TabManager.getInstance().OpenProfilePersonal();
     }
     @FXML
     public void OpenHome() throws IOException
     {
-        profileController.OpenHome();
+        TabManager.getInstance().OpenHome();
     }
     @FXML
     public void OpenMedical() throws IOException
     {
-        profileController.OpenMedical();
+        TabManager.getInstance().OpenProfileMedical();
     }
     @FXML
     public void OpenProfileExport() throws IOException
     {
-        profileController.OpenProfileExport();
+        TabManager.getInstance().OpenProfileExport();
     }
     
     

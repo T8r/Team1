@@ -5,8 +5,13 @@
  */
 package vaq_health;
 
+import Database.DatabaseManager;
 import Profile.Profile;
+import Routine.ExerciseRoutine;
+import Routine.WeeklyRoutine;
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.function.Consumer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,17 +31,16 @@ public class VAQ_Health extends Application {
    static public Profile profile = new Profile();
    
    
+   
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/SignIn/SignIn.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Login/Login.fxml"));
             
         Scene scene = new Scene(root);
         stage.setScene(scene);
         mainScene = scene;
         stage.show();
         mainStage = stage;
-       
-        
     }
 
     /**

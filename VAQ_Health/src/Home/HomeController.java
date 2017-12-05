@@ -5,7 +5,7 @@
  */
 package Home;
 
-import Profile.ProfileController;
+import TabManager.TabManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +22,6 @@ public class HomeController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    ProfileController profileController = new ProfileController();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -31,24 +30,24 @@ public class HomeController implements Initializable {
     @FXML
     public void OpenProfile() throws IOException
     {
-        profileController.OpenPersonal();
+        TabManager.getInstance().OpenProfilePersonal();
     }
     
     @FXML
     public void OpenExercise() throws IOException
     {
-        profileController.OpenExerciseHome();
+         TabManager.getInstance().OpenExerciseHome();
     }
     @FXML
     private void OpenRoutine() throws IOException
     {
-        profileController.OpenRoutine();
+         TabManager.getInstance().OpenRoutineHome();
     }
     
     @FXML
-    private void OpenSignIn() throws IOException
+    private void Logout() throws IOException
     {
-         profileController.OpenSignIn();
+          TabManager.getInstance().OpenLogin();
     }
     
 }

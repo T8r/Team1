@@ -26,7 +26,7 @@
                   <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
                   <AnchorPane layoutY="84.0" prefHeight="516.0" prefWidth="106.0" style="-fx-background-color: gray;" stylesheets="@../Profile/Header.css">
                      <children>
-                        <JFXButton buttonType="RAISED" layoutY="44.0" onMouseClicked="#OpenExercise" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Exercises" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutY="44.0" onMouseClicked="#OpenExercise" prefHeight="48.0" prefWidth="149.0" styleClass="Header" stylesheets="@../Profile/Header.css" text="Exercise List" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -41,7 +41,7 @@
                               <Image url="@../Rockin%20R%20Initials-White.png" />
                            </image>
                         </ImageView>
-                        <JFXButton buttonType="RAISED" layoutY="321.0" onMouseClicked="#OpenSignIn" prefHeight="48.0" prefWidth="149.0" style="-fx-background-color: red;" stylesheets="@../Profile/Header.css" text="Logout" textFill="WHITE">
+                        <JFXButton buttonType="RAISED" layoutY="321.0" onMouseClicked="#Logout" prefHeight="48.0" prefWidth="149.0" style="-fx-background-color: red;" stylesheets="@../Profile/Header.css" text="Logout" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>

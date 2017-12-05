@@ -5,7 +5,7 @@
  */
 package Exercise;
 
-import Profile.ProfileController;
+import TabManager.TabManager;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -32,6 +32,7 @@ import javafx.scene.image.ImageView;
 import Database.DatabaseManager;
 import Exercise.Equipment.Equipment;
 import Exercise.Exercise.ExerciseTypeE;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -66,6 +67,8 @@ public class ExerciseController implements Initializable {
     CheckComboBox exerciseEquipCCB;
     @FXML
     CheckComboBox exerciseTypeCCB;
+    @FXML
+    TextArea searchBar;
 
     Exercise selectedExercise;
     Image balanceImage = new Image("balance.png");
@@ -79,7 +82,7 @@ public class ExerciseController implements Initializable {
     Connection myConnection;
     Statement myStmt;
     ResultSet myRs;
-    ProfileController profileController = new ProfileController();
+    TabManager profileController = new TabManager();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,11 +92,11 @@ public class ExerciseController implements Initializable {
         exerciseTypeCCB.getItems().add(ExerciseTypeE.CARDIO.toString());
         exerciseTypeCCB.getItems().add(ExerciseTypeE.FLEXIBILITY.toString());
         exerciseTypeCCB.getItems().add(ExerciseTypeE.STRENGTH.toString());
-        
+        exerciseTypeCCB.getCheckModel().checkAll();
         exerciseList = DatabaseManager.GetExerciseTable();
         
         if (exerciseList.size() > 0) {
-            System.out.println(exerciseList.get(0).name);
+            System.out.println(exerciseList.get(0).getName());
         }
 
         ArrayList<Equipment> equipList = DatabaseManager.GetEquipmentList();
@@ -106,10 +109,10 @@ public class ExerciseController implements Initializable {
          if (exerciseList.size() > 0)
         {
             exerciseLV.getSelectionModel().clearAndSelect(0);                   
-            nameLabel.setText(exerciseList.get(0).name);
-            discriptionTA.setText(exerciseList.get(0).description);
-            metL.setText(String.valueOf(exerciseList.get(0).met));
-                switch (exerciseList.get(0).type) {
+            nameLabel.setText(exerciseList.get(0).getName());
+            discriptionTA.setText(exerciseList.get(0).getDescription());
+            metL.setText(String.valueOf(exerciseList.get(0).getMet()));
+                switch (exerciseList.get(0).getType()) {
                     case CARDIO:
                         typeImageV.setImage(cardioImage);
                         break;
@@ -122,6 +125,14 @@ public class ExerciseController implements Initializable {
                     case FLEXIBILITY:
                         typeImageV.setImage(flexibilityImage);
                 }
+                
+               searchBar.textProperty().addListener(new ChangeListener<String>() {
+               
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                   search(oldValue,newValue);
+                }
+            });
             
         }
         
@@ -144,10 +155,10 @@ public class ExerciseController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Exercise> observable, Exercise oldValue, Exercise newValue) {
                 selectedExercise = newValue;
-                nameLabel.setText(selectedExercise.name);
-                discriptionTA.setText(selectedExercise.description);
-                metL.setText(String.valueOf(selectedExercise.met));
-                switch (selectedExercise.type) {
+                nameLabel.setText(selectedExercise.getName());
+                discriptionTA.setText(selectedExercise.getDescription());
+                metL.setText(String.valueOf(selectedExercise.getMet()));
+                switch (selectedExercise.getType()) {
                     case CARDIO:
                         typeImageV.setImage(cardioImage);
                         break;
@@ -166,22 +177,32 @@ public class ExerciseController implements Initializable {
         });
 
         exerciseEquipCCB.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
-
             @Override
             public void onChanged(ListChangeListener.Change<? extends String> c) {
-                System.out.println("test");
                 UpdateExerciseList();
             }
         });
+        
+        exerciseTypeCCB.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends String> c) {
+                UpdateExerciseList();
+            }
+        });
+        
 
     }
 
     private void UpdateExerciseList() {
         ObservableList<Equipment> equipL = exerciseEquipCCB.getCheckModel().getCheckedItems();
+        ObservableList<ExerciseTypeE> exerciseTypeList = exerciseTypeCCB.getCheckModel().getCheckedItems();
         ArrayList<Exercise> filterdList = new ArrayList();
         for (int i = 0; i < exerciseList.size(); i++) {
-            if (!exerciseList.get(i).equipment.getName().equals("0") && !equipL.contains(exerciseList.get(i).equipment)) {
-              System.out.println("User doesnt have equipment");
+            if (exerciseList.get(i).getEquipment() != null 
+                    && (!equipL.contains(exerciseList.get(i).getEquipment())
+                    || !exerciseTypeList.contains(exerciseList.get(i).getType().toString()))) {
+              System.out.println("User doesnt have equipment: " + exerciseList.get(i).getEquipment().toString());
+              System.out.println("User doesnt want exerciseType : " + exerciseList.get(i).getType().toString());
             }
             else
                 filterdList.add(exerciseList.get(i));
@@ -212,11 +233,31 @@ public class ExerciseController implements Initializable {
                 break;
         }
         t /= 60;
-        double caloriesBurned = Exercise.CaloriesBurned(selectedExercise.met, t, 70);
+        double caloriesBurned = Exercise.CaloriesBurned(selectedExercise.getMet(), t, 70);
         DecimalFormat dec = new DecimalFormat("#0.00");
 
         caloriesL.setText(dec.format(caloriesBurned));
     }
+    
+    
+    public void search(String oldVal, String newVal) {
+    String value = newVal.toLowerCase();
+    ObservableList<Equipment> equipL = exerciseEquipCCB.getCheckModel().getCheckedItems();
+    ObservableList<ExerciseTypeE> exerciseTypeList = exerciseTypeCCB.getCheckModel().getCheckedItems();
+    ObservableList<Exercise> subentries = FXCollections.observableArrayList();
+        for (Iterator it = exerciseList.iterator(); it.hasNext();) {
+            Exercise entry = (Exercise) it.next();
+            if (entry.getName().toLowerCase().startsWith(value) 
+                    && entry.getEquipment() != null && equipL.contains(entry.getEquipment())
+                    && exerciseTypeList.contains(entry.getType().toString())
+                    ) {
+                 subentries.add(entry);
+            }            
+        }
+    exerciseLV.getItems().clear();
+    exerciseLV.setItems(subentries);
+    
+  }
 
     public void DisplayExercise(Exercise exercise) {
         SetCalories();

@@ -5,8 +5,11 @@
  */
 package Profile.Export;
 
-import Profile.Converter.Converter;
-import Profile.ProfileController;
+import Email.jEmailController;
+import Email.jEmailModel;
+import Email.jEmailView;
+import Profile.Converter.SaveProfile;
+import TabManager.TabManager;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -47,15 +50,28 @@ public class ExportController implements Initializable {
     AnchorPane xmlBackgroundAP;
     @FXML
     TextArea folderTA; 
+    @FXML
+    AnchorPane emailPane;
     
     String directoryPath;
-    ProfileController profileController = new ProfileController();
+    TabManager profileController = new TabManager();
     boolean pdfClicked,htmlClicked,xmlClicked;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        jEmailModel model = new jEmailModel();
+        model.setHost("smtp.gmail.com");
+        model.setPassword("utrgvcssw");
+        model.setPort("465");
+        model.setSubject("Sending File");
+        model.setToAddress("");
+        model.setUserName("softwareengineeringutrgv@gmail.com");
+        model.setMessage("File sent.");
+        model.setFile("bla.txt");
+        jEmailView root = new jEmailView();
+        jEmailController controller = new jEmailController(root, model);
+        emailPane.getChildren().add(root);
     }
 
     @FXML
@@ -118,11 +134,11 @@ public class ExportController implements Initializable {
             return;
         }
         if (pdfClicked)
-            Converter.PDF(directoryPath);
+            SaveProfile.PDF(directoryPath);
         if (htmlClicked)
-            Converter.HTML(directoryPath);
+            SaveProfile.HTML(directoryPath);
         if (xmlClicked)
-            Converter.XML(directoryPath);
+            SaveProfile.XML(directoryPath);
     }
 
     @FXML
@@ -132,12 +148,12 @@ public class ExportController implements Initializable {
       @FXML
     public void OpenPersonal() throws IOException
     {
-        profileController.OpenPersonal();
+        profileController.OpenProfilePersonal();
     }
     @FXML
     public void OpenMedical() throws IOException
     {
-        profileController.OpenMedical();
+        profileController.OpenProfileMedical();
     }
     @FXML
     public void OpenExercise() throws IOException

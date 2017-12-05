@@ -6,7 +6,7 @@
 package Profile.Allergies;
 
 import vaq_health.*;
-import Profile.ProfileController;
+import TabManager.TabManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,7 +56,7 @@ public class AllergiesController implements Initializable {
     @FXML
     CheckBox fructans = new CheckBox();;
     
-    ProfileController profileController = new ProfileController();
+    TabManager profileController = new TabManager();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -66,7 +66,7 @@ public class AllergiesController implements Initializable {
     @FXML
     public void OpenMedical() throws IOException
     {
-        profileController.OpenMedical();
+        profileController.OpenProfileMedical();
     }
     @FXML
     public void OpenHome() throws IOException
@@ -76,7 +76,7 @@ public class AllergiesController implements Initializable {
     @FXML
     public void OpenPersonal() throws IOException
     {
-         profileController.OpenPersonal();
+         profileController.OpenProfilePersonal();
     }
     
     //@FXML

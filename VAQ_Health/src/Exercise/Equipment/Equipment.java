@@ -6,6 +6,7 @@
 package Exercise.Equipment;
 
 import Exercise.Exercise.ExerciseTypeE;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -13,6 +14,67 @@ import Exercise.Exercise.ExerciseTypeE;
  */
 public class Equipment {
 
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return the image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the primaryMuscle
+     */
+    public String getPrimaryMuscle() {
+        return primaryMuscle;
+    }
+
+    /**
+     * @param primaryMuscle the primaryMuscle to set
+     */
+    public void setPrimaryMuscle(String primaryMuscle) {
+        this.primaryMuscle = primaryMuscle;
+    }
+
+    /**
+     * @return the secondaryMuscle
+     */
+    public String getSecondaryMuscle() {
+        return secondaryMuscle;
+    }
+
+    /**
+     * @param secondaryMuscle the secondaryMuscle to set
+     */
+    public void setSecondaryMuscle(String secondaryMuscle) {
+        this.secondaryMuscle = secondaryMuscle;
+    }
+
+    public Equipment() {
+    }
+
+
+    
  
 
     /**
@@ -45,6 +107,11 @@ public class Equipment {
     
     private String name;
     private ExerciseTypeE type;
+    private String description;
+    private Image image;
+    private String primaryMuscle;
+    private String secondaryMuscle;
+    
     
     public Equipment(String n,ExerciseTypeE e)
     {

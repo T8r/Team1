@@ -7,7 +7,7 @@ package ExerciseHome;
 
 import Database.DatabaseManager;
 import Exercise.Exercise;
-import Profile.ProfileController;
+import TabManager.TabManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class ExerciseHomeController implements Initializable {
     @FXML
     CheckListView exerciseCCB;
     ArrayList<Exercise> exerciseList = new ArrayList();
-    ProfileController profileController = new ProfileController();
+    TabManager profileController = new TabManager();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          exerciseList = DatabaseManager.GetExerciseTable();
@@ -53,7 +53,7 @@ public class ExerciseHomeController implements Initializable {
     @FXML
     public void OpenRoutine() throws IOException
     {
-         profileController.OpenRoutine();
+         profileController.OpenRoutineHome();
     }
     
 }

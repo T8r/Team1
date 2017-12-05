@@ -20,7 +20,7 @@ public class jEmailController {
     private jEmailModel model = new jEmailModel();
 
     
-    jEmailController(jEmailView view, jEmailModel model)
+    public jEmailController(jEmailView view, jEmailModel model)
     {
         this.view = view;
         this.model = model;

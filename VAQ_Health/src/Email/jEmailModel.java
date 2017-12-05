@@ -37,7 +37,7 @@ public class jEmailModel {
     private String subject;
     private String message;
     
-    jEmailModel(){
+    public jEmailModel(){
         this.host = "";
         this.port = "";
         this.userName = "";
@@ -60,6 +60,8 @@ public class jEmailModel {
         this.message = message;
         this.file="";
     }
+
+  
     
 
     public String getFile() {
