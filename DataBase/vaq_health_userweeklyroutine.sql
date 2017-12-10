@@ -16,27 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `exercisetype`
+-- Table structure for table `userweeklyroutine`
 --
 
-DROP TABLE IF EXISTS `exercisetype`;
+DROP TABLE IF EXISTS `userweeklyroutine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `exercisetype` (
-  `ID` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+CREATE TABLE `userweeklyroutine` (
+  `userID` int(11) NOT NULL,
+  `weeklyRoutineID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`userID`),
+  KEY `weeklyRoutineFK_idx` (`weeklyRoutineID`),
+  CONSTRAINT `uwrUserFK` FOREIGN KEY (`userID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `weeklyRoutineFK` FOREIGN KEY (`weeklyRoutineID`) REFERENCES `weeklyroutine` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exercisetype`
+-- Dumping data for table `userweeklyroutine`
 --
 
-LOCK TABLES `exercisetype` WRITE;
-/*!40000 ALTER TABLE `exercisetype` DISABLE KEYS */;
-INSERT INTO `exercisetype` VALUES (1,'CARDIO');
-/*!40000 ALTER TABLE `exercisetype` ENABLE KEYS */;
+LOCK TABLES `userweeklyroutine` WRITE;
+/*!40000 ALTER TABLE `userweeklyroutine` DISABLE KEYS */;
+INSERT INTO `userweeklyroutine` VALUES (1,1);
+/*!40000 ALTER TABLE `userweeklyroutine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-10 12:35:46
+-- Dump completed on 2017-12-10 12:35:47

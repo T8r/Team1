@@ -16,27 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `exercisetype`
+-- Table structure for table `food_groups`
 --
 
-DROP TABLE IF EXISTS `exercisetype`;
+DROP TABLE IF EXISTS `food_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `exercisetype` (
-  `ID` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `food_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `cssid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exercisetype`
+-- Dumping data for table `food_groups`
 --
 
-LOCK TABLES `exercisetype` WRITE;
-/*!40000 ALTER TABLE `exercisetype` DISABLE KEYS */;
-INSERT INTO `exercisetype` VALUES (1,'CARDIO');
-/*!40000 ALTER TABLE `exercisetype` ENABLE KEYS */;
+LOCK TABLES `food_groups` WRITE;
+/*!40000 ALTER TABLE `food_groups` DISABLE KEYS */;
+INSERT INTO `food_groups` VALUES (1,'Vegetables, salads, fruits','vegetables_category'),(2,'Wholemeal cereals and breads','wholemeal_category'),(3,'Milk, yogurt and cheese','dairy_category'),(4,'Meat, poultry, fish, eggs','meat_category'),(5,'Fats, spreads and oils','oils_category'),(6,'Foods and drinks high in fat','junk_category');
+/*!40000 ALTER TABLE `food_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-10 12:35:46
+-- Dump completed on 2017-12-10 12:35:42

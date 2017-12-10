@@ -16,27 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `exercisetype`
+-- Table structure for table `exerciseroutine`
 --
 
-DROP TABLE IF EXISTS `exercisetype`;
+DROP TABLE IF EXISTS `exerciseroutine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `exercisetype` (
+CREATE TABLE `exerciseroutine` (
   `ID` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `ExerciseID` int(11) DEFAULT NULL,
+  `workOutTime` double DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `erExerciseFK_idx` (`ExerciseID`),
+  CONSTRAINT `erExerciseFK` FOREIGN KEY (`ExerciseID`) REFERENCES `exercise` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exercisetype`
+-- Dumping data for table `exerciseroutine`
 --
 
-LOCK TABLES `exercisetype` WRITE;
-/*!40000 ALTER TABLE `exercisetype` DISABLE KEYS */;
-INSERT INTO `exercisetype` VALUES (1,'CARDIO');
-/*!40000 ALTER TABLE `exercisetype` ENABLE KEYS */;
+LOCK TABLES `exerciseroutine` WRITE;
+/*!40000 ALTER TABLE `exerciseroutine` DISABLE KEYS */;
+INSERT INTO `exerciseroutine` VALUES (1,1,60),(2,2,2),(3,11,30);
+/*!40000 ALTER TABLE `exerciseroutine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-10 12:35:46
+-- Dump completed on 2017-12-10 12:35:45

@@ -24,8 +24,11 @@ DROP TABLE IF EXISTS `userequipment`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userequipment` (
   `userID` int(11) NOT NULL,
-  `equipmentID` varchar(45) NOT NULL,
-  PRIMARY KEY (`userID`,`equipmentID`)
+  `equipmentID` int(11) NOT NULL,
+  PRIMARY KEY (`userID`,`equipmentID`),
+  KEY `ueEqupimentFK_idx` (`equipmentID`),
+  CONSTRAINT `ueEquipmentFK` FOREIGN KEY (`equipmentID`) REFERENCES `equipment` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `ueUserFK` FOREIGN KEY (`userID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -35,7 +38,7 @@ CREATE TABLE `userequipment` (
 
 LOCK TABLES `userequipment` WRITE;
 /*!40000 ALTER TABLE `userequipment` DISABLE KEYS */;
-INSERT INTO `userequipment` VALUES (1,'1'),(1,'4');
+INSERT INTO `userequipment` VALUES (1,1),(1,4);
 /*!40000 ALTER TABLE `userequipment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-15 13:49:00
+-- Dump completed on 2017-12-10 12:35:47

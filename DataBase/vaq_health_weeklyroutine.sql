@@ -16,29 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `badfoodfordisease`
+-- Table structure for table `weeklyroutine`
 --
 
-DROP TABLE IF EXISTS `badfoodfordisease`;
+DROP TABLE IF EXISTS `weeklyroutine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `badfoodfordisease` (
-  `diseaseID` int(11) NOT NULL,
-  `foodCatID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`diseaseID`),
-  KEY `foodCatID1_idx` (`foodCatID`),
-  CONSTRAINT `diseaseID2` FOREIGN KEY (`diseaseID`) REFERENCES `disease` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `foodCatID2` FOREIGN KEY (`foodCatID`) REFERENCES `foodcat` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `weeklyroutine` (
+  `ID` int(11) NOT NULL,
+  `ExerciseRoutineID` int(11) NOT NULL,
+  `workOutDay` varchar(45) NOT NULL,
+  `seqNum` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ID`,`ExerciseRoutineID`,`seqNum`,`workOutDay`),
+  KEY `ExerciseRoutineFK_idx` (`ExerciseRoutineID`),
+  CONSTRAINT `ExerciseRoutineFK` FOREIGN KEY (`ExerciseRoutineID`) REFERENCES `exerciseroutine` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `badfoodfordisease`
+-- Dumping data for table `weeklyroutine`
 --
 
-LOCK TABLES `badfoodfordisease` WRITE;
-/*!40000 ALTER TABLE `badfoodfordisease` DISABLE KEYS */;
-/*!40000 ALTER TABLE `badfoodfordisease` ENABLE KEYS */;
+LOCK TABLES `weeklyroutine` WRITE;
+/*!40000 ALTER TABLE `weeklyroutine` DISABLE KEYS */;
+INSERT INTO `weeklyroutine` VALUES (1,1,'Friday',1,'Routine1'),(1,1,'Monday',1,'Routine1'),(1,1,'Saturday',1,'Routine1'),(1,1,'Sunday',1,'Routine1'),(1,1,'Thursday',1,'Routine1'),(1,1,'Wednesday',1,'Routine1'),(1,2,'Tuesday',1,'Routine1'),(1,2,'Monday',2,'Routine1'),(1,3,'Monday',3,'Routine1'),(1,3,'Monday',4,'Routine1');
+/*!40000 ALTER TABLE `weeklyroutine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-15 13:49:00
+-- Dump completed on 2017-12-10 12:35:45

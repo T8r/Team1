@@ -24,8 +24,9 @@ DROP TABLE IF EXISTS `medical`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `medical` (
   `userID` int(11) NOT NULL,
-  `height` int(11) DEFAULT NULL,
+  `heightFt` int(11) DEFAULT NULL,
   `weight` int(11) DEFAULT NULL,
+  `heightInches` int(11) DEFAULT NULL,
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +37,7 @@ CREATE TABLE `medical` (
 
 LOCK TABLES `medical` WRITE;
 /*!40000 ALTER TABLE `medical` DISABLE KEYS */;
-INSERT INTO `medical` VALUES (1,20,20);
+INSERT INTO `medical` VALUES (1,6,140,10);
 /*!40000 ALTER TABLE `medical` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-15 13:49:00
+-- Dump completed on 2017-12-10 12:35:43
