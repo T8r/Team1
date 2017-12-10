@@ -2,42 +2,42 @@
 <Profile>
      <ProfileInformation>
      <PersonalComponent id="1">
-          <firstname>Joe</firstname>
-          <lastname>G</lastname>
-          <address>VV.</address>
+          <firstname>Stephen</firstname>
+          <lastname>Izquierdo</lastname>
+          <address>1234 ad street</address>
           <city>Harlingen</city>
-          <state>TX</state>
+          <state>Alabama</state>
           <email>hur@gmail.com</email>
-          <sex>M</sex>
+          <sex>Male</sex>
      </PersonalComponent>
      <MedicalComponent id="1">
-          <weight>20</weight>
-          <height>20</height>
+          <weight>140</weight>
+          <height>6</height>
           <disease>Celiac; </disease>
           <allergy>Night Shades; </allergy>
      </MedicalComponent>
      <ExerciseComponent id="1">
-          <exercise>Bicycle; Jump Rope; </exercise>
+          <exercise>Running Machine; Eliptical Machine; </exercise>
      </ExerciseComponent>
 </ProfileInformation>
      <ProfileInformation>
      <PersonalComponent id="1">
-          <firstname>Joe</firstname>
-          <lastname>G</lastname>
-          <address>VV.</address>
+          <firstname>Stephen</firstname>
+          <lastname>Izquierdo</lastname>
+          <address>1234 ad street</address>
           <city>Harlingen</city>
-          <state>TX</state>
+          <state>Alabama</state>
           <email>hur@gmail.com</email>
-          <sex>M</sex>
+          <sex>Male</sex>
      </PersonalComponent>
      <MedicalComponent id="1">
-          <weight>20</weight>
-          <height>20</height>
+          <weight>140</weight>
+          <height>6</height>
           <disease>Celiac; </disease>
           <allergy>Night Shades; </allergy>
      </MedicalComponent>
      <ExerciseComponent id="1">
-          <exercise>Bicycle; Jump Rope; </exercise>
+          <exercise>Running Machine; Eliptical Machine; </exercise>
      </ExerciseComponent>
 </ProfileInformation>
 </Profile>

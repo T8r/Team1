@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import vaq_health.VAQ_Health;
 
 /**
@@ -35,6 +36,8 @@ public class RoutineManagerController implements Initializable {
     private ComboBox routineCB;
     @FXML
     private Button saveButton;
+    @FXML
+    private Label promptL;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -48,6 +51,7 @@ public class RoutineManagerController implements Initializable {
             @Override
             public void handle(Event event) {
                 VAQ_Health.profile.currentWeeklyRoutine = (WeeklyRoutine) routineCB.getSelectionModel().getSelectedItem();
+                promptL.setText("Updated");
             }
         });
     }    

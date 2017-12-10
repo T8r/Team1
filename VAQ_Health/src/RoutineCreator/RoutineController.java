@@ -26,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
@@ -72,6 +73,9 @@ public class RoutineController implements Initializable {
     AnchorPane pieChartPane;
     @FXML 
     TextArea searchBar;
+    @FXML
+    private Label promptL;
+    private final int MAX_ROUTINES = 15;
 
     ListView currentDayLV;
     String currentDay = "Monday";
@@ -90,7 +94,7 @@ public class RoutineController implements Initializable {
 
         ImageView imageCopyV = new ImageView();
         imageCopyV.setImage(imageV.getImage());
-        exerciseList = DatabaseManager.GetExerciseTable();
+        exerciseList = DatabaseManager.GetExerciseList();
         for (Exercise exercise : exerciseList) {
             exerciseLV.getItems().add(exercise);
         }
@@ -108,7 +112,7 @@ public class RoutineController implements Initializable {
 
         });
         
-        routinePieChart = new RoutinePieChart(VAQ_Health.profile.currentWeeklyRoutine.friday,10,10);
+        routinePieChart = new RoutinePieChart(VAQ_Health.profile.currentWeeklyRoutine.monday,300,300);
         pieChartPane.setMaxSize(20,20);
         pieChartPane.getChildren().add(routinePieChart);
         searchBar.textProperty().addListener(new ChangeListener<String>() {
@@ -145,6 +149,11 @@ public class RoutineController implements Initializable {
         if (exerciseLV.getSelectionModel().isEmpty()) {
             return;
         }
+        if (currentDayLV.getItems().size() > MAX_ROUTINES)
+        {
+            promptL.setText("Limit Reached");
+            return;
+        }
         ExerciseRoutine exerciseRoutine;
         exerciseRoutine = new ExerciseRoutine((Exercise)exerciseLV.getSelectionModel().getSelectedItem(),60.0);
         currentDayLV.getItems().add(exerciseRoutine);
@@ -156,6 +165,11 @@ public class RoutineController implements Initializable {
     private void RemoveExercise() {
 
         if (currentDayLV.getSelectionModel().isEmpty()) {
+            return;
+        }
+        if (currentDayLV.getItems().size() <= MAX_ROUTINES)
+        {
+            promptL.setText("");
             return;
         }
         currentDayLV.getItems().remove(currentDayLV.getSelectionModel().getSelectedIndex());

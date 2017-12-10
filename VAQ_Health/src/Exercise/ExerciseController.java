@@ -93,7 +93,7 @@ public class ExerciseController implements Initializable {
         exerciseTypeCCB.getItems().add(ExerciseTypeE.FLEXIBILITY.toString());
         exerciseTypeCCB.getItems().add(ExerciseTypeE.STRENGTH.toString());
         exerciseTypeCCB.getCheckModel().checkAll();
-        exerciseList = DatabaseManager.GetExerciseTable();
+        exerciseList = DatabaseManager.GetExerciseList();
         
         if (exerciseList.size() > 0) {
             System.out.println(exerciseList.get(0).getName());

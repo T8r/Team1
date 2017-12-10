@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -57,19 +56,17 @@
                                           <Image url="@../arrow_back_white_192x192.png" />
                                        </image>
                                     </ImageView>
-                                    <ComboBox fx:id="routineCB" layoutX="229.0" layoutY="275.0" prefWidth="150.0" promptText="Select Routine.." />
-                                    <Label layoutX="232.0" layoutY="258.0" text="Current Weekly Routine" />
-                                    <ListView layoutX="516.0" layoutY="166.0" prefHeight="354.0" prefWidth="443.0" />
-                                    <Label layoutX="694.0" layoutY="129.0" text="History">
+                                    <ComboBox fx:id="routineCB" layoutX="379.0" layoutY="231.0" prefWidth="150.0" promptText="Select Routine.." />
+                                    <Label layoutX="379.0" layoutY="169.0" text="Current Weekly Routine">
                                        <font>
-                                          <Font size="28.0" />
-                                       </font>
-                                    </Label>
-                                    <JFXButton fx:id="saveButton" buttonType="RAISED" layoutX="232.0" layoutY="343.0" style="-fx-background-color: orange;" text="Save" textFill="WHITE">
+                                          <Font size="21.0" />
+                                       </font></Label>
+                                    <JFXButton fx:id="saveButton" buttonType="RAISED" layoutX="366.0" layoutY="318.0" style="-fx-background-color: orange;" text="Update" textFill="WHITE">
                                        <font>
                                           <Font size="22.0" />
                                        </font>
                                     </JFXButton>
+                                    <Label fx:id="promptL" layoutX="431.0" layoutY="272.0" textFill="#388d3b" />
                                  </children>
                               </AnchorPane>
                            </children>

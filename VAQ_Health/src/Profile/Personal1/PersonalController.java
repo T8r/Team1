@@ -23,9 +23,12 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,7 +52,57 @@ public class PersonalController implements Initializable {
 
     
     //Personal Fields
-    ArrayList<String> states = new ArrayList<String>(Arrays.asList("Alabama","Texas"));
+    ArrayList<String> states = new ArrayList<String>(Arrays.asList(
+            "Alabama",
+            "Alaska",
+            "Arizona",
+            "Arkanasa",
+            "California",
+            "Colorado",
+            "Connecticut",
+            "Delaware",
+            "Florida",
+            "GEorgia",
+            "Hawaii",
+            "Idaho",
+            "Illinois",
+            "Indiana",
+            "Iowa",
+            "Kansas",
+            "Kentucky",
+            "Louisana",
+            "Maine",
+            "Maryland",
+            "Massachussetts",
+            "Michigan",
+            "Minnesota",
+            "Mississippi",
+            "Misouri",
+            "Nebraska",
+            "Nevada",
+            "New Hampshire",
+            "New Jersey",
+            "New Mexico",
+            "New York",
+            "North Carloina",
+            "North Dakota",
+            "Ohio",
+            "Oklahoma",
+            "Oregon",
+            "Pennsylvania",
+            "Rhode Island",
+            "South Carolina",
+            "South Dakota",
+            "Tennessee",
+            "Texas",
+            "Utah",
+            "Vermont",
+            "Virginia",
+            "Washington",
+            "West Virginia",
+            "Wisconsin",
+            "Wyoming"
+    ));
     
     @FXML
     private TextField fNameTF;
@@ -78,6 +131,7 @@ public class PersonalController implements Initializable {
    
     
     private File imageFile;
+    private static final int MAX_TF_SIZE = 30;
     /**
      * Initializes the controller class.
      */
@@ -87,7 +141,8 @@ public class PersonalController implements Initializable {
         stateCB.setItems(FXCollections.observableList(states));
         sexCB.setItems(FXCollections.observableArrayList(new ArrayList<String>(Arrays.asList("Male","Female"))));
         stateCB.getSelectionModel().select(0);
-        sexCB.getSelectionModel().select(0);       
+        sexCB.getSelectionModel().select(0);
+        SetupHandlers();
         DisplayPersonal();
 
     }    
@@ -216,5 +271,99 @@ public class PersonalController implements Initializable {
             }
  
         }
+
+    private void SetupHandlers() {
+        
+        fNameTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               if (newValue.length() > MAX_TF_SIZE )
+                   fNameTF.setText(oldValue);
+            }
+        });
+        lNameTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               if (newValue.length() > MAX_TF_SIZE )
+                   lNameTF.setText(oldValue);
+            }
+        });
+        zipTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               if (newValue.length() > 5 )
+                   zipTF.setText(oldValue);
+            }
+        });
+        emailTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               if (newValue.length() > MAX_TF_SIZE )
+                   emailTF.setText(oldValue);
+            }
+        });
+        addressTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               if (newValue.length() > MAX_TF_SIZE )
+                   addressTF.setText(oldValue);
+            }
+        });
+        cityTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               if (newValue.length() > MAX_TF_SIZE )
+                   cityTF.setText(oldValue);
+            }
+        });
+        birthdayMonthTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               boolean isAcceptable = true;
+                if (newValue.length() > 0)
+                    try {
+                        Integer.parseInt(newValue);
+                        if (Integer.parseInt(newValue) > 12)
+                            isAcceptable = false;
+                    } catch (Exception e) {
+                        isAcceptable = false;
+                    }
+               if (!isAcceptable || newValue.length() > 2)
+                   birthdayMonthTF.setText(oldValue);
+            }
+        });
+        birthdayYearTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               boolean isAcceptable = true;
+                if (newValue.length() > 0)
+                    try {
+                        Integer.parseInt(newValue);
+                    } catch (Exception e) {
+                        isAcceptable = false;
+                    }
+               if (!isAcceptable || newValue.length() > 4)
+                   birthdayYearTF.setText(oldValue);
+            }
+        });
+        birthdayDayTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                boolean isAcceptable = true;
+                if (newValue.length() > 0)
+                    try {
+                        Integer.parseInt(newValue);
+                        if (Integer.parseInt(newValue) > 32)
+                            isAcceptable = false;
+                    } catch (Exception e) {
+                        isAcceptable = false;
+                    }
+               if (!isAcceptable || newValue.length() > 2)
+                   birthdayDayTF.setText(oldValue);
+            }
+        });
+    }
+   
+
     
 }

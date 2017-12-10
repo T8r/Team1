@@ -6,6 +6,8 @@
 package TabManager;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -65,9 +67,15 @@ public class TabManager {
 //        VAQ_Health.mainStage.show(); 
     }
     
-    public void OpenHome() throws IOException
+    public void OpenHome() 
     {
-        Parent root = FXMLLoader.load(getClass().getResource("/Home/Home.fxml"));
+        Parent root;
+         try {
+             root = FXMLLoader.load(getClass().getResource("/Home/Home.fxml"));
+         } catch (IOException ex) {
+             Logger.getLogger(TabManager.class.getName()).log(Level.SEVERE, null, ex);
+             return;
+         }
         
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene);
@@ -94,7 +102,7 @@ public class TabManager {
     }
 
     public void OpenExercises() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Exercise/Exercise.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ExerciseMenu/menu.fxml"));
         Scene scene = new Scene(root);
         VAQ_Health.mainStage.setScene(scene); 
         VAQ_Health.mainScene = scene;

@@ -32,6 +32,7 @@ public class RoutinePieChart extends PieChart {
     
     public RoutinePieChart(ArrayList<ExerciseRoutine> exerciseRoutines,int sizeX,int sizeY) {
         // TODO
+        
         this.setMaxSize(sizeX,sizeY);
         int numCardio = 0,numBalance = 0,numStrength = 0,numFlexibility = 0;
         for (ExerciseRoutine exerciseRoutine : exerciseRoutines)

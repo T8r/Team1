@@ -33,7 +33,7 @@ public class ExerciseHomeController implements Initializable {
     TabManager profileController = new TabManager();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         exerciseList = DatabaseManager.GetExerciseTable();
+         exerciseList = DatabaseManager.GetExerciseList();
          for (Exercise exercise : exerciseList) {
             exerciseCCB.getItems().add(exercise);
         }

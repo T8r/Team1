@@ -71,6 +71,7 @@ public class Equipment {
     }
 
     public Equipment() {
+        this.name = "None";
     }
 
 

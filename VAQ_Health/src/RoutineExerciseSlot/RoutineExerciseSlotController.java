@@ -68,7 +68,7 @@ public class RoutineExerciseSlotController implements Initializable {
         exerciseNameL.setText(exerciseRoutine.exercise.getName());
         exerciseIV.setImage(exerciseRoutine.exercise.getImage());
         typeL.setText(exerciseRoutine.exercise.getType().toString());
-        metL.setText(Integer.toString(exerciseRoutine.exercise.getMet()));
+        metL.setText(Double.toString(exerciseRoutine.exercise.getMet()));
         difficultyL.setText(exerciseRoutine.exercise.getDifficulty());
         descriptionTA.setText(exerciseRoutine.exercise.getDescription());
         if (exerciseRoutine.exercise.getEquipment() != null)

@@ -9,6 +9,7 @@ import Disease.Disease;
 import Exercise.Equipment.Equipment;
 import Exercise.Exercise;
 import Exercise.Exercise.ExerciseTypeE;
+import Exercise.Exercise.MuscleTypeE;
 import Profile.Allergies.Allergy;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -64,6 +65,17 @@ public class DatabaseManager {
         }
         return myStmt;
     }
+    static Connection OpenConnection2() {
+        try {
+           
+            Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaq_health", "root", "password");
+            return myConnection;
+
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        return null;
+    }
 
     static void CloseConnection(Connection myConnection, Statement myStmt, ResultSet myRs) {
         try {
@@ -100,7 +112,7 @@ public class DatabaseManager {
             int rowCount = myRs.getInt(1) + 1;
             String sql = "INSERT INTO User (ID, username, password) VALUES (?, ?, ?)";
 
-            PreparedStatement statement = myConnection.prepareStatement(sql);
+            PreparedStatement statement = OpenConnection2().prepareStatement(sql);
             statement.setInt(1, rowCount);
             statement.setString(2, hashedUsername);
             statement.setString(3, hashedPassword);
@@ -188,7 +200,7 @@ public class DatabaseManager {
         return equipList;
     }
 
-    public static ArrayList<Exercise> GetExerciseTable() {
+    public static ArrayList<Exercise> GetExerciseList() {
         ArrayList<Exercise> exerciseList = new ArrayList<>();
 
         try {
@@ -205,8 +217,15 @@ public class DatabaseManager {
                 newExercise.setDifficulty(myRs.getString("difficulty"));
                 newExercise.setDescription(myRs.getString("description"));
                 newExercise.setType(ExerciseTypeE.valueOf(myRs.getString("type")));
-                newExercise.setMet(myRs.getInt("met"));
+                newExercise.setMuscleTypeE(MuscleTypeE.valueOf(myRs.getString("primaryMuscle")));
+                newExercise.setMet(myRs.getDouble("met"));
                 newExercise.setEquipment(GetEquipment(myRs.getInt("equipmentID")));
+                Blob blob = myRs.getBlob("image");
+                if (blob != null)
+                {
+                    byte[] byteImage = blob.getBytes(1, (int) blob.length());
+                    newExercise.setImage(new Image(new ByteArrayInputStream(byteImage),150,100,false,false));
+                }
                 exerciseList.add(newExercise);
             }
 
@@ -228,13 +247,15 @@ public class DatabaseManager {
             myStmt = OpenConnection(myConnection);
 
             //Medical
-            PreparedStatement ps = myConnection.prepareStatement(
+            PreparedStatement ps = OpenConnection2().prepareStatement(
                     "UPDATE medical SET "
                     + "weight = ?, "
-                    + "height = ? "
+                    + "heightFt = ?, "
+                    + "heightInches = ? "
             );
             ps.setInt(1, Integer.parseInt(profile.medical.getWeight()));
             ps.setInt(2, Integer.parseInt(profile.medical.getHeight()));
+            ps.setInt(3, Integer.parseInt(profile.medical.getHeightInches()));
             ps.executeUpdate();
 
             //Allergies
@@ -354,10 +375,9 @@ public class DatabaseManager {
         String hashedUsername = "";
 
         try {
-            Connection myConnection = null;
+            Connection myConnection  = OpenConnection2();
             Statement myStmt = null;
             ResultSet myRs = null;
-            myStmt = OpenConnection(myConnection);
             hashedUsername = sha256(profile.username);
             PreparedStatement ps = myConnection.prepareStatement(
                     "UPDATE personal SET "
@@ -365,20 +385,22 @@ public class DatabaseManager {
                     + "lastName = ?, "
                     + "address = ?, "
                     + "city = ?, "
-                    //+ "state = ?, "
+                    + "state = ?, "
                     + "zipcode = ?, "
+                    + "sex = ?, "
                     + "birthday = ? "
                     + "WHERE userID=" + profile.id);
-
             ps.setString(1, profile.personal.getFname());
             ps.setString(2, profile.personal.getlName());
             ps.setString(3, profile.personal.getAddress());
             ps.setString(4, profile.personal.getCity());
-            ps.setString(5, profile.personal.getZipCode());
+            ps.setString(5, profile.personal.getState());
+            ps.setString(6, profile.personal.getZipCode());
+            ps.setString(7, profile.personal.getSex());
             if (isValidDate(profile.personal.getBirthday().toString())) {
-                ps.setDate(6, profile.personal.getBirthday());
+                ps.setDate(8, profile.personal.getBirthday());
             } else {
-                ps.setDate(6, java.sql.Date.valueOf("2000-01-01"));
+                ps.setDate(9, java.sql.Date.valueOf("2000-01-01"));
             }
             ps.executeUpdate();
             ps.close();
@@ -386,8 +408,8 @@ public class DatabaseManager {
             if (profile.imagePath != null) {
                 File imgfile = new File(profile.imagePath);
                 FileInputStream fin = new FileInputStream(imgfile);
-                PreparedStatement pre = myConnection.prepareStatement(
-                        "UPDATE profilePicture SET image = ? WHERE userID=" + profile.id);
+                String sql ="UPDATE profilePicture SET image = ? WHERE userID=" + profile.id;
+                PreparedStatement pre = myConnection.prepareStatement(sql);
                 pre.setBinaryStream(1, (InputStream) fin, (int) imgfile.length());
                 pre.executeUpdate();
                 System.out.println("Successfully inserted the file into the database!");
@@ -434,7 +456,8 @@ public class DatabaseManager {
             //Get Medical
             myRs = myStmt.executeQuery("select* from medical where userID=" + userID + "");
             myRs.next();
-            profile.medical.setHeight(myRs.getString("height"));
+            profile.medical.setHeight(myRs.getString("heightFt"));
+            profile.medical.setHeightInches(myRs.getString("heightInches"));
             profile.medical.setWeight(myRs.getString("weight"));
 
             //Get Allergies
@@ -584,7 +607,29 @@ public class DatabaseManager {
         }
         return weeklyRoutines;
     }
-    
+    public static void UpdateWeeklyRoutine(int userID, WeeklyRoutine weeklyRoutine) {
+        try {
+            Connection myConnection = null;
+            Statement myStmt = null;
+            ResultSet myRs;
+            myStmt = OpenConnection(myConnection);
+            myRs = myStmt.executeQuery("select* from currentWeeklyRoutine where userID=" + userID);
+            int weeklyRoutineID = myRs.getInt("WeeklyRoutineID");
+            for (int i=0; i <weeklyRoutine.monday.size(); i++)
+            {
+                String sqlStr = "Update weeklyRoutine SET isDone=? where ID=" + weeklyRoutineID + "and workOutDay='Monday' and seqNum="+i;
+                PreparedStatement ps = OpenConnection2().prepareStatement(sqlStr);
+                ps.setBoolean(1, true);
+                ps.executeUpdate();
+                ps.close();
+            }
+            
+            
+            CloseConnection(myConnection, myStmt, myRs);
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
     public static WeeklyRoutine GetUserCurrentWeeklyRoutine(int userID) {
         WeeklyRoutine weeklyRoutine = new WeeklyRoutine();
 
@@ -732,13 +777,16 @@ public class DatabaseManager {
             exercise.setName(myRs.getString("name"));
             exercise.setType(ExerciseTypeE.valueOf(myRs.getString("type")));
             exercise.setDescription(myRs.getString("description"));
-            exercise.setMet(myRs.getInt("MET"));
+            exercise.setMet(myRs.getDouble("MET"));
             exercise.setDifficulty(myRs.getString("Difficulty"));
             exercise.setDescription(myRs.getString("description"));
             Blob b = myRs.getBlob("image");
-            byte[] byteImage = b.getBytes(1, (int) b.length());
-            Image exerciseImg = new Image(new ByteArrayInputStream(byteImage));
-            exercise.setImage(exerciseImg);
+            if (b != null)
+            {
+                 byte[] byteImage = b.getBytes(1, (int) b.length());
+                Image exerciseImg = new Image(new ByteArrayInputStream(byteImage));
+                exercise.setImage(exerciseImg);
+            }
             CloseConnection(myConnection, myStmt, myRs);
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -772,5 +820,7 @@ public class DatabaseManager {
         }
         return equipment;
     }
+
+    
 
 }

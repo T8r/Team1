@@ -17,6 +17,20 @@ import javafx.scene.image.Image;
 public class Exercise {
 
     /**
+     * @return the muscleTypeE
+     */
+    public MuscleTypeE getMuscleTypeE() {
+        return muscleTypeE;
+    }
+
+    /**
+     * @param muscleTypeE the muscleTypeE to set
+     */
+    public void setMuscleTypeE(MuscleTypeE muscleTypeE) {
+        this.muscleTypeE = muscleTypeE;
+    }
+
+    /**
      * @return the image
      */
     public Image getImage() {
@@ -77,14 +91,14 @@ public class Exercise {
      * @return the type
      */
     public ExerciseTypeE getType() {
-        return type;
+        return exerciseType;
     }
 
     /**
      * @param type the type to set
      */
     public void setType(ExerciseTypeE type) {
-        this.type = type;
+        this.exerciseType = type;
     }
 
     /**
@@ -104,14 +118,14 @@ public class Exercise {
     /**
      * @return the met
      */
-    public int getMet() {
+    public Double getMet() {
         return met;
     }
 
     /**
      * @param met the met to set
      */
-    public void setMet(int met) {
+    public void setMet(Double met) {
         this.met = met;
     }
     
@@ -120,15 +134,28 @@ public class Exercise {
         BALANCE,
         FLEXIBILITY,
         STRENGTH
+    }  
+    public enum MuscleTypeE{
+        Triceps,
+        Biceps,
+        Back,
+        Glutes,
+        LowerLegs,
+        Shoulders,
+        Chest,
+        ForeArms,
+        Abs,
+        UpperLegs
     }
-      
+    
     private String name;
     private String difficulty;
     private String description;
     private Image image;
-    private ExerciseTypeE type;
+    private ExerciseTypeE exerciseType;
+    private MuscleTypeE muscleTypeE;
     private Equipment equipment;
-    private int met;
+    private Double met;
     
     @Override
     public String toString()
@@ -138,7 +165,7 @@ public class Exercise {
   
     
     // met = metabolic equivalent
-    public static double CaloriesBurned(int met, double hrs,double weightKG)
+    public static double CaloriesBurned(Double met, double hrs,double weightKG)
     {
         if (hrs < 1)
             return met * weightKG*hrs;

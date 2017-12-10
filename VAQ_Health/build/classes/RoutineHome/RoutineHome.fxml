@@ -51,7 +51,7 @@
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="145.0" layoutY="80.0" prefHeight="520.0" prefWidth="4.0" style="-fx-background-color: orange;" />
-                              <ScrollPane layoutX="179.0" layoutY="84.0" prefHeight="516.0" prefWidth="820.0">
+                              <ScrollPane layoutX="161.0" layoutY="84.0" prefHeight="516.0" prefWidth="820.0">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1995.0" prefWidth="804.0" style="-fx-background-color: white;">
                                        <children>

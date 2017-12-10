@@ -5,6 +5,7 @@
  */
 package RoutineHome;
 
+import Database.DatabaseManager;
 import Exercise.Exercise;
 import Routine.ExerciseRoutine;
 import RoutineExerciseSlot.RoutineExerciseSlotController;
@@ -13,6 +14,7 @@ import TabManager.TabManager;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -94,7 +96,7 @@ public class RoutineHomeController implements Initializable {
         currentDayL.setText(new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.getTime()));
         UpdateProgressIndicators();
        
-        pieChartPane.getChildren().add(new RoutinePieChart(VAQ_Health.profile.currentWeeklyRoutine.monday,300,300));
+        pieChartPane.getChildren().add(new RoutinePieChart(new ArrayList<ExerciseRoutine>(),300,300));
         UpdateCaloriesBurned();
 
     }
@@ -117,6 +119,7 @@ public class RoutineHomeController implements Initializable {
                         public void handle(Event event) {
                             controller.Done();
                             exerciseRoutine.isCompleted = true;
+                            //DatabaseManager.UpdateWeeklyRoutine(VAQ_Health.profile);
                             UpdateProgressIndicators();
                         }
                     });

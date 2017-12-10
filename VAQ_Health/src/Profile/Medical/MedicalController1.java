@@ -41,6 +41,8 @@ public class MedicalController1 implements Initializable {
     @FXML
     TextField heightTF = new TextField();
     @FXML
+    TextField heightInchesTF = new TextField();
+    @FXML
     CheckListView allergyCLV;
     @FXML
     CheckListView diseaseCLV;
@@ -64,21 +66,7 @@ public class MedicalController1 implements Initializable {
         allergyTA.setWrapText(true);
         diseaseTA.setWrapText(true);
         DisplayMedicalProfile();
-        diseaseCLV.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Disease>() {
-            @Override
-            public void changed(ObservableValue<? extends Disease> observable, Disease oldValue, Disease disease) {
-                 diseaseTA.setText(disease.getDiscription());
-            }
-        });
-        
-        allergyCLV.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Allergy>() {
-            @Override
-            public void changed(ObservableValue<? extends Allergy> observable, Allergy oldValue, Allergy allergy) {
-                 allergyTA.setText(allergy.getDescription());
-            }
-        });
-        
-
+        SetupHandlers();
     }
 
     private void DisplayMedicalProfile() {
@@ -116,6 +104,7 @@ public class MedicalController1 implements Initializable {
         //Weight & Height
         weightTF.setText(profile.medical.getWeight());
         heightTF.setText(profile.medical.getHeight());
+        heightInchesTF.setText(profile.medical.getHeightInches());
 
     }
 
@@ -147,6 +136,9 @@ public class MedicalController1 implements Initializable {
         if (heightTF.getText() != null) {
             VAQ_Health.profile.medical.setHeight(heightTF.getText());
         }
+        if (heightInchesTF.getText() != null) {
+            VAQ_Health.profile.medical.setHeightInches(heightInchesTF.getText());
+        }
        
 
         for (int i = 0; i < allergyList.size(); i++) {
@@ -177,6 +169,74 @@ public class MedicalController1 implements Initializable {
         
         System.out.println(VAQ_Health.profile.medical);
         DatabaseManager.UpdateMedical(VAQ_Health.profile);
+    }
+
+    private void SetupHandlers() {
+       diseaseCLV.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Disease>() {
+            @Override
+            public void changed(ObservableValue<? extends Disease> observable, Disease oldValue, Disease disease) {
+                 diseaseTA.setText(disease.getDiscription());
+            }
+        });
+        
+        allergyCLV.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Allergy>() {
+            @Override
+            public void changed(ObservableValue<? extends Allergy> observable, Allergy oldValue, Allergy allergy) {
+                 allergyTA.setText(allergy.getDescription());
+            }
+        });
+        
+        weightTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                boolean isAcceptable = true;
+                if (newValue.length() > 0) {
+                    try {
+                        Integer.parseInt(newValue);
+                    } catch (Exception e) {
+                        isAcceptable = false;
+                    }
+                }
+                if (!isAcceptable || newValue.length() > 3) {
+                    weightTF.setText(oldValue);
+                }
+            }
+        });
+
+        heightTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                boolean isAcceptable = true;
+                if (newValue.length() > 0) {
+                    try {
+                        Integer.parseInt(newValue);
+                    } catch (Exception e) {
+                        isAcceptable = false;
+                    }
+                }
+                if (!isAcceptable || newValue.length() > 2) {
+                    heightTF.setText(oldValue);
+                }
+            }
+        });
+        heightInchesTF.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                boolean isAcceptable = true;
+                if (newValue.length() > 0) {
+                    try {
+                        if (Integer.parseInt(newValue) > 12)
+                            isAcceptable = false;
+                    } catch (Exception e) {
+                        isAcceptable = false;
+                    }
+                }
+                if (!isAcceptable || newValue.length() > 2) {
+                    heightInchesTF.setText(oldValue);
+                }
+            }
+        });
+
     }
 
 }

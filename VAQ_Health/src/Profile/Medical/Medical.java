@@ -17,6 +17,20 @@ import java.util.List;
 public class Medical {
 
     /**
+     * @return the heightInches
+     */
+    public String getHeightInches() {
+        return heightInches;
+    }
+
+    /**
+     * @param heightInches the heightInches to set
+     */
+    public void setHeightInches(String heightInches) {
+        this.heightInches = heightInches;
+    }
+
+    /**
      * @return the hasHighBloodPressure
      */
     public Boolean getHasHighBloodPressure() {
@@ -48,14 +62,14 @@ public class Medical {
      * @return the height
      */
     public String getHeight() {
-        return height;
+        return heightFt;
     }
 
     /**
      * @param height the height to set
      */
     public void setHeight(String height) {
-        this.height = height;
+        this.heightFt = height;
     }
 
     /**
@@ -137,7 +151,8 @@ public class Medical {
     public List<Disease>  diseaseList = new ArrayList<>();
     public List<Allergy> allergyList = new ArrayList<>();
     private String weight;
-    private String height;
+    private String heightFt;
+    private String heightInches;
     private Boolean hasDiabetes;
     private Boolean hasHighCholesterol;
     private Boolean hasCeliacDisease;
